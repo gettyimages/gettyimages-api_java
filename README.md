@@ -16,7 +16,7 @@ Import the module into your project
 ```
 File | Import Module...
 Point to the ConnectSdk folder
-Click on Next, Next, Reuse, then click Finish
+Click on Next, Next, Next, Next, Reuse, then click Finish
 ```
 Add the module dependency to your application
 ````
