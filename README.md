@@ -7,7 +7,7 @@ Seamlessly integrate Getty Images' expansive digital content, powerful search te
 - Download files using your Getty Images products (e.g., Editorial subscriptions, Easy Access, Thinkstock Subscriptions, and Image Packs).
 
 ## Assumptions
-* You have the latest Android Sdk installed.
+* You have the latest Stand-alone Android Sdk installed.
 * You have IntelliJ IDEA >= 13 installed.
 * You have "Getty Test" credentials from http://api.gettyimages.com
 
