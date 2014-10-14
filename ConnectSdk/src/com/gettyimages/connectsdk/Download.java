@@ -31,7 +31,6 @@ public class Download {
         return this;
     }
 
-
     public String ExecuteAsync() throws SdkException {
         if (assetId == null || assetId.length() == 0)
         {
