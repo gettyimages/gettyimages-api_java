@@ -64,6 +64,7 @@ Update the AndroidManifest.xml to include internet permissions.
 
 ## FAQ
 * If you get an error running the test application make sure that you are using your Getty Key and Secret in the code.
+* If you get "Failure [INSTALL_FALIED_OLDER_SDK]", you need to make sure that your minSdkVersion in the AndroidManifest.xml is less than the Target SDK of your AVD.
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/ConnectSdk/fork )
