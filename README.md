@@ -7,7 +7,8 @@ Seamlessly integrate Getty Images' expansive digital content, powerful search te
 - Download files using your Getty Images products (e.g., Editorial subscriptions, Easy Access, Thinkstock Subscriptions, and Image Packs).
 
 ## Assumptions
-* You have the latest Stand-alone Android Sdk installed.
+* You have a Java SDK installed.
+* You have the latest Stand-alone Android Sdk installed. Install at least the Android 2.2 (API 8) Sdk.
 * You have IntelliJ IDEA >= 13 installed.
 * You have "Getty Test" credentials from http://api.gettyimages.com
 
@@ -63,6 +64,7 @@ Update the AndroidManifest.xml to include internet permissions.
 
 ## FAQ
 * If you get an error running the test application make sure that you are using your Getty Key and Secret in the code.
+* If you get "Failure [INSTALL_FALIED_OLDER_SDK]", you need to make sure that your minSdkVersion in the AndroidManifest.xml is less than the Target SDK of your AVD.
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/ConnectSdk/fork )
