@@ -8,7 +8,7 @@ Seamlessly integrate Getty Images' expansive digital content, powerful search te
 
 ## Assumptions
 * You have a Java SDK installed.
-* You have the latest Stand-alone Android Sdk installed.
+* You have the latest Stand-alone Android Sdk installed. Install at least the Android 2.2 (API 8) Sdk.
 * You have IntelliJ IDEA >= 13 installed.
 * You have "Getty Test" credentials from http://api.gettyimages.com
 
