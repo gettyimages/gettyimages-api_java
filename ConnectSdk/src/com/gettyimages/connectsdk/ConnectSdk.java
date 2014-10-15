@@ -6,6 +6,7 @@ import com.gettyimages.connectsdk.search.Search;
     Main entry point to the Connect API SDK
  */
 public class ConnectSdk {
+    public static String Version="1.0.1-beta";
     private String Slash = "/";
     private Credentials credentials;
     private String baseUrl = "https://connect.gettyimages.com/v3";

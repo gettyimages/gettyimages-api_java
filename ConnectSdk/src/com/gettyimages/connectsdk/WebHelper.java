@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
+import java.util.Properties;
 
 public class WebHelper {
     protected String baseUrl;
@@ -32,7 +33,7 @@ public class WebHelper {
             HttpClient httpClient = new DefaultHttpClient();
             HttpGet httpGet = new HttpGet(url.toString());
 
-            addCredentials(httpGet);
+            addHeaders(httpGet);
 
             HttpResponse response = httpClient.execute(httpGet);
             HttpEntity responseEntity = response.getEntity();
@@ -53,7 +54,7 @@ public class WebHelper {
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url.toString());
 
-            addCredentials(httpPost);
+            addHeaders(httpPost);
 
             HttpResponse response = httpClient.execute(httpPost);
             HttpEntity responseEntity = response.getEntity();
@@ -68,7 +69,7 @@ public class WebHelper {
         return null;
     }
 
-    private void addCredentials(HttpRequest request) throws SdkException {
+    private void addHeaders(HttpRequest request) throws SdkException {
         switch (credentials.CredentialType) {
             case ApiKey: {
                 request.addHeader("Api-Key", credentials.ApiKey);
@@ -81,6 +82,29 @@ public class WebHelper {
                 break;
             }
         }
+
+        request.addHeader("User-Agent", getUserAgent());
+    }
+
+    private String getUserAgent()
+    {
+        String httpAgentString = "";
+        Properties properties = System.getProperties();
+
+        String httpAgent = System.getProperty("http.agent");
+        if (httpAgent != null) {
+            httpAgentString = httpAgent.replace(")", "").replace(" (", "; ");
+        }
+        else {
+            String osName = System.getProperty("os.name");
+            String osArch = System.getProperty("os.arch");
+            String javaVersion = System.getProperty("java.version");
+
+            httpAgentString = String.format("%s; %s; Java %s", osName, osArch, javaVersion);
+        }
+
+        String userAgentString = String.format("ConnectSDK/%s (%s)", ConnectSdk.Version, httpAgentString);
+        return userAgentString;
     }
 
     private String BuildQuery(Map<?, ?> queryParams) {
