@@ -1,5 +1,7 @@
 # Getty Images Connect SDK 
 
+[![Join the chat at https://gitter.im/gettyimages/gettyimages-api_java](https://badges.gitter.im/gettyimages/gettyimages-api_java.svg)](https://gitter.im/gettyimages/gettyimages-api_java?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Seamlessly integrate Getty Images' expansive digital content, powerful search technology, and rich metadata into your publishing tools, products and services!
 
 - Search for images from our extensive creative and editorial catalogs.
