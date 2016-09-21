@@ -1,5 +1,6 @@
 # Getty Images API SDK 
 
+[![Build Status](https://travis-ci.org/gettyimages/gettyimages-api_java.svg?branch=master)](https://travis-ci.org/gettyimages/gettyimages-api_java)
 [![Join the chat at https://gitter.im/gettyimages/gettyimages-api_java](https://badges.gitter.im/gettyimages/gettyimages-api_java.svg)](https://gitter.im/gettyimages/gettyimages-api_java?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Seamlessly integrate Getty Images' expansive digital content, powerful search technology, and rich metadata into your publishing tools, products and services!
@@ -8,65 +9,36 @@ Seamlessly integrate Getty Images' expansive digital content, powerful search te
 - Get image metadata.
 - Download files using your Getty Images products (e.g., Editorial subscriptions, Easy Access, Thinkstock Subscriptions, and Image Packs).
 
-## Assumptions
-* You have a Java SDK installed.
-* You have the latest Stand-alone Android Sdk installed. Install at least the Android 2.2 (API 8) Sdk.
-* You have IntelliJ IDEA >= 13 installed.
-* You have "Getty Test" credentials from http://api.gettyimages.com
+## Minimum Requirements
+* You have Java SDK installed.
+* You have "Getty Test" credentials from the [Getty Images API Portal](https://developer.gettyimages.com/member/register)
+* You have [IntelliJ IDEA](https://www.jetbrains.com/idea/) installed
+* You have [Maven](https://maven.apache.org/) installed
 
-## IntelliJ Installation
+## Import the SDK to your project via IntelliJ+Maven
+
 Import the module into your project
+
 ```
-File | Import Module...
-Point to the ConnectSdk folder
-Click on Next, Next, Next, Next, Reuse, then click Finish
+File | New | Module from Existing Sources...
+Point to the *gettyimagesapi-sdk* folder
+Select *Maven* via *Import module from external model* window
+Click on Next, Next, then click Finish
 ```
-Add the module dependency to your application
-````
-File | Project Structure...
-Click on Modules
-Click on your main application
-Click on the Dependencies tab
-Click on the + to add a Module Dependency to your main application
-Click OK
-````
 
 ## Usage
-Add a TextView control to your activity.
-```
-   <TextView
-            android:id="@+id/textView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello World, MyActivity"
-            />
-```
-Add the following code to your activity.
-```
-import com.gettyimages.connectsdk.ConnectSdk;
+See *gettyimagesapi-examples* folder for examples
 
-public class MyActivity extends Activity {
+### Run Example via Maven
+You can run the examples by using [Maven's](http://www.mojohaus.org/exec-maven-plugin/usage.html) `exec:java` call. The following shows how to run the creative search example:
 
-    private String apiKey = "Connect API Key";
-    private String apiSecret = "Connect API Secret";
-	...
-    String result;
-
-	ConnectSdk connectSdk = new ConnectSdk(apiKey, apiSecret);
-	result = connectSdk.Search().Images().Creative().WithPhrase("dog").WithPage(10).ExecuteAsync();
-	
-	TextView textView = (TextView) findViewById(R.id.textView);
-    textView.setText(result);
-	...
 ```
-Update the AndroidManifest.xml to include internet permissions.
-```
- <uses-permission android:name="android.permission.INTERNET"/>
+(Edit CreativeSearch.java to include correct API Key, Secret, Username, and Password)
+cd gettyimagesapi-examples
+mvn clean install
+mvn exec:java -Dexec.mainClass="com.gettyimages.search.CreativeSearch"
 ```
 
-## FAQ
-* If you get an error running the test application make sure that you are using your Getty Key and Secret in the code.
-* If you get "Failure [INSTALL_FALIED_OLDER_SDK]", you need to make sure that your minSdkVersion in the AndroidManifest.xml is less than the Target SDK of your AVD.
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/ConnectSdk/fork )
@@ -74,3 +46,7 @@ Update the AndroidManifest.xml to include internet permissions.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+Our wish-list is (in no particular order):
+* Add more examples to gettyimagesapi-examples
+* Implement Getty Images [BDD Scenarios](https://github.com/gettyimages/gettyimages-api_bdd)

@@ -1,0 +1,34 @@
+package com.gettyimages.search;
+
+import com.gettyimages.connectsdk.ConnectSdk;
+import com.gettyimages.connectsdk.SdkException;
+import com.gettyimages.connectsdk.search.ICreativeImagesSearch;
+import com.gettyimages.connectsdk.search.Search;
+
+public class CreativeSearch
+{
+    private static String apiKey = "API Key";
+    private static String apiSecret = "API Secret";
+    private static String userName = "";
+    private static String userPassword = "";
+
+    public static void main( String[] args )
+    {
+        ConnectSdk connectSdk = new ConnectSdk(apiKey, apiSecret, userName, userPassword);
+        String searchTerm = "cat";
+
+        try {
+            Search search = connectSdk.Search();
+            ICreativeImagesSearch creativeImageSearch =
+                    search.Images()
+                            .Creative()
+                            .WithPhrase(searchTerm)
+                            .WithPage(10);
+            String result = creativeImageSearch.ExecuteAsync();
+            System.out.print(result);
+        } catch (SdkException e) {
+            System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
+            System.exit(-1);
+        }
+    }
+}
