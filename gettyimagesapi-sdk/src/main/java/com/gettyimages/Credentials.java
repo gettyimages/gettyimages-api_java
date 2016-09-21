@@ -1,4 +1,4 @@
-package com.gettyimages.connectsdk;
+package com.gettyimages;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

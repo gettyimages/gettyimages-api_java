@@ -1,4 +1,4 @@
-package com.gettyimages.connectsdk.search;
+package com.gettyimages.search;
 
 public enum LicenseModel
 {

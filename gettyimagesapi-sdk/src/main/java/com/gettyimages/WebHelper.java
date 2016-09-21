@@ -1,4 +1,4 @@
-package com.gettyimages.connectsdk;
+package com.gettyimages;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpRequest;
@@ -103,7 +103,7 @@ public class WebHelper {
             httpAgentString = String.format("%s; %s; Java %s", osName, osArch, javaVersion);
         }
 
-        String userAgentString = String.format("ConnectSDK/%s (%s)", ConnectSdk.Version, httpAgentString);
+        String userAgentString = String.format("ConnectSDK/%s (%s)", ApiClient.Version, httpAgentString);
         return userAgentString;
     }
 

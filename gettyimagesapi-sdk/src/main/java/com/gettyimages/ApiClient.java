@@ -1,24 +1,34 @@
-package com.gettyimages.connectsdk;
+package com.gettyimages;
 
-import com.gettyimages.connectsdk.search.Search;
+import com.gettyimages.search.Search;
 
 /*
     Main entry point to the Connect API SDK
  */
-public class ConnectSdk {
+public class ApiClient {
     public static String Version="1.0.1-beta";
     private String Slash = "/";
     private Credentials credentials;
     private String baseUrl = "https://connect.gettyimages.com/v3";
 
-    public ConnectSdk(String apiKey, String apiSecret) {
+    private ApiClient(String apiKey, String apiSecret) {
         NormalizeAndSetBaseUrl(baseUrl);
         credentials = Credentials.GetInstance(apiKey, apiSecret, GetOAuthBaseUrl());
     }
 
-    public ConnectSdk(String apiKey, String apiSecret, String userName, String userPassword) {
+    private ApiClient(String apiKey, String apiSecret, String userName, String userPassword) {
         NormalizeAndSetBaseUrl(baseUrl);
         credentials = Credentials.GetInstance(apiKey, apiSecret, userName, userPassword, GetOAuthBaseUrl());
+    }
+
+    public static ApiClient GetApiClientWithClientCredentials(String apiKey, String apiSecret)
+    {
+        return new ApiClient(apiKey, apiSecret);
+    }
+
+    public static ApiClient GetApiClientWithResourceOwnerCredentials(String apiKey, String apiSecret, String userName, String password)
+    {
+        return new ApiClient(apiKey, apiSecret, userName, password);
     }
 
     public Search Search() {

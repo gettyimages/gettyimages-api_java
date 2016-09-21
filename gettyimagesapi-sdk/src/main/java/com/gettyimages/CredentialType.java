@@ -1,4 +1,4 @@
-package com.gettyimages.connectsdk;
+package com.gettyimages;
 
 enum CredentialType
 {

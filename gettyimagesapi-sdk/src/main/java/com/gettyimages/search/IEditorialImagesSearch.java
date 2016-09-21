@@ -1,6 +1,6 @@
-package com.gettyimages.connectsdk.search;
+package com.gettyimages.search;
 
-import com.gettyimages.connectsdk.SdkException;
+import com.gettyimages.SdkException;
 
 public interface IEditorialImagesSearch {
     String ExecuteAsync() throws SdkException;

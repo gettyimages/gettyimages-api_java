@@ -1,7 +1,7 @@
-package com.gettyimages.connectsdk.search;
+package com.gettyimages.search;
 
-import com.gettyimages.connectsdk.Credentials;
-import com.gettyimages.connectsdk.SdkException;
+import com.gettyimages.Credentials;
+import com.gettyimages.SdkException;
 
 import java.util.Map;
 

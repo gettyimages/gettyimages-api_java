@@ -1,9 +1,9 @@
-package com.gettyimages.connectsdk.search;
+package com.gettyimages.search;
 
-import com.gettyimages.connectsdk.Credentials;
-import com.gettyimages.connectsdk.SdkException;
-import com.gettyimages.connectsdk.StringHelper;
-import com.gettyimages.connectsdk.WebHelper;
+import com.gettyimages.StringHelper;
+import com.gettyimages.Credentials;
+import com.gettyimages.SdkException;
+import com.gettyimages.WebHelper;
 
 import java.util.ArrayList;
 import java.util.EnumSet;

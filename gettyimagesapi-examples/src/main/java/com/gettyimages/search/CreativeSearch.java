@@ -1,9 +1,7 @@
 package com.gettyimages.search;
 
-import com.gettyimages.connectsdk.ConnectSdk;
-import com.gettyimages.connectsdk.SdkException;
-import com.gettyimages.connectsdk.search.ICreativeImagesSearch;
-import com.gettyimages.connectsdk.search.Search;
+import com.gettyimages.ApiClient;
+import com.gettyimages.SdkException;
 
 public class CreativeSearch
 {
@@ -14,7 +12,7 @@ public class CreativeSearch
 
     public static void main( String[] args )
     {
-        ConnectSdk connectSdk = new ConnectSdk(apiKey, apiSecret, userName, userPassword);
+        ApiClient connectSdk = ApiClient.GetApiClientWithResourceOwnerCredentials(apiKey, apiSecret, userName, userPassword);
         String searchTerm = "cat";
 
         try {

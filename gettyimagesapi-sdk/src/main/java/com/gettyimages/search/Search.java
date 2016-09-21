@@ -1,6 +1,6 @@
-package com.gettyimages.connectsdk.search;
+package com.gettyimages.search;
 
-import com.gettyimages.connectsdk.Credentials;
+import com.gettyimages.Credentials;
 
 public class Search {
     private String baseUrl;

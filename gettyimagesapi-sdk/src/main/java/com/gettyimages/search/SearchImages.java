@@ -1,7 +1,7 @@
-package com.gettyimages.connectsdk.search;
+package com.gettyimages.search;
 
-import com.gettyimages.connectsdk.Credentials;
-import com.gettyimages.connectsdk.SdkException;
+import com.gettyimages.Credentials;
+import com.gettyimages.SdkException;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -9,10 +9,14 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-public class EditorialSearchImages extends BaseSearchImages implements IEditorialImagesSearch {
+public class SearchImages extends BaseSearchImages implements IBlendedImagesSearch {
 
-    public EditorialSearchImages(Credentials credentials, String baseUrl, Map map) {
-        super(credentials, baseUrl, map);
+    private SearchImages(Credentials credentials, String baseUrl) {
+        super(credentials, baseUrl, new Hashtable());
+    }
+
+    public static SearchImages GetInstance(Credentials credentials, String baseUrl) {
+        return new SearchImages(credentials, baseUrl);
     }
 
     @Override
@@ -21,72 +25,69 @@ public class EditorialSearchImages extends BaseSearchImages implements IEditoria
     }
 
     @Override
-    public IEditorialImagesSearch WithPage(int val) {
+    public IBlendedImagesSearch WithPage(int val) {
         super.withPage(val);
         return this;
     }
 
     @Override
-    public IEditorialImagesSearch WithPageSize(int val) {
+    public IBlendedImagesSearch WithPageSize(int val) {
         super.withPageSize(val);
         return this;
     }
 
     @Override
-    public IEditorialImagesSearch WithPhrase(String val) {
+    public IBlendedImagesSearch WithPhrase(String val) {
         super.withPhrase(val);
         return this;
     }
 
     @Override
-    public IEditorialImagesSearch WithSortOrder(String val) {
+    public IBlendedImagesSearch WithSortOrder(String val) {
         super.withSortOrder(val);
         return this;
     }
 
     @Override
-    public IEditorialImagesSearch WithEmbedContentOnly(boolean val) {
+    public IBlendedImagesSearch WithEmbedContentOnly(boolean val) {
         super.withEmbedContentOnly(val);
         return this;
     }
 
     @Override
-    public IEditorialImagesSearch WithExcludeNudity(boolean val) {
+    public IBlendedImagesSearch WithExcludeNudity(boolean val) {
         super.withExcludeNudity(val);
         return this;
     }
 
     @Override
-    public IEditorialImagesSearch WithResponseField(String val) {
+    public IBlendedImagesSearch WithResponseField(String val) {
         super.withResponseField(val);
         return this;
     }
 
     @Override
-    public IEditorialImagesSearch WithGraphicalStyle(GraphicalStyles val) {
+    public IBlendedImagesSearch WithGraphicalStyle(GraphicalStyles val) {
         super.withGraphicalStyle(val);
         return this;
     }
 
     @Override
-    public IEditorialImagesSearch WithOrientation(Orientation val) {
+    public IBlendedImagesSearch WithOrientation(Orientation val) {
         super.withOrientation(val);
         return this;
     }
 
-    @Override
-    public IEditorialImagesSearch WithEditorialSegment(EditorialSegment seg) {
-        super.withEditorialSegment(seg);
+    public IBlendedImagesSearch WithLicenseModel(LicenseModel val) {
+        super.withLicenseModel(val);
         return this;
     }
 
-    @Override
     public ICreativeImagesSearch Creative() {
         super.creative();
         return new CreativeSearchImages(credentials, baseUrl, map);
     }
 
-    @Override
     public IEditorialImagesSearch Editorial() {
         super.editorial();
         return new EditorialSearchImages(credentials, baseUrl, map);

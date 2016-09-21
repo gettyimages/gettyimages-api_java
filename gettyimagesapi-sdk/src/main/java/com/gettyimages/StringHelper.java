@@ -1,4 +1,4 @@
-package com.gettyimages.connectsdk;
+package com.gettyimages;
 
 public class StringHelper {
     public static boolean isNullOrEmpty(String s) {
