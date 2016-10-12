@@ -5,8 +5,6 @@
     <groupId>com.gettyimages</groupId>
     <artifactId>gettyimagesapi-sdk</artifactId>
     <version>1.0-pre-alpha-1</version>
-    <packaging>jar</packaging>
-
     <name>gettyimagesapi-sdk</name>
     <url>http://api.gettyimages.com</url>
 
@@ -25,6 +23,24 @@
     </developers>
     <dependencies>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>1.2.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>1.2.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20160810</version>
@@ -35,4 +51,17 @@
             <version>4.5.2</version>
         </dependency>
     </dependencies>
+    <build>
+	<plugins>
+	  <plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-compiler-plugin</artifactId>
+	    <version>3.5.1</version>
+	    <configuration>
+	      <source>1.7</source>
+	      <target>1.7</target>
+	    </configuration>
+	  </plugin>
+	</plugins>
+    </build>
 </project>

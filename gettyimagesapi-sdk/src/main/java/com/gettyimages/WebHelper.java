@@ -78,7 +78,7 @@ public class WebHelper {
             case ClientCredentials:
             case ResourceOwner: {
                 request.addHeader("Api-Key", credentials.ApiKey);
-                request.addHeader("Authorization", "Bearer " + credentials.GetAccessToken().TokenString);
+                request.addHeader("Authorization", "Bearer " + credentials.GetAccessToken().getTokenString());
                 break;
             }
         }

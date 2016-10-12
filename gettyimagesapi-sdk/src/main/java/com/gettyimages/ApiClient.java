@@ -31,14 +31,14 @@ public class ApiClient {
         return new ApiClient(apiKey, apiSecret, userName, password);
     }
 
-    public Search Search() {
+    public Search search() {
         return Search.GetInstance(credentials, baseUrl);
     }
 
-    public Images Images()
-    {
-        return Images.GetInstance(credentials, baseUrl);
-    }
+//    public Images Images()
+//    {
+//        return Images.GetInstance(credentials, baseUrl);
+//    }
 
     public Download Download()
     {

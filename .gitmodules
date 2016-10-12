@@ -1,0 +1,3 @@
+[submodule "gettyimagesapi-sdk/src/test/resources/com/gettyimages/bdd-scenarios"]
+	path = gettyimagesapi-sdk/src/test/resources/com/gettyimages/bdd-scenarios
+	url = https://github.com/gettyimages/gettyimages-api_bdd

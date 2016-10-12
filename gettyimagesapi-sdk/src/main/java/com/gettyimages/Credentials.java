@@ -25,6 +25,7 @@ public class Credentials {
     private String ClientCredentialsValue = "client_credentials";
     private String GrantTypeKey = "grant_type";
     private String Oauth2TokenPath = "/oauth2/token";
+    private String RefreshTokenKey = "refresh_token";
 
     private String baseUrl;
     private Token accessToken;
@@ -32,7 +33,7 @@ public class Credentials {
     public String ApiKey;
     public String ApiSecret;
     public CredentialType CredentialType;
-    public Token RefreshToken;
+    public String RefreshToken;
     public String UserName;
     public String UserPassword;
 
@@ -41,6 +42,14 @@ public class Credentials {
         CredentialType = CredentialType.ClientCredentials;
         ApiKey = apiKey;
         ApiSecret = apiSecret;
+    }
+
+    private Credentials(String apiKey, String apiSecret, String refreshToken, String baseUrl) {
+        this.baseUrl = baseUrl;
+        CredentialType = CredentialType.RefreshToken;
+        ApiKey = apiKey;
+        ApiSecret = apiSecret;
+        RefreshToken = refreshToken;
     }
 
     private Credentials(String apiKey, String apiSecret, String userName, String userPassword, String baseUrl) {
@@ -56,6 +65,10 @@ public class Credentials {
         return new Credentials(apiKey, apiSecret, baseUrl);
     }
 
+    public static Credentials GetInstance(String apiKey, String apiSecret, String refreshToken, String baseUrl) {
+        return new Credentials(apiKey, apiSecret, refreshToken, baseUrl); //TODO change to accept refresh token
+    }
+
     public static Credentials GetInstance(String apiKey, String apiSecret, String userName, String userPassword,
                                           String baseUrl) {
         return new Credentials(apiKey, apiSecret, userName, userPassword, baseUrl);
@@ -65,9 +78,9 @@ public class Credentials {
         Calendar now = Calendar.getInstance();
         now.add(Calendar.MINUTE, -5);
 
-        if (CredentialType != CredentialType.ClientCredentials && CredentialType != CredentialType.ResourceOwner
+        if (CredentialType != CredentialType.ClientCredentials && CredentialType != CredentialType.ResourceOwner && CredentialType != CredentialType.RefreshToken
                 ||
-                (accessToken != null && accessToken.Expiration.compareTo(now.getTime()) >= 0)) {
+                (accessToken != null && accessToken.getExpiration().compareTo(now.getTime()) >= 0)) {
             return accessToken;
         }
 
@@ -78,11 +91,14 @@ public class Credentials {
 
             accessToken = new Token();
 
-            accessToken.TokenString = json.getString("access_token");
+            accessToken.setTokenString(json.getString("access_token"));
+
+            if (CredentialType == CredentialType.ResourceOwner)
+                accessToken.setRefreshTokenString(json.getString("refresh_token"));
 
             Calendar expiration = Calendar.getInstance();
             expiration.add(Calendar.SECOND, json.getInt("expires_in"));
-            accessToken.Expiration = expiration.getTime();
+            accessToken.setExpiration(expiration.getTime());
 
             return accessToken;
         } catch (JSONException e) {
@@ -115,6 +131,11 @@ public class Credentials {
             dict.put(PasswordKey, UserPassword);
         }
 
+        if (!StringHelper.isNullOrEmpty(RefreshToken))
+        {
+            dict.put(RefreshTokenKey, RefreshToken);
+        }
+
         switch (CredentialType)
         {
             case ClientCredentials:
@@ -122,6 +143,9 @@ public class Credentials {
                 break;
             case ResourceOwner:
                 dict.put(GrantTypeKey, PasswordKey);
+                break;
+            case RefreshToken:
+                dict.put(GrantTypeKey, RefreshTokenKey);
                 break;
         }
 

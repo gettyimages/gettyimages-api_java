@@ -1,9 +1,10 @@
 package com.gettyimages;
 
-enum CredentialType
+public enum CredentialType
 {
     None,
     ApiKey,
     ClientCredentials,
-    ResourceOwner
+    ResourceOwner,
+    RefreshToken
 }
