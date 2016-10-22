@@ -1,6 +1,8 @@
 # Getty Images API SDK 
 
-[![Build Status](https://travis-ci.org/gettyimages/gettyimages-api_java.svg?branch=master)](https://travis-ci.org/gettyimages/gettyimages-api_java)
+# Deprecated
+
+**The SDK's have been deprecated and are no longer being maintained as of November 2016.**
 
 Seamlessly integrate Getty Images' expansive digital content, powerful search technology, and rich metadata into your publishing tools, products and services!
 
