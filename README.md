@@ -1,7 +1,6 @@
 # Getty Images API SDK 
 
 [![Build Status](https://travis-ci.org/gettyimages/gettyimages-api_java.svg?branch=master)](https://travis-ci.org/gettyimages/gettyimages-api_java)
-[![Join the chat at https://gitter.im/gettyimages/gettyimages-api_java](https://badges.gitter.im/gettyimages/gettyimages-api_java.svg)](https://gitter.im/gettyimages/gettyimages-api_java?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Seamlessly integrate Getty Images' expansive digital content, powerful search technology, and rich metadata into your publishing tools, products and services!
 
