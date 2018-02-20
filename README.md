@@ -1,12 +1,5 @@
 # Getty Images API SDK 
 
-# Deprecated
-
-As of November 2016, we will no longer be improving or maintaining the language-specific SDKs. The API is still alive and under active feature development. Current documentation can be found at [developers.gettyimages.com/api/docs/](http://developers.gettyimages.com/api/docs/).
-SDK source code remains open source, providing a technology example of interaction with the Getty Images API. We will no longer take pull requests for these repositories, but feel free to fork them for your own modifications.
----
-
-
 Seamlessly integrate Getty Images' expansive digital content, powerful search technology, and rich metadata into your publishing tools, products and services!
 
 - Search for images from our extensive creative and editorial catalogs.
@@ -36,21 +29,10 @@ See *gettyimagesapi-examples* folder for examples
 ### Run Example via Maven
 You can run the examples by using [Maven's](http://www.mojohaus.org/exec-maven-plugin/usage.html) `exec:java` call. The following shows how to run the creative search example:
 
-```
 (Edit CreativeSearch.java to include correct API Key, Secret, Username, and Password)
+
+```sh
 cd gettyimagesapi-examples
 mvn clean install
 mvn exec:java -Dexec.mainClass="com.gettyimages.search.CreativeSearch"
 ```
-
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/ConnectSdk/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
-
-Our wish-list is (in no particular order):
-* Add more examples to gettyimagesapi-examples
-* Implement Getty Images [BDD Scenarios](https://github.com/gettyimages/gettyimages-api_bdd)
