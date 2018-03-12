@@ -1,7 +1,5 @@
 package com.gettyimages;
 
-import com.gettyimages.search.Search;
-
 /*
     Main entry point to the Connect API SDK
  */
@@ -48,9 +46,9 @@ public class ApiClient {
         return new ApiClient(apiKey, apiSecret, userName, password);
     }
 
-    public Search search() {
-        return Search.GetInstance(credentials, baseUrl);
-    }
+//    public Search search() {
+//        return Search.GetInstance(credentials, baseUrl);
+//    }
 
 //    public Images Images()
 //    {
@@ -69,5 +67,17 @@ public class ApiClient {
     private String GetOAuthBaseUrl() {
         String oAuthBaseUrl = baseUrl.substring(0, baseUrl.lastIndexOf(Slash));
         return oAuthBaseUrl;
+    }
+
+    public SearchImages searchimages() {
+        return SearchImages.GetInstance(credentials, baseUrl);
+    }
+
+    public SearchImagesCreative searchimagescreative() {
+        return SearchImagesCreative.GetInstance(credentials, baseUrl);
+    }
+
+    public SearchImagesEditorial searchimageseditorial() {
+        return SearchImagesEditorial.GetInstance(credentials, baseUrl);
     }
 }

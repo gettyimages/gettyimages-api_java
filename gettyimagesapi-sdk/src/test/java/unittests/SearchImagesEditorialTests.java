@@ -2,7 +2,7 @@ package unittests;
 
 import com.gettyimages.ApiClient;
 import com.gettyimages.SdkException;
-import com.gettyimages.SearchImages;
+import com.gettyimages.SearchImagesEditorial;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +18,7 @@ import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
-public class SearchImagesTests {
+public class SearchImagesEditorialTests {
     private static ClientAndServer mockServer;
 
     @BeforeAll
@@ -42,7 +42,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("age_of_people", "adult")
                         )
@@ -51,7 +51,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("artists", "roman makhmutov")
                         )
@@ -60,7 +60,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("collection_codes", "WRI,ARF")
                         )
@@ -69,7 +69,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("collection_filter_type", "exclude")
                         )
@@ -78,25 +78,25 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
-                                new Parameter("color", "#002244")
+                                new Parameter("compositions", "headshot,abstract")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
-                                new Parameter("composition", "headshot,abstract")
+                                new Parameter("editorial_segments", "archival,publicity")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("embed_content_only", "true")
                         )
@@ -105,7 +105,25 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
+                        .withQueryStringParameters(
+                                new Parameter("end_date", "2015-04-01")
+                        )
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath("/search/images/editorial")
+                        .withQueryStringParameters(
+                                new Parameter("entity_uris", "uri1,uri2")
+                        )
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("ethnicity", "black,japanese")
                         )
@@ -114,7 +132,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("event_ids", "123,456,789")
                         )
@@ -123,7 +141,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("exclude_nudity", "true")
                         )
@@ -132,7 +150,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("fields", "asset_family,id,uri_oembed")
                         )
@@ -141,7 +159,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("file_types", "eps,jpg")
                         )
@@ -150,7 +168,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("graphical_styles", "fine_art,illustration")
                         )
@@ -159,7 +177,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("keyword_ids", "1111,2222,3333")
                         )
@@ -168,16 +186,16 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
-                                new Parameter("license_models", "rightsmanaged")
+                                new Parameter("minimum_quality_rank", "1")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("minimum_size", "small")
                         )
@@ -186,7 +204,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("number_of_people", "group,one")
                         )
@@ -195,7 +213,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("orientations", "Horizontal,Square")
                         )
@@ -204,7 +222,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("page", "3")
                         )
@@ -213,7 +231,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("page_size", "50")
                         )
@@ -222,7 +240,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("phrase", "cat")
                         )
@@ -231,16 +249,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
-                        .withQueryStringParameters(
-                                new Parameter("prestige_content_only", "true")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("product_types", "easyaccess,editorialsubscription")
                         )
@@ -249,7 +258,7 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("sort_order", "newest")
                         )
@@ -258,19 +267,28 @@ public class SearchImagesTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("specific_people", "Reggie Jackson")
+                        )
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath("/search/images/editorial")
+                        .withQueryStringParameters(
+                                new Parameter("start_date", "2015-04-01")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
     }
 
 //   @Test
-//    void searchImagesWithAgeOfPeople() {
+//    void searchImagesEditorialWithAgeOfPeople() {
 //        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
 //        try {
-//            SearchImages search = client.searchimages()
+//            SearchImagesEditorial search = client.searchimageseditorial()
 //                    .withAgeOfPeople(AgeOfPeople.ADULT);
 //            String result = search.executeAsync();
 //            System.out.print(result);
@@ -282,10 +300,10 @@ public class SearchImagesTests {
 //    }
 
     @Test
-    void searchImagesWithArtist() {
+    void searchImagesEditorialWithArtist() {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
         try {
-            SearchImages search = client.searchimages()
+            SearchImagesEditorial search = client.searchimageseditorial()
                     .withArtists(Arrays.asList("roman makhmutov"));
             String result = search.executeAsync();
             System.out.print(result);
@@ -297,10 +315,10 @@ public class SearchImagesTests {
     }
 
     @Test
-    void searchImagesWithCollectionCodes() {
+    void searchImagesEditorialWithCollectionCodes() {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
         try {
-            SearchImages search = client.searchimages()
+            SearchImagesEditorial search = client.searchimageseditorial()
                     .withCollectionCodes(Arrays.asList("WRI", "ARF"));
             String result = search.executeAsync();
             System.out.print(result);
@@ -312,10 +330,10 @@ public class SearchImagesTests {
     }
 //
 //    @Test
-//    void searchImagesWithCollectionFilter() {
+//    void searchImagesEditorialWithCollectionFilter() {
 //        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
 //        try {
-//            SearchImages search = client.searchimages()
+//            SearchImagesEditorial search = client.searchimageseditorial()
 //                    .withCollectionFilter(CollectionFilter.EXCLUDE);
 //            String result = search.executeAsync();
 //            System.out.print(result);
@@ -326,27 +344,12 @@ public class SearchImagesTests {
 //        }
 //    }
 
-   @Test
-    void searchImagesWithColor() {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
-        try {
-            SearchImages search = client.searchimages()
-                    .withColor("#002244");
-            String result = search.executeAsync();
-            System.out.print(result);
-            assertEquals("success", result);
-        } catch (SdkException e) {
-            System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
-            System.exit(-1);
-        }
-    }
-
     //
 //    @Test
-//    void searchImagesWithComposition() {
+//    void searchImagesEditorialWithComposition() {
 //        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
 //        try {
-//            SearchImages search = client.searchimages()
+//            SearchImagesEditorial search = client.searchimageseditorial()
 //                    .withComposition(Composition.HEADSHOT | Composition.ABSTRACT);
 //            String result = search.executeAsync();
 //            System.out.print(result);
@@ -357,11 +360,26 @@ public class SearchImagesTests {
 //        }
 //    }
 
+    //    @Test
+//    void searchImagesEditorialWithEditorialSegments() {
+//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
+//        try {
+//            SearchImagesEditorial search = client.searchimageseditorial()
+//                    .withEditorialSegments(EditorialSegment.ARCHIVAL | EditorialSegment.PUBLICITY);
+//            String result = search.executeAsync();
+//            System.out.print(result);
+//            assertEquals("success", result);
+//        } catch (SdkException e) {
+//            System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
+//            System.exit(-1);
+//        }
+//    }
+
     @Test
-    void searchImagesWithEmbedContetOnly() {
+    void searchImagesEditorialWithEmbedContetOnly() {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
         try {
-            SearchImages search = client.searchimages()
+            SearchImagesEditorial search = client.searchimageseditorial()
                     .withEmbedContentOnly(true);
             String result = search.executeAsync();
             System.out.print(result);
@@ -372,11 +390,41 @@ public class SearchImagesTests {
         }
     }
 
+    @Test
+    void searchImagesEditorialWithEndDate() {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
+        try {
+            SearchImagesEditorial search = client.searchimageseditorial()
+                    .withEndDate("2015-04-01");
+            String result = search.executeAsync();
+            System.out.print(result);
+            assertEquals("success", result);
+        } catch (SdkException e) {
+            System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
+            System.exit(-1);
+        }
+    }
+
+    @Test
+    void searchImagesEditorialWithEntityUris() {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
+        try {
+            SearchImagesEditorial search = client.searchimageseditorial()
+                    .withEntityUris(Arrays.asList("uri1", "uri2"));
+            String result = search.executeAsync();
+            System.out.print(result);
+            assertEquals("success", result);
+        } catch (SdkException e) {
+            System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
+            System.exit(-1);
+        }
+    }
+
 //    @Test
-//    void searchImagesWithEthnicity() {
+//    void searchImagesEditorialWithEthnicity() {
 //        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
 //        try {
-//            SearchImages search = client.searchimages()
+//            SearchImagesEditorial search = client.searchimageseditorial()
 //                    .withEthnicity(Ethnicity.BLACK | Ethnicity.JAPANESE);
 //            String result = search.executeAsync();
 //            System.out.print(result);
@@ -388,10 +436,10 @@ public class SearchImagesTests {
 //    }
 
     @Test
-    void searchImagesWithEventIds() {
+    void searchImagesEditorialWithEventIds() {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
         try {
-            SearchImages search = client.searchimages()
+            SearchImagesEditorial search = client.searchimageseditorial()
                     .withEventIds(Arrays.asList(123, 456, 789));
             String result = search.executeAsync();
             System.out.print(result);
@@ -403,10 +451,10 @@ public class SearchImagesTests {
     }
 
     @Test
-    void searchImagesWithExcludeNudity() {
+    void searchImagesEditorialWithExcludeNudity() {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
         try {
-            SearchImages search = client.searchimages()
+            SearchImagesEditorial search = client.searchimageseditorial()
                     .withExcludeNudity(true);
             String result = search.executeAsync();
             System.out.print(result);
@@ -418,10 +466,10 @@ public class SearchImagesTests {
     }
 
     @Test
-    void searchImagesWithResponseFields() {
+    void searchImagesEditorialWithResponseFields() {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
         try {
-            SearchImages search = client.searchimages()
+            SearchImagesEditorial search = client.searchimageseditorial()
                     .withResponseFields(Arrays.asList("asset_family", "id", "uri_oembed"));
             String result = search.executeAsync();
             System.out.print(result);
@@ -433,10 +481,10 @@ public class SearchImagesTests {
     }
 
 //    @Test
-//    void searchImagesWithFileTypes() {
+//    void searchImagesEditorialWithFileTypes() {
 //        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
 //        try {
-//            SearchImages search = client.searchimages()
+//            SearchImagesEditorial search = client.searchimageseditorial()
 //                    .withFileTypes(FileType.EPS | FileType.JPG);
 //            String result = search.executeAsync();
 //            System.out.print(result);
@@ -448,10 +496,10 @@ public class SearchImagesTests {
 //    }
 //
 //   @Test
-//    void searchImagesWithGraphicalStyles() {
+//    void searchImagesEditorialWithGraphicalStyles() {
 //        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
 //        try {
-//            SearchImages search = client.searchimages()
+//            SearchImagesEditorial search = client.searchimageseditorial()
 //                    .withGraphicalStyles(GraphicalStyles.FINEART | GraphicalStyles.ILLUSTRATION);
 //            String result = search.executeAsync();
 //            System.out.print(result);
@@ -463,10 +511,10 @@ public class SearchImagesTests {
 //    }
 
     @Test
-    void searchImagesWithKeywordIds() {
+    void searchImagesEditorialWithKeywordIds() {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
         try {
-            SearchImages search = client.searchimages()
+            SearchImagesEditorial search = client.searchimageseditorial()
                     .withKeywordIds(Arrays.asList(1111,2222,3333));
             String result = search.executeAsync();
             System.out.print(result);
@@ -478,11 +526,11 @@ public class SearchImagesTests {
     }
 
 //    @Test
-//    void searchImagesWithLicenseModels() {
+//    void searchImagesEditorialWithMinimumQualityRank() {
 //        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
 //        try {
-//            SearchImages search = client.searchimages()
-//                    .withLicenseModels(LicenseModel.RIGHTS_MANAGED);
+//            SearchImagesEditorial search = client.searchimageseditorial()
+//                    .withMinimumQualityRank(MinimumQualityRank.ONE);
 //            String result = search.executeAsync();
 //            System.out.print(result);
 //            assertEquals("success", result);
@@ -493,10 +541,10 @@ public class SearchImagesTests {
 //    }
 
 //    @Test
-//    void searchImagesWithMinimumSize() {
+//    void searchImagesEditorialWithMinimumSize() {
 //        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
 //        try {
-//            SearchImages search = client.searchimages()
+//            SearchImagesEditorial search = client.searchimageseditorial()
 //                    .withMinimumSize(MinimumSize.SMALL);
 //            String result = search.executeAsync();
 //            System.out.print(result);
@@ -508,10 +556,10 @@ public class SearchImagesTests {
 //    }
 
 //    @Test
-//    void searchImagesWithNumberOfPeople() {
+//    void searchImagesEditorialWithNumberOfPeople() {
 //        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
 //        try {
-//            SearchImages search = client.searchimages()
+//            SearchImagesEditorial search = client.searchimageseditorial()
 //                    .withNumberOfPeople(NumberOfPeople.GROUP | NumberOfPeople.ONE);
 //            String result = search.executeAsync();
 //            System.out.print(result);
@@ -523,10 +571,10 @@ public class SearchImagesTests {
 //    }
 
 //    @Test
-//    void searchImagesWithOrientations() {
+//    void searchImagesEditorialWithOrientations() {
 //        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
 //        try {
-//            SearchImages search = client.searchimages()
+//            SearchImagesEditorial search = client.searchimageseditorial()
 //                    .withOrientations(Orientation.HORIZONTAL | Orientation.SQUARE);
 //            String result = search.executeAsync();
 //            System.out.print(result);
@@ -538,10 +586,10 @@ public class SearchImagesTests {
 //    }
 
     @Test
-    void searchImagesWithPage() {
+    void searchImagesEditorialWithPage() {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
         try {
-            SearchImages search = client.searchimages()
+            SearchImagesEditorial search = client.searchimageseditorial()
                     .withPage(3);
             String result = search.executeAsync();
             System.out.print(result);
@@ -553,10 +601,10 @@ public class SearchImagesTests {
     }
 
     @Test
-    void searchImagesWithPageSize() {
+    void searchImagesEditorialWithPageSize() {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
         try {
-            SearchImages search = client.searchimages()
+            SearchImagesEditorial search = client.searchimageseditorial()
                     .withPageSize(50);
             String result = search.executeAsync();
             System.out.print(result);
@@ -568,10 +616,10 @@ public class SearchImagesTests {
     }
 
     @Test
-    void searchImagesWithPhrase() {
+    void searchImagesEditorialWithPhrase() {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
         try {
-            SearchImages search = client.searchimages()
+            SearchImagesEditorial search = client.searchimageseditorial()
                     .withPhrase("cat");
             String result = search.executeAsync();
             System.out.print(result);
@@ -582,26 +630,11 @@ public class SearchImagesTests {
         }
     }
 
-    @Test
-    void searchImagesWithPrestigeContentOnly() {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
-        try {
-            SearchImages search = client.searchimages()
-                    .withPrestigeContentOnly(true);
-            String result = search.executeAsync();
-            System.out.print(result);
-            assertEquals("success", result);
-        } catch (SdkException e) {
-            System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
-            System.exit(-1);
-        }
-    }
-
 //    @Test
-//    void searchImagesWithProductTypes() {
+//    void searchImagesEditorialWithProductTypes() {
 //        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
 //        try {
-//            SearchImages search = client.searchimages()
+//            SearchImagesEditorial search = client.searchimageseditorial()
 //                    .withProductTypes(ProductType.EASYACCESS | ProductType.EDITORIALSUBSCRIPTION);
 //            String result = search.executeAsync();
 //            System.out.print(result);
@@ -613,10 +646,10 @@ public class SearchImagesTests {
 //    }
 
 //    @Test
-//    void searchImagesWithSortOrder() {
+//    void searchImagesEditorialWithSortOrder() {
 //        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
 //        try {
-//            SearchImages search = client.searchimages()
+//            SearchImagesEditorial search = client.searchimageseditorial()
 //                    .withSortOrder(SortOrder.NEWEST);
 //            String result = search.executeAsync();
 //            System.out.print(result);
@@ -628,11 +661,26 @@ public class SearchImagesTests {
 //    }
 
     @Test
-    void searchImagesWithSpecificPeople() {
+    void searchImagesEditorialWithSpecificPeople() {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
         try {
-            SearchImages search = client.searchimages()
+            SearchImagesEditorial search = client.searchimageseditorial()
                     .withSpecificPeople(Arrays.asList("Reggie Jackson"));
+            String result = search.executeAsync();
+            System.out.print(result);
+            assertEquals("success", result);
+        } catch (SdkException e) {
+            System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
+            System.exit(-1);
+        }
+    }
+
+    @Test
+    void searchImagesEditorialWithStartDate() {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
+        try {
+            SearchImagesEditorial search = client.searchimageseditorial()
+                    .withStartDate("2015-04-01");
             String result = search.executeAsync();
             System.out.print(result);
             assertEquals("success", result);

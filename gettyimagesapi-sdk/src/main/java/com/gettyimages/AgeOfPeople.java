@@ -1,4 +1,4 @@
-package com.gettyimages.search.filters;
+package com.gettyimages;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -31,6 +31,7 @@ public class WebHelper {
             String query = BuildQuery(queryParams);
             URL url = new URL(baseUrl + path + "?" + query);
             HttpClient httpClient = new DefaultHttpClient();
+            //HttpClientBuilder instead
             HttpGet httpGet = new HttpGet(url.toString());
 
             addHeaders(httpGet);
