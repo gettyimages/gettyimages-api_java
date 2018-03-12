@@ -6,15 +6,13 @@ public abstract class AbstractApiRequest<T> {
 
     protected String baseUrl;
     protected Credentials credentials;
-    protected Map map;
     protected String method;
     protected String path;
     Map<String, Object> queryParams = new HashMap<>();
 
-    public AbstractApiRequest(Credentials credentials, String baseUrl, Map map) {
+    public AbstractApiRequest(Credentials credentials, String baseUrl) {
         this.credentials = credentials;
         this.baseUrl = baseUrl;
-        this.map = map;
     }
 
     String executeAsync() throws SdkException {

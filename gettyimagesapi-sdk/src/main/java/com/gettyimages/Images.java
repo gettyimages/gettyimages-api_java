@@ -1,23 +1,16 @@
 package com.gettyimages;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
-public class Images {
+public class Images extends AbstractApiRequest{
     private String MustSpecifyAtLeastOneImageIdMessage = "Must specify at least one image id.";
-    private String FieldsKey = "fields";
-    private String ImagesPath = "/images/";
-    private String baseUrl;
-    private Credentials credentials;
-    private List<String> fields = new ArrayList<String>();
+    private String ImagesPath = "/images";
     private List<String> imageIds = new ArrayList<String>();
 
     private Images(Credentials credentials, String baseUrl)
     {
-        this.credentials = credentials;
-        this.baseUrl = baseUrl;
+        super(credentials, baseUrl);
     }
 
     public static Images GetInstance(Credentials credentials, String baseUrl)
@@ -25,62 +18,40 @@ public class Images {
         return new Images(credentials, baseUrl);
     }
 
-    public Images WithId(String val)
+    public String executeAsync() throws SdkException {
+        if (imageIds.isEmpty())
+        {
+            throw new SdkException(MustSpecifyAtLeastOneImageIdMessage);
+        }
+        method = "GET";
+        path = ImagesPath;
+        if (imageIds.size() > 1 ) {
+            queryParams.put(Constants.IdsParameterName, imageIds);
+        }
+        else {
+            String id = String.join(",", imageIds);
+            path = ImagesPath + "/" + id;
+        }
+
+        return super.executeAsync();
+    }
+
+    public Images withId(String val)
     {
         imageIds.add(val);
         return this;
     }
 
-    public Images WithIds(List<String> ids)
+    public Images withIds(List<String> ids)
     {
         imageIds.addAll(ids);
         return this;
     }
 
-    public Images WithField(String value)
+    public Images withResponseFields(Iterable<String> values)
     {
-        if (!fields.contains(value))
-        {
-            fields.add(value);
-        }
-
+        addResponseFields(values);
         return this;
-    }
-
-    public String ExecuteAsync() throws SdkException {
-        if (imageIds.isEmpty())
-        {
-            throw new SdkException(MustSpecifyAtLeastOneImageIdMessage);
-        }
-
-        WebHelper helper = new WebHelper(credentials, baseUrl);
-        String ids = join(imageIds, ",");
-        Map queryParams = new Hashtable<String, String>();
-
-        if (!fields.isEmpty())
-        {
-            queryParams.put(FieldsKey, join(fields, ","));
-        }
-
-        String path = ImagesPath + ids;
-        return helper.Get(queryParams, path);
-    }
-
-    public static String join(List<String> list, String delim) {
-
-        StringBuilder sb = new StringBuilder();
-
-        String loopDelim = "";
-
-        for(String s : list) {
-
-            sb.append(loopDelim);
-            sb.append(s);
-
-            loopDelim = delim;
-        }
-
-        return sb.toString();
     }
 }
 

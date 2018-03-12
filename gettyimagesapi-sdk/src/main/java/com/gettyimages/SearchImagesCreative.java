@@ -5,12 +5,12 @@ import java.util.Map;
 
 public class SearchImagesCreative extends AbstractApiRequest {
 
-    private SearchImagesCreative(Credentials credentials, String baseUrl, Map map) {
-        super(credentials, baseUrl, map);
+    private SearchImagesCreative(Credentials credentials, String baseUrl) {
+        super(credentials, baseUrl);
     }
 
     public static SearchImagesCreative GetInstance(Credentials credentials, String baseUrl) {
-        return new SearchImagesCreative(credentials, baseUrl, new Hashtable());
+        return new SearchImagesCreative(credentials, baseUrl);
     }
 
 

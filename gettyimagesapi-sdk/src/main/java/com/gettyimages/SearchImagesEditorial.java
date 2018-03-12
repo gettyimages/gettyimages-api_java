@@ -8,12 +8,12 @@ import java.util.Map;
 
 public class SearchImagesEditorial extends AbstractApiRequest {
 
-    private SearchImagesEditorial(Credentials credentials, String baseUrl, Map map) {
-        super(credentials, baseUrl, map);
+    private SearchImagesEditorial(Credentials credentials, String baseUrl) {
+        super(credentials, baseUrl);
     }
 
     public static SearchImagesEditorial GetInstance(Credentials credentials, String baseUrl) {
-        return new SearchImagesEditorial(credentials, baseUrl, new Hashtable());
+        return new SearchImagesEditorial(credentials, baseUrl);
     }
 
 

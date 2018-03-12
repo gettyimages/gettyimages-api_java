@@ -33,4 +33,5 @@ public class Constants {
     static final String KeywordIdsParameterName = "keyword_ids";
     static final String ProductTypeParameterName = "product_types";
     static final String EntityUriParameterName = "entity_uris";
+    static final String IdsParameterName = "ids";
 }

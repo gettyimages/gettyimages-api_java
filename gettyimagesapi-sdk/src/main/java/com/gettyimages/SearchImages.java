@@ -1,16 +1,13 @@
 package com.gettyimages;
 
-import java.util.Hashtable;
-import java.util.Map;
-
 public class SearchImages extends AbstractApiRequest {
 
-    private SearchImages(Credentials credentials, String baseUrl, Map map) {
-        super(credentials, baseUrl, map);
+    private SearchImages(Credentials credentials, String baseUrl) {
+        super(credentials, baseUrl);
     }
 
     public static SearchImages GetInstance(Credentials credentials, String baseUrl) {
-        return new SearchImages(credentials, baseUrl, new Hashtable());
+        return new SearchImages(credentials, baseUrl);
     }
 
 

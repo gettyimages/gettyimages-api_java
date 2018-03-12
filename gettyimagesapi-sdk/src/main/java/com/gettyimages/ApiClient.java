@@ -46,20 +46,6 @@ public class ApiClient {
         return new ApiClient(apiKey, apiSecret, userName, password);
     }
 
-//    public Search search() {
-//        return Search.GetInstance(credentials, baseUrl);
-//    }
-
-//    public Images Images()
-//    {
-//        return Images.GetInstance(credentials, baseUrl);
-//    }
-
-    public Download Download()
-    {
-        return Download.GetInstance(credentials, baseUrl);
-    }
-
     private void NormalizeAndSetBaseUrl(String baseUrl) {
         baseUrl = baseUrl.endsWith(Slash) ? baseUrl.substring(0, baseUrl.length() - 1) : baseUrl;
     }
@@ -67,6 +53,22 @@ public class ApiClient {
     private String GetOAuthBaseUrl() {
         String oAuthBaseUrl = baseUrl.substring(0, baseUrl.lastIndexOf(Slash));
         return oAuthBaseUrl;
+    }
+
+
+    public Images images()
+    {
+        return Images.GetInstance(credentials, baseUrl);
+    }
+
+    public Videos videos()
+    {
+        return Videos.GetInstance(credentials, baseUrl);
+    }
+
+    public Download Download()
+    {
+        return Download.GetInstance(credentials, baseUrl);
     }
 
     public SearchImages searchimages() {
@@ -79,5 +81,17 @@ public class ApiClient {
 
     public SearchImagesEditorial searchimageseditorial() {
         return SearchImagesEditorial.GetInstance(credentials, baseUrl);
+    }
+
+    public SearchVideos searchvideos() {
+        return SearchVideos.GetInstance(credentials, baseUrl);
+    }
+
+    public SearchVideosCreative searchvideoscreative() {
+        return SearchVideosCreative.GetInstance(credentials, baseUrl);
+    }
+
+    public SearchVideosEditorial searchvideoseditorial() {
+        return SearchVideosEditorial.GetInstance(credentials, baseUrl);
     }
 }
