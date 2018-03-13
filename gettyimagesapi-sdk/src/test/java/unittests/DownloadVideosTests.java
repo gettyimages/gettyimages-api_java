@@ -1,7 +1,7 @@
 package unittests;
 
 import com.gettyimages.ApiClient;
-import com.gettyimages.Videos;
+import com.gettyimages.DownloadVideos;
 import com.gettyimages.SdkException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,7 +19,7 @@ import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
-public class VideosTests {
+public class DownloadVideosTests {
     private static ClientAndServer mockServer;
 
     @BeforeAll
@@ -45,19 +45,21 @@ public class VideosTests {
                 );
         client.when(
                 request()
-                        .withMethod("GET")
-                        .withPath("/videos/12345")
+                        .withMethod("POST")
+                        .withPath("/downloads/videos/12345")
                         .withQueryStringParameters(
-                                new Parameter("fields", "country,id")
+                                new Parameter("product_id", "9876"),
+                                new Parameter("auto_download", "false")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
                 request()
-                        .withMethod("GET")
-                        .withPath("/videos")
+                        .withMethod("POST")
+                        .withPath("/downloads/videos/12345")
                         .withQueryStringParameters(
-                                new Parameter("ids", "12345,678910")
+                                new Parameter("size", "size"),
+                                new Parameter("auto_download", "false")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
@@ -65,21 +67,21 @@ public class VideosTests {
     }
 
     @Test
-    void videosWithIdWithResponseFields() throws Exception {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
-        Videos videos = client.videos()
-                .withId("12345").withResponseFields(Arrays.asList("country", "id"));
-        String result = videos.executeAsync();
+    void downloadVideosWithProductId() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        DownloadVideos downloadVideos = client.downloadvideos()
+                .withId("12345").withProductId(9876);
+        String result = downloadVideos.executeAsync();
         System.out.print(result);
         assertEquals("success", result);
     }
 
     @Test
-    void videosWithIds() throws Exception {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
-        Videos videos = client.videos()
-                .withIds(Arrays.asList("12345", "678910"));
-        String result = videos.executeAsync();
+    void downloadVideosWithSize() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        DownloadVideos downloadVideos = client.downloadvideos()
+                .withId("12345").withSize("size");
+        String result = downloadVideos.executeAsync();
         System.out.print(result);
         assertEquals("success", result);
     }
@@ -90,4 +92,3 @@ public class VideosTests {
         mockServer.stop();
     }
 }
-

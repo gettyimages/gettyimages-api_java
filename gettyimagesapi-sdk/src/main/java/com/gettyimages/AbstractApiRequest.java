@@ -43,7 +43,19 @@ public abstract class AbstractApiRequest<T> {
         });
 
         WebHelper helper = new WebHelper(credentials, baseUrl);
-        return helper.Get(queryParams, path);
+        switch (method)
+        {
+            case "GET":
+                return helper.Get(queryParams, path);
+            case "POST":
+                return helper.PostQuery(queryParams, path);
+//            case "PUT":
+//                return helper.Get(queryParams, path);
+//            case "DELETE":
+//                return helper.Get(queryParams, path);
+            default:
+                throw new SdkException("No appropriate HTTP method found for this request.");
+        }
     }
 
 

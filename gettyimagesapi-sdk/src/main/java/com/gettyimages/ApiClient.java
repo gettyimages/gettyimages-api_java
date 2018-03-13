@@ -7,7 +7,7 @@ public class ApiClient {
     public static String Version="1.0.1-beta";
     private String Slash = "/";
     private Credentials credentials;
-    private String baseUrl = "https://connect.gettyimages.com/v3";
+    private static String baseUrl = "https://connect.gettyimages.com/v3";
 
     private ApiClient(String apiKey, String apiSecret, String baseUrl) {
         this.baseUrl = baseUrl;
@@ -55,7 +55,6 @@ public class ApiClient {
         return oAuthBaseUrl;
     }
 
-
     public Images images()
     {
         return Images.GetInstance(credentials, baseUrl);
@@ -64,11 +63,6 @@ public class ApiClient {
     public Videos videos()
     {
         return Videos.GetInstance(credentials, baseUrl);
-    }
-
-    public Download Download()
-    {
-        return Download.GetInstance(credentials, baseUrl);
     }
 
     public SearchImages searchimages() {
@@ -93,5 +87,13 @@ public class ApiClient {
 
     public SearchVideosEditorial searchvideoseditorial() {
         return SearchVideosEditorial.GetInstance(credentials, baseUrl);
+    }
+
+    public DownloadVideos downloadvideos() {
+        return DownloadVideos.GetInstance(credentials, baseUrl);
+    }
+
+    public DownloadImages downloadimages() {
+        return DownloadImages.GetInstance(credentials, baseUrl);
     }
 }

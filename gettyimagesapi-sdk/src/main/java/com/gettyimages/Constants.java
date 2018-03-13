@@ -34,4 +34,8 @@ public class Constants {
     static final String ProductTypeParameterName = "product_types";
     static final String EntityUriParameterName = "entity_uris";
     static final String IdsParameterName = "ids";
+    static final String AutoDownloadParameterName = "auto_download";
+    static final String HeightParameterName = "height";
+    static final String ProductIdParameterName = "product_id";
+    static final String SizeParameterName = "size";
 }

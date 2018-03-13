@@ -48,7 +48,7 @@ public class WebHelper {
         return "{null}";
     }
 
-    public String PostQuery(Map<String, String> queryParams, String path) throws SdkException {
+    public String PostQuery(Map queryParams, String path) throws SdkException {
         try {
             String query = BuildQuery(queryParams);
             URL url = new URL(baseUrl + path + "?" + query);
