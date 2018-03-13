@@ -1,5 +1,7 @@
 package com.gettyimages;
 
+import com.gettyimages.Filters.AgeOfPeople;
+
 import java.util.*;
 
 public abstract class AbstractApiRequest<T> {
@@ -8,14 +10,14 @@ public abstract class AbstractApiRequest<T> {
     protected Credentials credentials;
     protected String method;
     protected String path;
-    Map<String, Object> queryParams = new HashMap<>();
+    protected Map<String, Object> queryParams = new HashMap<>();
 
     public AbstractApiRequest(Credentials credentials, String baseUrl) {
         this.credentials = credentials;
         this.baseUrl = baseUrl;
     }
 
-    String executeAsync() throws SdkException {
+    protected String executeAsync() throws SdkException {
 
         queryParams.forEach((k, v)->{
             if (v instanceof List<?>) {

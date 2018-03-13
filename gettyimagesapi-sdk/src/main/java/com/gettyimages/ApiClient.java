@@ -1,5 +1,11 @@
 package com.gettyimages;
 
+import com.gettyimages.Downloads.DownloadImages;
+import com.gettyimages.Downloads.DownloadVideos;
+import com.gettyimages.Images.Images;
+import com.gettyimages.Search.*;
+import com.gettyimages.Videos.Videos;
+
 /*
     Main entry point to the Connect API SDK
  */
@@ -8,11 +14,6 @@ public class ApiClient {
     private String Slash = "/";
     private Credentials credentials;
     private static String baseUrl = "https://connect.gettyimages.com/v3";
-
-    private ApiClient(String apiKey, String apiSecret, String baseUrl) {
-        this.baseUrl = baseUrl;
-        credentials = Credentials.GetInstance(apiKey, apiSecret, this.baseUrl);
-    }
 
     private ApiClient(String apiKey, String apiSecret) {
         NormalizeAndSetBaseUrl(baseUrl);
@@ -24,21 +25,9 @@ public class ApiClient {
         credentials = Credentials.GetInstance(apiKey, apiSecret, userName, userPassword, GetOAuthBaseUrl());
     }
 
-    //CHECK ON DESIGN
-//    public void setBaseUrl(String baseUrl) {
-//        if (baseUrl != null) {
-//            this.baseUrl = baseUrl;
-//        }
-//    }
-
     public static ApiClient GetApiClientWithClientCredentials(String apiKey, String apiSecret)
     {
         return new ApiClient(apiKey, apiSecret);
-    }
-
-    public static ApiClient GetApiClientWithClientCredentials(String apiKey, String apiSecret, String baseUrl)
-    {
-        return new ApiClient(apiKey, apiSecret, baseUrl);
     }
 
     public static ApiClient GetApiClientWithResourceOwnerCredentials(String apiKey, String apiSecret, String userName, String password)
