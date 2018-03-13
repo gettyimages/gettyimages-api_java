@@ -1,6 +1,7 @@
 package unittests.Search;
 
 import com.gettyimages.ApiClient;
+import com.gettyimages.Filters.*;
 import com.gettyimages.Search.SearchVideosCreative;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,6 +13,7 @@ import org.mockserver.model.Parameter;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.EnumSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockserver.integration.ClientAndServer.startClientAndServer;
@@ -47,7 +49,7 @@ public class SearchVideosCreativeTests {
                         .withMethod("GET")
                         .withPath("/search/videos/creative")
                         .withQueryStringParameters(
-                                new Parameter("age_of_people", "adult")
+                                new Parameter("age_of_people", "baby,child,adult")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
@@ -65,7 +67,7 @@ public class SearchVideosCreativeTests {
                         .withMethod("GET")
                         .withPath("/search/videos/creative")
                         .withQueryStringParameters(
-                                new Parameter("collection_filter_type", "exclude")
+                                new Parameter("collections_filter_type", "exclude")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
@@ -170,15 +172,15 @@ public class SearchVideosCreativeTests {
                 .respond(response().withStatusCode(200).withBody("success"));
     }
 
-//   @Test
-//    void searchVideosCreativeWithAgeOfPeople() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchVideosCreative search = client.searchvideoscreative()
-//                .withAgeOfPeople(AgeOfPeople.ADULT);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+   @Test
+    void searchVideosCreativeWithAgeOfPeople() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosCreative search = client.searchvideoscreative()
+                .withAgeOfPeople(EnumSet.of(AgeOfPeople.ADULT)).withAgeOfPeople(EnumSet.of(AgeOfPeople.CHILD, AgeOfPeople.BABY));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
     @Test
     void searchVideosCreativeWithCollectionCodes() throws Exception {
@@ -189,16 +191,16 @@ public class SearchVideosCreativeTests {
         System.out.print(result);
         assertEquals("success", result);
     }
-//
-//    @Test
-//    void searchVideosCreativeWithCollectionFilter() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchVideosCreative search = client.searchvideoscreative()
-//                .withCollectionFilter(CollectionFilter.EXCLUDE);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+
+    @Test
+    void searchVideosCreativeWithCollectionFilter() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosCreative search = client.searchvideoscreative()
+                .withCollectionFilterType(CollectionFilter.EXCLUDE);
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
     @Test
     void searchVideosCreativeWithExcludeNudity() throws Exception {
@@ -220,25 +222,25 @@ public class SearchVideosCreativeTests {
         assertEquals("success", result);
     }
 
-//    @Test
-//    void searchVideosCreativeWithFormatAvailable() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchVideosCreative search = client.searchvideoscreative()
-//                .withFormatAvailable(Format.HD);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
-//
-//   @Test
-//    void searchVideosCreativeWithFrameRates() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchVideosCreative search = client.searchvideoscreative()
-//                .withFrameRates(FrameRate.FRAMERATE24 | FrameRate.FRAMERATE29);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void searchVideosCreativeWithFormatAvailable() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosCreative search = client.searchvideoscreative()
+                .withFormatAvailable(FormatAvailable.HD);
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
+
+   @Test
+    void searchVideosCreativeWithFrameRates() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosCreative search = client.searchvideoscreative()
+                .withFrameRates(EnumSet.of(FrameRate.FRAMERATE_24, FrameRate.FRAMERATE_29));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
     @Test
     void searchVideosCreativeWithKeywordIds() throws Exception {
@@ -250,15 +252,15 @@ public class SearchVideosCreativeTests {
         assertEquals("success", result);
     }
 
-//    @Test
-//    void searchVideosCreativeWithLicenseModels() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchVideosCreative search = client.searchvideoscreative()
-//                .withLicenseModels(LicenseModel.RIGHTS_MANAGED);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void searchVideosCreativeWithLicenseModels() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosCreative search = client.searchvideoscreative()
+                .withLicenseModels(EnumSet.of(LicenseModel.RIGHTS_MANAGED));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
     @Test
     void searchVideosCreativeWithPage() throws Exception {
@@ -290,25 +292,25 @@ public class SearchVideosCreativeTests {
         assertEquals("success", result);
     }
 
-//    @Test
-//    void searchVideosCreativeWithProductTypes() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchVideosCreative search = client.searchvideoscreative()
-//                .withProductTypes(ProductType.EASYACCESS | ProductType.EDITORIALSUBSCRIPTION);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void searchVideosCreativeWithProductTypes() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosCreative search = client.searchvideoscreative()
+                .withProductTypes(EnumSet.of(ProductType.EASYACCESS, ProductType.EDITORIALSUBSCRIPTION));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
-//    @Test
-//    void searchVideosCreativeWithSortOrder() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchVideosCreative search = client.searchvideoscreative()
-//                .withSortOrder(SortOrder.NEWEST);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void searchVideosCreativeWithSortOrder() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosCreative search = client.searchvideoscreative()
+                .withSortOrder(SortOrder.NEWEST);
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
     @AfterAll
     public static void stopProxy() {

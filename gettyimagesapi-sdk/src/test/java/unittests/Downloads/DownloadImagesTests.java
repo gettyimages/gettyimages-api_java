@@ -2,6 +2,8 @@ package unittests.Downloads;
 
 import com.gettyimages.ApiClient;
 import com.gettyimages.Downloads.DownloadImages;
+import com.gettyimages.Filters.FileType;
+import com.gettyimages.Filters.ProductType;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,7 +46,7 @@ public class DownloadImagesTests {
         client.when(
                 request()
                         .withMethod("POST")
-                        .withPath("downloads/images/12345")
+                        .withPath("/downloads/images/12345")
                         .withQueryStringParameters(
                                 new Parameter("file_type", "jpg"),
                                 new Parameter("auto_download", "false")
@@ -74,7 +76,7 @@ public class DownloadImagesTests {
         client.when(
                 request()
                         .withMethod("POST")
-                        .withPath("downloads/images/12345")
+                        .withPath("/downloads/images/12345")
                         .withQueryStringParameters(
                                 new Parameter("product_type", "easyaccess"),
                                 new Parameter("auto_download", "false")
@@ -84,15 +86,15 @@ public class DownloadImagesTests {
 
     }
 
-//    @Test
-//    void downloadImagesWithFileType() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
-//        DownloadImages downloadimages = client.downloadimages()
-//                .withId("12345").withFileType(FileType.JPG);
-//        String result = downloadimages.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void downloadImagesWithFileType() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        DownloadImages downloadimages = client.downloadimages()
+                .withId("12345").withFileType(FileType.JPG);
+        String result = downloadimages.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
     @Test
     void downloadImagesWithHeight() throws Exception {
@@ -114,15 +116,15 @@ public class DownloadImagesTests {
         assertEquals("success", result);
     }
 
-//    @Test
-//    void downloadImagesWithProductType() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret", "http://127.0.0.1:1080");
-//        DownloadImages downloadimages = client.downloadimages()
-//                .withId("12345").withProductType(ProductType.EASYACCESS);
-//        String result = downloadimages.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void downloadImagesWithProductType() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        DownloadImages downloadimages = client.downloadimages()
+                .withId("12345").withProductType(ProductType.EASYACCESS);
+        String result = downloadimages.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
 
     @AfterAll

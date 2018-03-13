@@ -1,7 +1,11 @@
 package com.gettyimages.Search;
 
 import com.gettyimages.*;
-import com.gettyimages.Filters.AgeOfPeople;
+import com.gettyimages.Filters.*;
+import com.gettyimages.Filters.SortOrder;
+
+import javax.swing.*;
+import java.util.EnumSet;
 
 public class SearchImages extends AbstractApiRequest {
 
@@ -21,9 +25,9 @@ public class SearchImages extends AbstractApiRequest {
         return super.executeAsync();
     }
 
-    public SearchImages withAgeOfPeople(AgeOfPeople value)
+    public SearchImages withAgeOfPeople(EnumSet<AgeOfPeople> values)
     {
-        addAgeOfPeople(value);
+        addAgeOfPeople(values);
         return this;
     }
 
@@ -39,11 +43,11 @@ public class SearchImages extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchImages withCollectionFilterType(CollectionFilter value)
-//    {
-//        AddQueryParameter(Constants.CollectionFilterKey, value);
-//        return this;
-//    }
+    public SearchImages withCollectionFilterType(CollectionFilter value)
+    {
+        queryParams.put(Constants.CollectionsFilterTypeParameterName, value);
+        return this;
+    }
 
     public SearchImages withColor(String value)
     {
@@ -51,11 +55,11 @@ public class SearchImages extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchImages WithComposition(Composition value)
-//    {
-//        AddComposition(value);
-//        return this;
-//    }
+    public SearchImages withCompositions(EnumSet<Compositions> values)
+    {
+        addCompositions(values);
+        return this;
+    }
 
     public SearchImages withEmbedContentOnly(Boolean value)
     {
@@ -63,11 +67,11 @@ public class SearchImages extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchImages WithEthnicity(Ethnicity value)
-//    {
-//        AddEthnicity(value);
-//        return this;
-//    }
+    public SearchImages withEthnicity(EnumSet<Ethnicity> values)
+    {
+        addEthnicity(values);
+        return this;
+    }
 
     public SearchImages withEventIds(Iterable<Integer> values)
     {
@@ -87,17 +91,17 @@ public class SearchImages extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchImages WithFileType(FileType value)
-//    {
-//        AddFileTypes(value);
-//        return this;
-//    }
-//
-//    public SearchImages WithGraphicalStyle(GraphicalStyles value)
-//    {
-//        AddGraphicalStyle(value);
-//        return this;
-//    }
+    public SearchImages withFileTypes(EnumSet<FileType> values)
+    {
+        addFileTypes(values);
+        return this;
+    }
+
+    public SearchImages withGraphicalStyles(EnumSet<GraphicalStyles> values)
+    {
+        addGraphicalStyles(values);
+        return this;
+    }
 
     public SearchImages withKeywordIds(Iterable<Integer> values)
     {
@@ -105,29 +109,29 @@ public class SearchImages extends AbstractApiRequest {
         return this;
     }
 
-//    public virtual SearchImages WithLicenseModel(LicenseModel value)
-//    {
-//        AddLicenseModel(value);
-//        return this;
-//    }
-//
-//    public SearchImages WithMinimumSize(MinimumSize value)
-//    {
-//        AddQueryParameter(Constants.MinimumSizeKey, value);
-//        return this;
-//    }
-//
-//    public SearchImages WithNumberOfPeople(NumberOfPeople value)
-//    {
-//        AddNumberOfPeople(value);
-//        return this;
-//    }
-//
-//    public SearchImages WithOrientation(Orientation value)
-//    {
-//        AddOrientation(value);
-//        return this;
-//    }
+    public SearchImages withLicenseModels(EnumSet<LicenseModel> values)
+    {
+        addLicenseModels(values);
+        return this;
+    }
+
+    public SearchImages withMinimumSize(MinimumSize value)
+    {
+        queryParams.put(Constants.MinimumSizeParameterName, value);
+        return this;
+    }
+
+    public SearchImages withNumberOfPeople(EnumSet<NumberOfPeople> values)
+    {
+        addNumberOfPeople(values);
+        return this;
+    }
+
+    public SearchImages withOrientations(EnumSet<Orientation> values)
+    {
+        addOrientations(values);
+        return this;
+    }
 
     public SearchImages withPage(Integer value)
     {
@@ -153,17 +157,17 @@ public class SearchImages extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchImages WithProductType(ProductType value)
-//    {
-//        AddProductTypes(value);
-//        return this;
-//    }
-//
-//    public SearchImages WithSortOrder(SortOrder value)
-//    {
-//        AddQueryParameter(Constants.SortOrderKey, value);
-//        return this;
-//    }
+    public SearchImages withProductTypes(EnumSet<ProductType> values)
+    {
+        addProductTypes(values);
+        return this;
+    }
+
+    public SearchImages withSortOrder(SortOrder value)
+    {
+        queryParams.put(Constants.SortOrderParameterName, value);
+        return this;
+    }
 
     public SearchImages withSpecificPeople(Iterable<String> values)
     {

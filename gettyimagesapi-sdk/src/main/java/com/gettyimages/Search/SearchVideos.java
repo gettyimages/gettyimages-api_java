@@ -1,7 +1,9 @@
 package com.gettyimages.Search;
 
 import com.gettyimages.*;
-import com.gettyimages.Filters.AgeOfPeople;
+import com.gettyimages.Filters.*;
+
+import java.util.EnumSet;
 
 public class SearchVideos extends AbstractApiRequest {
 
@@ -21,9 +23,9 @@ public class SearchVideos extends AbstractApiRequest {
         return super.executeAsync();
     }
 
-    public SearchVideos withAgeOfPeople(AgeOfPeople value)
+    public SearchVideos withAgeOfPeople(EnumSet<AgeOfPeople> values)
     {
-        addAgeOfPeople(value);
+        addAgeOfPeople(values);
         return this;
     }
 
@@ -33,11 +35,17 @@ public class SearchVideos extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchVideos WithEditorialVideoTypes(EditorialVideoType value)
-//    {
-//        addEditorialVideoType(value);
-//        return this;
-//    }
+    public SearchVideos withCollectionFilterType(CollectionFilter value)
+    {
+        queryParams.put(Constants.CollectionsFilterTypeParameterName, value);
+        return this;
+    }
+
+    public SearchVideos withEditorialVideoTypes(EnumSet<EditorialVideoType> values)
+    {
+        addEditorialVideoTypes(values);
+        return this;
+    }
 
     public SearchVideos withExcludeNudity(Boolean value)
     {
@@ -51,17 +59,17 @@ public class SearchVideos extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchVideos withFormatAvailable(Format value)
-//    {
-//        addFormatAvailable(value);
-//        return this;
-//    }
-//
-//    public SearchVideos withFrameRate(FrameRate value)
-//    {
-//        addFrameRate(value);
-//        return this;
-//    }
+    public SearchVideos withFormatAvailable(FormatAvailable value)
+    {
+        queryParams.put(Constants.FormatAvailableParameterName, value);
+        return this;
+    }
+
+    public SearchVideos withFrameRates(EnumSet<FrameRate> values)
+    {
+        addFrameRates(values);
+        return this;
+    }
 
     public SearchVideos withKeywordIds(Iterable<Integer> values)
     {
@@ -69,11 +77,11 @@ public class SearchVideos extends AbstractApiRequest {
         return this;
     }
 
-//    public virtual SearchVideos WithLicenseModel(LicenseModel value)
-//    {
-//        AddLicenseModel(value);
-//        return this;
-//    }
+    public SearchVideos withLicenseModels(EnumSet<LicenseModel> values)
+    {
+        addLicenseModels(values);
+        return this;
+    }
 
     public SearchVideos withPage(Integer value)
     {
@@ -93,17 +101,17 @@ public class SearchVideos extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchVideos WithProductType(ProductType value)
-//    {
-//        AddProductTypes(value);
-//        return this;
-//    }
-//
-//    public SearchVideos WithSortOrder(SortOrder value)
-//    {
-//        AddQueryParameter(Constants.SortOrderKey, value);
-//        return this;
-//    }
+    public SearchVideos withProductTypes(EnumSet<ProductType> values)
+    {
+        addProductTypes(values);
+        return this;
+    }
+
+    public SearchVideos withSortOrder(SortOrder value)
+    {
+        queryParams.put(Constants.SortOrderParameterName, value);
+        return this;
+    }
 
     public SearchVideos withSpecificPeople(Iterable<String> values)
     {

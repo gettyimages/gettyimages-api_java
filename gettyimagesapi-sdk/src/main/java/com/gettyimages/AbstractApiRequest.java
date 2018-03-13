@@ -1,7 +1,8 @@
 package com.gettyimages;
 
-import com.gettyimages.Filters.AgeOfPeople;
+import com.gettyimages.Filters.*;
 
+import java.io.File;
 import java.util.*;
 
 public abstract class AbstractApiRequest<T> {
@@ -30,18 +31,18 @@ public abstract class AbstractApiRequest<T> {
             else if (v instanceof Boolean) {
                 queryParams.put(k, String.valueOf(v));
             }
-//            else if (v instanceof EnumSet) {
-//                StringBuilder sb = new StringBuilder();
-//                boolean first = true;
-//                for (var item : v) {
-//                    if (first)
-//                        first = false;
-//                    else
-//                        sb.append(",");
-//                    sb.append(item);
-//                }
-//                queryParams.put(k, sb.toString());
-//            }
+            else if (v instanceof EnumSet) {
+                StringBuilder sb = new StringBuilder();
+                boolean first = true;
+                for (Object item : (EnumSet) v) {
+                    if (first)
+                        first = false;
+                    else
+                        sb.append(",");
+                    sb.append(item);
+                }
+                queryParams.put(k, sb.toString());
+            }
         });
 
         WebHelper helper = new WebHelper(credentials, baseUrl);
@@ -60,21 +61,34 @@ public abstract class AbstractApiRequest<T> {
         }
     }
 
+//    public void addEnumSet(EnumSet values, String paramName) {
+//        EnumSet<Filter> enumSet;
+//
+//        if (queryParams.containsKey(paramName)) {
+//            enumSet = (EnumSet) queryParams.get(paramName);
+//        } else {
+//            enumSet = EnumSet.noneOf();
+//        }
+//        for (Object item : values) {
+//            enumSet.add(item);
+//        }
+//
+//        queryParams.put(paramName, enumSet);
+//    }
 
-
-    public void addAgeOfPeople(AgeOfPeople ageOfPeople) {
-        EnumSet<AgeOfPeople> ageOfPeoples;
+    public void addAgeOfPeople(EnumSet<AgeOfPeople> ageOfPeople) {
+        EnumSet<AgeOfPeople> values;
 
         if (queryParams.containsKey(Constants.AgeOfPeopleParameterName)) {
-            ageOfPeoples = (EnumSet<AgeOfPeople>) queryParams.get(Constants.AgeOfPeopleParameterName);
+            values = (EnumSet<AgeOfPeople>) queryParams.get(Constants.AgeOfPeopleParameterName);
         } else {
-            ageOfPeoples = EnumSet.noneOf(AgeOfPeople.class);
+            values = EnumSet.noneOf(AgeOfPeople.class);
         }
-        if (ageOfPeople != AgeOfPeople.NONE) {
-            ageOfPeoples.add(ageOfPeople);
+        for (AgeOfPeople item : ageOfPeople) {
+            values.add(item);
         }
 
-        queryParams.put(Constants.AgeOfPeopleParameterName, ageOfPeoples);
+        queryParams.put(Constants.AgeOfPeopleParameterName, values);
     }
 
     public void addArtists(Iterable<String> values) {
@@ -107,6 +121,51 @@ public abstract class AbstractApiRequest<T> {
         queryParams.put(Constants.CollectionCodesParameterName, assets);
     }
 
+    public void addCompositions(EnumSet<Compositions> compositions) {
+        EnumSet<Compositions> values;
+
+        if (queryParams.containsKey(Constants.CompositionsParameterName)) {
+            values = (EnumSet<Compositions>) queryParams.get(Constants.CompositionsParameterName);
+        } else {
+            values = EnumSet.noneOf(Compositions.class);
+        }
+        for (Compositions item : compositions) {
+            values.add(item);
+        }
+
+        queryParams.put(Constants.CompositionsParameterName, values);
+    }
+
+    public void addEditorialSegments(EnumSet<EditorialSegment> editorialSegments) {
+        EnumSet<EditorialSegment> values;
+
+        if (queryParams.containsKey(Constants.EditorialSegmentsParameterName)) {
+            values = (EnumSet<EditorialSegment>) queryParams.get(Constants.EditorialSegmentsParameterName);
+        } else {
+            values = EnumSet.noneOf(EditorialSegment.class);
+        }
+        for (EditorialSegment item : editorialSegments) {
+            values.add(item);
+        }
+
+        queryParams.put(Constants.EditorialSegmentsParameterName, values);
+    }
+
+    public void addEditorialVideoTypes(EnumSet<EditorialVideoType> editorialVideoTypes) {
+        EnumSet<EditorialVideoType> values;
+
+        if (queryParams.containsKey(Constants.EditorialVideoTypeParameterName)) {
+            values = (EnumSet<EditorialVideoType>) queryParams.get(Constants.EditorialVideoTypeParameterName);
+        } else {
+            values = EnumSet.noneOf(EditorialVideoType.class);
+        }
+        for (EditorialVideoType item : editorialVideoTypes) {
+            values.add(item);
+        }
+
+        queryParams.put(Constants.EditorialVideoTypeParameterName, values);
+    }
+
     public void addEntityUris(Iterable<String> values) {
         List<String> assets;
 
@@ -121,6 +180,21 @@ public abstract class AbstractApiRequest<T> {
         }
 
         queryParams.put(Constants.EntityUriParameterName, assets);
+    }
+
+    public void addEthnicity(EnumSet<Ethnicity> ethnicity) {
+        EnumSet<Ethnicity> values;
+
+        if (queryParams.containsKey(Constants.EthnicityParameterName)) {
+            values = (EnumSet<Ethnicity>) queryParams.get(Constants.EthnicityParameterName);
+        } else {
+            values = EnumSet.noneOf(Ethnicity.class);
+        }
+        for (Ethnicity item : ethnicity) {
+            values.add(item);
+        }
+
+        queryParams.put(Constants.EthnicityParameterName, values);
     }
 
     public void addEventIds(Iterable<Integer> values) {
@@ -154,6 +228,51 @@ public abstract class AbstractApiRequest<T> {
         queryParams.put(Constants.FieldsString, assets);
     }
 
+    public void addFileTypes(EnumSet<FileType> fileTypes) {
+        EnumSet<FileType> values;
+
+        if (queryParams.containsKey(Constants.FileTypesParameterName)) {
+            values = (EnumSet<FileType>) queryParams.get(Constants.FileTypesParameterName);
+        } else {
+            values = EnumSet.noneOf(FileType.class);
+        }
+        for (FileType item : fileTypes) {
+            values.add(item);
+        }
+
+        queryParams.put(Constants.FileTypesParameterName, values);
+    }
+
+    public void addFrameRates(EnumSet<FrameRate> frameRates) {
+        EnumSet<FrameRate> values;
+
+        if (queryParams.containsKey(Constants.FrameRateParameterName)) {
+            values = (EnumSet<FrameRate>) queryParams.get(Constants.FrameRateParameterName);
+        } else {
+            values = EnumSet.noneOf(FrameRate.class);
+        }
+        for (FrameRate item : frameRates) {
+            values.add(item);
+        }
+
+        queryParams.put(Constants.FrameRateParameterName, values);
+    }
+
+    public void addGraphicalStyles(EnumSet<GraphicalStyles> graphicalStyles) {
+        EnumSet<GraphicalStyles> values;
+
+        if (queryParams.containsKey(Constants.GraphicalStylesString)) {
+            values = (EnumSet<GraphicalStyles>) queryParams.get(Constants.GraphicalStylesString);
+        } else {
+            values = EnumSet.noneOf(GraphicalStyles.class);
+        }
+        for (GraphicalStyles item : graphicalStyles) {
+            values.add(item);
+        }
+
+        queryParams.put(Constants.GraphicalStylesString, values);
+    }
+
     public void addKeywordIds(Iterable<Integer> values) {
         List<String> assets;
 
@@ -168,6 +287,66 @@ public abstract class AbstractApiRequest<T> {
         }
 
         queryParams.put(Constants.KeywordIdsParameterName, assets);
+    }
+
+    public void addLicenseModels(EnumSet<LicenseModel> licenseModels) {
+        EnumSet<LicenseModel> values;
+
+        if (queryParams.containsKey(Constants.LicenseModelsParameterName)) {
+            values = (EnumSet<LicenseModel>) queryParams.get(Constants.LicenseModelsParameterName);
+        } else {
+            values = EnumSet.noneOf(LicenseModel.class);
+        }
+        for (LicenseModel item : licenseModels) {
+            values.add(item);
+        }
+
+        queryParams.put(Constants.LicenseModelsParameterName, values);
+    }
+
+    public void addNumberOfPeople(EnumSet<NumberOfPeople> numberOfPeople) {
+        EnumSet<NumberOfPeople> values;
+
+        if (queryParams.containsKey(Constants.NumberOfPeopleParameterName)) {
+            values = (EnumSet<NumberOfPeople>) queryParams.get(Constants.NumberOfPeopleParameterName);
+        } else {
+            values = EnumSet.noneOf(NumberOfPeople.class);
+        }
+        for (NumberOfPeople item : numberOfPeople) {
+            values.add(item);
+        }
+
+        queryParams.put(Constants.NumberOfPeopleParameterName, values);
+    }
+
+    public void addOrientations(EnumSet<Orientation> orientations) {
+        EnumSet<Orientation> values;
+
+        if (queryParams.containsKey(Constants.OrientationsParameterName)) {
+            values = (EnumSet<Orientation>) queryParams.get(Constants.OrientationsParameterName);
+        } else {
+            values = EnumSet.noneOf(Orientation.class);
+        }
+        for (Orientation item : orientations) {
+            values.add(item);
+        }
+
+        queryParams.put(Constants.OrientationsParameterName, values);
+    }
+
+    public void addProductTypes(EnumSet<ProductType> productTypes) {
+        EnumSet<ProductType> values;
+
+        if (queryParams.containsKey(Constants.ProductTypesParameterName)) {
+            values = (EnumSet<ProductType>) queryParams.get(Constants.ProductTypesParameterName);
+        } else {
+            values = EnumSet.noneOf(ProductType.class);
+        }
+        for (ProductType item : productTypes) {
+            values.add(item);
+        }
+
+        queryParams.put(Constants.ProductTypesParameterName, values);
     }
 
     public void addSpecificPeople(Iterable<String> values) {

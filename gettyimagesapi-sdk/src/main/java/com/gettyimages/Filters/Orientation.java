@@ -4,10 +4,10 @@ public enum Orientation
 {
     NONE(""),
     HORIZONTAL("Horizontal"),
-    PANORAMIC_HORIZONTAL("Vertical"),
-    PANORAMIC_VERTICAL("Square"),
-    SQUARE("PanoramicHorizontal"),
-    VERTICAL("PanoramicVertical");
+    VERTICAL("Vertical"),
+    SQUARE("Square"),
+    PANORAMIC_HORIZONTAL("PanoramicHorizontal"),
+    PANORAMIC_VERTICAL("PanoramicVertical");
 
     private String orientation;
 

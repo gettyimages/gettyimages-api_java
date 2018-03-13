@@ -1,7 +1,9 @@
 package com.gettyimages.Search;
 
 import com.gettyimages.*;
-import com.gettyimages.Filters.AgeOfPeople;
+import com.gettyimages.Filters.*;
+
+import java.util.EnumSet;
 
 public class SearchVideosCreative extends AbstractApiRequest {
 
@@ -21,15 +23,21 @@ public class SearchVideosCreative extends AbstractApiRequest {
         return super.executeAsync();
     }
 
-    public SearchVideosCreative withAgeOfPeople(AgeOfPeople value)
+    public SearchVideosCreative withAgeOfPeople(EnumSet<AgeOfPeople> values)
     {
-        addAgeOfPeople(value);
+        addAgeOfPeople(values);
         return this;
     }
 
     public SearchVideosCreative withCollectionCodes(Iterable<String> values)
     {
         addCollectionCodes(values);
+        return this;
+    }
+
+    public SearchVideosCreative withCollectionFilterType(CollectionFilter value)
+    {
+        queryParams.put(Constants.CollectionsFilterTypeParameterName, value);
         return this;
     }
 
@@ -45,17 +53,17 @@ public class SearchVideosCreative extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchVideosCreative withFormatAvailable(Format value)
-//    {
-//        addFormatAvailable(value);
-//        return this;
-//    }
-//
-//    public SearchVideosCreative withFrameRate(FrameRate value)
-//    {
-//        addFrameRate(value);
-//        return this;
-//    }
+    public SearchVideosCreative withFormatAvailable(FormatAvailable value)
+    {
+        queryParams.put(Constants.FormatAvailableParameterName, value);
+        return this;
+    }
+
+    public SearchVideosCreative withFrameRates(EnumSet<FrameRate> values)
+    {
+        addFrameRates(values);
+        return this;
+    }
 
     public SearchVideosCreative withKeywordIds(Iterable<Integer> values)
     {
@@ -63,11 +71,11 @@ public class SearchVideosCreative extends AbstractApiRequest {
         return this;
     }
 
-//    public virtual SearchVideosCreative WithLicenseModel(LicenseModel value)
-//    {
-//        AddLicenseModel(value);
-//        return this;
-//    }
+    public SearchVideosCreative withLicenseModels(EnumSet<LicenseModel> values)
+    {
+        addLicenseModels(values);
+        return this;
+    }
 
     public SearchVideosCreative withPage(Integer value)
     {
@@ -87,15 +95,15 @@ public class SearchVideosCreative extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchVideosCreative WithProductType(ProductType value)
-//    {
-//        AddProductTypes(value);
-//        return this;
-//    }
-//
-//    public SearchVideosCreative WithSortOrder(SortOrder value)
-//    {
-//        AddQueryParameter(Constants.SortOrderKey, value);
-//        return this;
-//    }
+    public SearchVideosCreative withProductTypes(EnumSet<ProductType> values)
+    {
+        addProductTypes(values);
+        return this;
+    }
+
+    public SearchVideosCreative withSortOrder(SortOrder value)
+    {
+        queryParams.put(Constants.SortOrderParameterName, value);
+        return this;
+    }
 }

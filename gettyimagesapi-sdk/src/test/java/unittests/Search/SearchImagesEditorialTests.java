@@ -1,6 +1,7 @@
 package unittests.Search;
 
 import com.gettyimages.ApiClient;
+import com.gettyimages.Filters.*;
 import com.gettyimages.Search.SearchImagesEditorial;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,6 +13,7 @@ import org.mockserver.model.Parameter;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.EnumSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockserver.integration.ClientAndServer.startClientAndServer;
@@ -47,7 +49,7 @@ public class SearchImagesEditorialTests {
                         .withMethod("GET")
                         .withPath("/search/images/editorial")
                         .withQueryStringParameters(
-                                new Parameter("age_of_people", "adult")
+                                new Parameter("age_of_people", "baby,child,adult")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
@@ -74,7 +76,7 @@ public class SearchImagesEditorialTests {
                         .withMethod("GET")
                         .withPath("/search/images/editorial")
                         .withQueryStringParameters(
-                                new Parameter("collection_filter_type", "exclude")
+                                new Parameter("collections_filter_type", "exclude")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
@@ -83,7 +85,7 @@ public class SearchImagesEditorialTests {
                         .withMethod("GET")
                         .withPath("/search/images/editorial")
                         .withQueryStringParameters(
-                                new Parameter("compositions", "headshot,abstract")
+                                new Parameter("compositions", "abstract,headshot")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
@@ -209,7 +211,7 @@ public class SearchImagesEditorialTests {
                         .withMethod("GET")
                         .withPath("/search/images/editorial")
                         .withQueryStringParameters(
-                                new Parameter("number_of_people", "group,one")
+                                new Parameter("number_of_people", "one,group")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
@@ -287,15 +289,15 @@ public class SearchImagesEditorialTests {
                 .respond(response().withStatusCode(200).withBody("success"));
     }
 
-    //   @Test
-//    void searchImagesEditorialWithAgeOfPeople() {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchImagesEditorial search = client.searchimageseditorial()
-//                .withAgeOfPeople(AgeOfPeople.ADULT);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void searchImagesEditorialWithAgeOfPeople() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withAgeOfPeople(EnumSet.of(AgeOfPeople.ADULT)).withAgeOfPeople(EnumSet.of(AgeOfPeople.CHILD, AgeOfPeople.BABY));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
     @Test
     void searchImagesEditorialWithArtist() throws Exception {
@@ -316,40 +318,40 @@ public class SearchImagesEditorialTests {
         System.out.print(result);
         assertEquals("success", result);
     }
-//
-//    @Test
-//    void searchImagesEditorialWithCollectionFilter() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchImagesEditorial search = client.searchimageseditorial()
-//                .withCollectionFilter(CollectionFilter.EXCLUDE);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
-
-    //
-//    @Test
-//    void searchImagesEditorialWithComposition() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchImagesEditorial search = client.searchimageseditorial()
-//                .withComposition(Composition.HEADSHOT | Composition.ABSTRACT);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
-
-    //    @Test
-//    void searchImagesEditorialWithEditorialSegments() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchImagesEditorial search = client.searchimageseditorial()
-//                .withEditorialSegments(EditorialSegment.ARCHIVAL | EditorialSegment.PUBLICITY);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
 
     @Test
-    void searchImagesEditorialWithEmbedContetOnly() throws Exception {
+    void searchImagesEditorialWithCollectionFilter() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withCollectionFilterType(CollectionFilter.EXCLUDE);
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
+
+
+    @Test
+    void searchImagesEditorialWithComposition() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withCompositions(EnumSet.of(Compositions.HEADSHOT, Compositions.ABSTRACT));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchImagesEditorialWithEditorialSegments() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withEditorialSegments(EnumSet.of(EditorialSegment.ARCHIVAL, EditorialSegment.PUBLICITY));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchImagesEditorialWithEmbedContentOnly() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withEmbedContentOnly(true);
@@ -378,15 +380,15 @@ public class SearchImagesEditorialTests {
         assertEquals("success", result);
     }
 
-//    @Test
-//    void searchImagesEditorialWithEthnicity() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchImagesEditorial search = client.searchimageseditorial()
-//                .withEthnicity(Ethnicity.BLACK | Ethnicity.JAPANESE);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void searchImagesEditorialWithEthnicity() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withEthnicity(EnumSet.of(Ethnicity.BLACK, Ethnicity.JAPANESE));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
     @Test
     void searchImagesEditorialWithEventIds() throws Exception {
@@ -418,25 +420,25 @@ public class SearchImagesEditorialTests {
         assertEquals("success", result);
     }
 
-//    @Test
-//    void searchImagesEditorialWithFileTypes() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchImagesEditorial search = client.searchimageseditorial()
-//                .withFileTypes(FileType.EPS | FileType.JPG);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
-//
-//   @Test
-//    void searchImagesEditorialWithGraphicalStyles() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchImagesEditorial search = client.searchimageseditorial()
-//                .withGraphicalStyles(GraphicalStyles.FINEART | GraphicalStyles.ILLUSTRATION);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void searchImagesEditorialWithFileTypes() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withFileTypes(EnumSet.of(FileType.EPS, FileType.JPG));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
+
+   @Test
+    void searchImagesEditorialWithGraphicalStyles() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withGraphicalStyles(EnumSet.of(GraphicalStyles.FINE_ART, GraphicalStyles.ILLUSTRATION));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
     @Test
     void searchImagesEditorialWithKeywordIds() throws Exception {
@@ -448,45 +450,45 @@ public class SearchImagesEditorialTests {
         assertEquals("success", result);
     }
 
-//    @Test
-//    void searchImagesEditorialWithMinimumQualityRank() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchImagesEditorial search = client.searchimageseditorial()
-//                .withMinimumQualityRank(MinimumQualityRank.ONE);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void searchImagesEditorialWithMinimumQualityRank() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withMinimumQualityRank(MinimumQualityRank.ONE);
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
-//    @Test
-//    void searchImagesEditorialWithMinimumSize() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchImagesEditorial search = client.searchimageseditorial()
-//                .withMinimumSize(MinimumSize.SMALL);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void searchImagesEditorialWithMinimumSize() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withMinimumSize(MinimumSize.SMALL);
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
-//    @Test
-//    void searchImagesEditorialWithNumberOfPeople() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchImagesEditorial search = client.searchimageseditorial()
-//                .withNumberOfPeople(NumberOfPeople.GROUP | NumberOfPeople.ONE);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void searchImagesEditorialWithNumberOfPeople() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withNumberOfPeople(EnumSet.of(NumberOfPeople.GROUP, NumberOfPeople.ONE));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
-//    @Test
-//    void searchImagesEditorialWithOrientations() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchImagesEditorial search = client.searchimageseditorial()
-//                .withOrientations(Orientation.HORIZONTAL | Orientation.SQUARE);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void searchImagesEditorialWithOrientations() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withOrientations(EnumSet.of(Orientation.HORIZONTAL, Orientation.SQUARE));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
     @Test
     void searchImagesEditorialWithPage() throws Exception {
@@ -518,25 +520,25 @@ public class SearchImagesEditorialTests {
         assertEquals("success", result);
     }
 
-//    @Test
-//    void searchImagesEditorialWithProductTypes() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchImagesEditorial search = client.searchimageseditorial()
-//                .withProductTypes(ProductType.EASYACCESS | ProductType.EDITORIALSUBSCRIPTION);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void searchImagesEditorialWithProductTypes() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withProductTypes(EnumSet.of(ProductType.EASYACCESS, ProductType.EDITORIALSUBSCRIPTION));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
-//    @Test
-//    void searchImagesEditorialWithSortOrder() throws Exception {
-//        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-//        SearchImagesEditorial search = client.searchimageseditorial()
-//                .withSortOrder(SortOrder.NEWEST);
-//        String result = search.executeAsync();
-//        System.out.print(result);
-//        assertEquals("success", result);
-//    }
+    @Test
+    void searchImagesEditorialWithSortOrder() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withSortOrder(SortOrder.NEWEST);
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
 
     @Test
     void searchImagesEditorialWithSpecificPeople() throws Exception {

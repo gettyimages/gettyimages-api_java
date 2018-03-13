@@ -1,7 +1,10 @@
 package com.gettyimages.Search;
 
 import com.gettyimages.*;
-import com.gettyimages.Filters.AgeOfPeople;
+import com.gettyimages.Filters.*;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+
+import java.util.EnumSet;
 
 public class SearchImagesEditorial extends AbstractApiRequest {
 
@@ -21,9 +24,9 @@ public class SearchImagesEditorial extends AbstractApiRequest {
         return super.executeAsync();
     }
 
-    public SearchImagesEditorial withAgeOfPeople(AgeOfPeople value)
+    public SearchImagesEditorial withAgeOfPeople(EnumSet<AgeOfPeople> values)
     {
-        addAgeOfPeople(value);
+        addAgeOfPeople(values);
         return this;
     }
 
@@ -39,22 +42,22 @@ public class SearchImagesEditorial extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchImagesEditorial withCollectionFilterType(CollectionFilter value)
-//    {
-//        AddQueryParameter(Constants.CollectionFilterKey, value);
-//        return this;
-//    }
+    public SearchImagesEditorial withCollectionFilterType(CollectionFilter value)
+    {
+        queryParams.put(Constants.CollectionsFilterTypeParameterName, value);
+        return this;
+    }
 
-//    public SearchImagesEditorial WithComposition(Composition value)
-//    {
-//        AddComposition(value);
-//        return this;
-//    }
+    public SearchImagesEditorial withCompositions(EnumSet<Compositions> values)
+    {
+        addCompositions(values);
+        return this;
+    }
 
-//    public SearchImagesEditorial withEditorialSegments(EditorialSegment value) {
-//        addEditorialSegments(value);
-//        return this;
-//    }
+    public SearchImagesEditorial withEditorialSegments(EnumSet<EditorialSegment> values) {
+        addEditorialSegments(values);
+        return this;
+    }
 
     public SearchImagesEditorial withEmbedContentOnly(Boolean value)
     {
@@ -72,11 +75,11 @@ public class SearchImagesEditorial extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchImagesEditorial WithEthnicity(Ethnicity value)
-//    {
-//        AddEthnicity(value);
-//        return this;
-//    }
+    public SearchImagesEditorial withEthnicity(EnumSet<Ethnicity> values)
+    {
+        addEthnicity(values);
+        return this;
+    }
 
     public SearchImagesEditorial withEventIds(Iterable<Integer> values)
     {
@@ -96,17 +99,17 @@ public class SearchImagesEditorial extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchImagesEditorial WithFileType(FileType value)
-//    {
-//        AddFileTypes(value);
-//        return this;
-//    }
-//
-//    public SearchImagesEditorial WithGraphicalStyle(GraphicalStyles value)
-//    {
-//        AddGraphicalStyle(value);
-//        return this;
-//    }
+    public SearchImagesEditorial withFileTypes(EnumSet<FileType> values)
+    {
+        addFileTypes(values);
+        return this;
+    }
+
+    public SearchImagesEditorial withGraphicalStyles(EnumSet<GraphicalStyles> values)
+    {
+        addGraphicalStyles(values);
+        return this;
+    }
 
     public SearchImagesEditorial withKeywordIds(Iterable<Integer> values)
     {
@@ -114,28 +117,28 @@ public class SearchImagesEditorial extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchImagesEditorial withMinimumQualityRank(MinimumQualityRank value) {
-//        addMinimumQualityRank(value);
-//        return this;
-//    }
-//
-//    public SearchImagesEditorial WithMinimumSize(MinimumSize value)
-//    {
-//        AddQueryParameter(Constants.MinimumSizeKey, value);
-//        return this;
-//    }
-//
-//    public SearchImagesEditorial WithNumberOfPeople(NumberOfPeople value)
-//    {
-//        AddNumberOfPeople(value);
-//        return this;
-//    }
-//
-//    public SearchImagesEditorial WithOrientation(Orientation value)
-//    {
-//        AddOrientation(value);
-//        return this;
-//    }
+    public SearchImagesEditorial withMinimumQualityRank(MinimumQualityRank value) {
+        queryParams.put(Constants.MinimumQualityRankParameterName, value);
+        return this;
+    }
+
+    public SearchImagesEditorial withMinimumSize(MinimumSize value)
+    {
+        queryParams.put(Constants.MinimumSizeParameterName, value);
+        return this;
+    }
+
+    public SearchImagesEditorial withNumberOfPeople(EnumSet<NumberOfPeople> values)
+    {
+        addNumberOfPeople(values);
+        return this;
+    }
+
+    public SearchImagesEditorial withOrientations(EnumSet<Orientation> values)
+    {
+        addOrientations(values);
+        return this;
+    }
 
     public SearchImagesEditorial withPage(Integer value)
     {
@@ -155,17 +158,17 @@ public class SearchImagesEditorial extends AbstractApiRequest {
         return this;
     }
 
-//    public SearchImagesEditorial WithProductType(ProductType value)
-//    {
-//        AddProductTypes(value);
-//        return this;
-//    }
-//
-//    public SearchImagesEditorial WithSortOrder(SortOrder value)
-//    {
-//        AddQueryParameter(Constants.SortOrderKey, value);
-//        return this;
-//    }
+    public SearchImagesEditorial withProductTypes(EnumSet<ProductType> values)
+    {
+        addProductTypes(values);
+        return this;
+    }
+
+    public SearchImagesEditorial withSortOrder(SortOrder value)
+    {
+        queryParams.put(Constants.SortOrderParameterName, value);
+        return this;
+    }
 
     public SearchImagesEditorial withSpecificPeople(Iterable<String> values)
     {
