@@ -1,5 +1,6 @@
 package com.gettyimages;
 
+import com.gettyimages.CustomRequest.CustomRequest;
 import com.gettyimages.Downloads.DownloadImages;
 import com.gettyimages.Downloads.DownloadVideos;
 import com.gettyimages.Images.Images;
@@ -13,7 +14,7 @@ public class ApiClient {
     public static String Version="1.0.1-beta";
     private String Slash = "/";
     private Credentials credentials;
-    private static String baseUrl = "https://connect.gettyimages.com/v3";
+    private static String baseUrl = "https://api.gettyimages.com/v3";
 
     private ApiClient(String apiKey, String apiSecret) {
         NormalizeAndSetBaseUrl(baseUrl);
@@ -84,5 +85,9 @@ public class ApiClient {
 
     public DownloadImages downloadimages() {
         return DownloadImages.GetInstance(credentials, baseUrl);
+    }
+
+    public CustomRequest customrequest() {
+        return CustomRequest.GetInstance(credentials, baseUrl);
     }
 }

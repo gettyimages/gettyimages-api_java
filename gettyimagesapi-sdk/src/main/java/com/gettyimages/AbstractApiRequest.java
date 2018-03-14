@@ -1,6 +1,7 @@
 package com.gettyimages;
 
 import com.gettyimages.Filters.*;
+import org.apache.http.HttpEntity;
 
 import java.io.File;
 import java.util.*;
@@ -11,6 +12,7 @@ public abstract class AbstractApiRequest<T> {
     protected Credentials credentials;
     protected String method;
     protected String path;
+    protected HttpEntity body;
     protected Map<String, Object> queryParams = new HashMap<>();
 
     public AbstractApiRequest(Credentials credentials, String baseUrl) {
@@ -51,30 +53,15 @@ public abstract class AbstractApiRequest<T> {
             case "GET":
                 return helper.Get(queryParams, path);
             case "POST":
-                return helper.PostQuery(queryParams, path);
-//            case "PUT":
-//                return helper.Get(queryParams, path);
-//            case "DELETE":
-//                return helper.Get(queryParams, path);
+                return helper.PostQuery(queryParams, path, body);
+            case "PUT":
+                return helper.PutQuery(queryParams, path, body);
+            case "DELETE":
+                return helper.DeleteQuery(queryParams, path);
             default:
                 throw new SdkException("No appropriate HTTP method found for this request.");
         }
     }
-
-//    public void addEnumSet(EnumSet values, String paramName) {
-//        EnumSet<Filter> enumSet;
-//
-//        if (queryParams.containsKey(paramName)) {
-//            enumSet = (EnumSet) queryParams.get(paramName);
-//        } else {
-//            enumSet = EnumSet.noneOf();
-//        }
-//        for (Object item : values) {
-//            enumSet.add(item);
-//        }
-//
-//        queryParams.put(paramName, enumSet);
-//    }
 
     public void addAgeOfPeople(EnumSet<AgeOfPeople> ageOfPeople) {
         EnumSet<AgeOfPeople> values;

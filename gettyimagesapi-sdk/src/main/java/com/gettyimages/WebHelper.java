@@ -4,9 +4,12 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -30,8 +33,7 @@ public class WebHelper {
         try {
             String query = BuildQuery(queryParams);
             URL url = new URL(baseUrl + path + "?" + query);
-            HttpClient httpClient = new DefaultHttpClient();
-            //HttpClientBuilder instead
+            HttpClient httpClient = HttpClientBuilder.create().build();
             HttpGet httpGet = new HttpGet(url.toString());
 
             addHeaders(httpGet);
@@ -48,16 +50,68 @@ public class WebHelper {
         return "{null}";
     }
 
-    public String PostQuery(Map queryParams, String path) throws SdkException {
+    public String PostQuery(Map queryParams, String path, HttpEntity body) throws SdkException {
         try {
             String query = BuildQuery(queryParams);
             URL url = new URL(baseUrl + path + "?" + query);
-            HttpClient httpClient = new DefaultHttpClient();
+            HttpClient httpClient = HttpClientBuilder.create().build();
             HttpPost httpPost = new HttpPost(url.toString());
 
             addHeaders(httpPost);
+            if (body != null) {
+                httpPost.addHeader("content-type", "application/json");
+                httpPost.setEntity(body);
+            }
 
             HttpResponse response = httpClient.execute(httpPost);
+            HttpEntity responseEntity = response.getEntity();
+            String content = EntityUtils.toString(responseEntity);
+
+            return content;
+        } catch (MalformedURLException ex) {
+            String s = ex.toString();
+        } catch (IOException ex) {
+            String s = ex.toString();
+        }
+        return null;
+    }
+
+    public String PutQuery(Map queryParams, String path, HttpEntity body) throws SdkException {
+        try {
+            String query = BuildQuery(queryParams);
+            URL url = new URL(baseUrl + path + "?" + query);
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpPut httpPut = new HttpPut(url.toString());
+
+            addHeaders(httpPut);
+            if (body != null) {
+                httpPut.addHeader("content-type", "application/json");
+                httpPut.setEntity(body);
+            }
+
+            HttpResponse response = httpClient.execute(httpPut);
+            HttpEntity responseEntity = response.getEntity();
+            String content = EntityUtils.toString(responseEntity);
+
+            return content;
+        } catch (MalformedURLException ex) {
+            String s = ex.toString();
+        } catch (IOException ex) {
+            String s = ex.toString();
+        }
+        return null;
+    }
+
+    public String DeleteQuery(Map queryParams, String path) throws SdkException {
+        try {
+            String query = BuildQuery(queryParams);
+            URL url = new URL(baseUrl + path + "?" + query);
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpDelete httpDelete = new HttpDelete(url.toString());
+
+            addHeaders(httpDelete);
+
+            HttpResponse response = httpClient.execute(httpDelete);
             HttpEntity responseEntity = response.getEntity();
             String content = EntityUtils.toString(responseEntity);
 
