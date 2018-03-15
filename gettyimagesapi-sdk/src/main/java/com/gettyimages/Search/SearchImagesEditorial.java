@@ -2,7 +2,6 @@ package com.gettyimages.Search;
 
 import com.gettyimages.*;
 import com.gettyimages.Filters.*;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 import java.util.EnumSet;
 
