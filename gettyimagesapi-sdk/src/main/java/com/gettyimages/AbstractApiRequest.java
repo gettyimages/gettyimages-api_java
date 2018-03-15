@@ -35,15 +35,12 @@ public abstract class AbstractApiRequest<T> {
             }
             else if (v instanceof EnumSet) {
                 StringBuilder sb = new StringBuilder();
-                boolean first = true;
                 for (Object item : (EnumSet) v) {
-                    if (first)
-                        first = false;
-                    else
-                        sb.append(",");
                     sb.append(item);
+                    sb.append(",");
                 }
-                queryParams.put(k, sb.toString());
+                String result = sb.substring(0,sb.length() - 1);
+                queryParams.put(k, result);
             }
         });
 

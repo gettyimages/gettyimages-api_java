@@ -91,7 +91,14 @@ public class WebHelper {
 
             HttpResponse response = httpClient.execute(httpPut);
             HttpEntity responseEntity = response.getEntity();
-            String content = EntityUtils.toString(responseEntity);
+
+            String content;
+            if (responseEntity != null) {
+                content = EntityUtils.toString(responseEntity);
+            }
+            else {
+                content = "{}";
+            }
 
             return content;
         } catch (MalformedURLException ex) {
@@ -113,7 +120,13 @@ public class WebHelper {
 
             HttpResponse response = httpClient.execute(httpDelete);
             HttpEntity responseEntity = response.getEntity();
-            String content = EntityUtils.toString(responseEntity);
+            String content;
+            if (responseEntity != null) {
+                content = EntityUtils.toString(responseEntity);
+            }
+            else {
+                content = "{}";
+            }
 
             return content;
         } catch (MalformedURLException ex) {

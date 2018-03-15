@@ -17,12 +17,10 @@ public class ApiClient {
     private static String baseUrl = "https://api.gettyimages.com/v3";
 
     private ApiClient(String apiKey, String apiSecret) {
-        NormalizeAndSetBaseUrl(baseUrl);
         credentials = Credentials.GetInstance(apiKey, apiSecret, GetOAuthBaseUrl());
     }
 
     private ApiClient(String apiKey, String apiSecret, String userName, String userPassword) {
-        NormalizeAndSetBaseUrl(baseUrl);
         credentials = Credentials.GetInstance(apiKey, apiSecret, userName, userPassword, GetOAuthBaseUrl());
     }
 
@@ -34,10 +32,6 @@ public class ApiClient {
     public static ApiClient GetApiClientWithResourceOwnerCredentials(String apiKey, String apiSecret, String userName, String password)
     {
         return new ApiClient(apiKey, apiSecret, userName, password);
-    }
-
-    private void NormalizeAndSetBaseUrl(String baseUrl) {
-        baseUrl = baseUrl.endsWith(Slash) ? baseUrl.substring(0, baseUrl.length() - 1) : baseUrl;
     }
 
     private String GetOAuthBaseUrl() {
