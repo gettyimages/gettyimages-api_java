@@ -1,4 +1,4 @@
-package unittests.Images;
+
 
 import com.gettyimages.ApiClient;
 import com.gettyimages.Images.Images;
@@ -18,7 +18,7 @@ import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
-public class ImagesTests {
+public class ImagesTest {
     private static ClientAndServer mockServer;
 
     @BeforeAll

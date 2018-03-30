@@ -26,7 +26,7 @@ Click on Next, Next, then click Finish
 
 ## Examples
 
-###Search creative images with phrase, age of people, and page
+### Search creative images with phrase, age of people, and page
 ```java
         String apiKey = "API Key";
         String apiSecret = "API Secret";
@@ -49,7 +49,7 @@ Click on Next, Next, then click Finish
         }
 ```
 
-###Search editorial videos with phrase, fields, format available, and exclude nudity
+### Search editorial videos with phrase, fields, format available, and exclude nudity
 ```java
         String apiKey = "API Key";
         String apiSecret = "API Secret";
@@ -73,7 +73,7 @@ Click on Next, Next, then click Finish
         }
 ```
 
-###Custom Request to search images with phrase, fields, and age of people
+### Custom Request to search images with phrase, fields, and age of people
 ```java
         String apiKey = "API Key";
         String apiSecret = "API Secret";

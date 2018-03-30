@@ -1,4 +1,3 @@
-package unittests.Search;
 
 import com.gettyimages.ApiClient;
 import com.gettyimages.Filters.*;
@@ -20,7 +19,7 @@ import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
-public class SearchVideosCreativeTests {
+public class SearchVideosCreativeTest {
     private static ClientAndServer mockServer;
 
     @BeforeAll

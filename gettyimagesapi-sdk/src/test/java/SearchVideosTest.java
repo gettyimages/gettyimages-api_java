@@ -1,8 +1,7 @@
-package unittests.Search;
 
 import com.gettyimages.ApiClient;
 import com.gettyimages.Filters.*;
-import com.gettyimages.Search.SearchImagesCreative;
+import com.gettyimages.Search.SearchVideos;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +19,7 @@ import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
-public class SearchImagesCreativeTests {
+public class SearchVideosTest {
     private static ClientAndServer mockServer;
 
     @BeforeAll
@@ -47,7 +46,7 @@ public class SearchImagesCreativeTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
                                 new Parameter("age_of_people", "baby,child,adult")
                         )
@@ -56,16 +55,7 @@ public class SearchImagesCreativeTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
-                        .withQueryStringParameters(
-                                new Parameter("artists", "roman makhmutov")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
                                 new Parameter("collection_codes", "WRI,ARF")
                         )
@@ -74,7 +64,7 @@ public class SearchImagesCreativeTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
                                 new Parameter("collections_filter_type", "exclude")
                         )
@@ -83,43 +73,16 @@ public class SearchImagesCreativeTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
-                                new Parameter("color", "#002244")
+                                new Parameter("editorial_video_types", "raw,produced")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
-                        .withQueryStringParameters(
-                                new Parameter("compositions", "abstract,headshot")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/creative")
-                        .withQueryStringParameters(
-                                new Parameter("embed_content_only", "true")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/creative")
-                        .withQueryStringParameters(
-                                new Parameter("ethnicity", "black,japanese")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
                                 new Parameter("exclude_nudity", "true")
                         )
@@ -128,7 +91,7 @@ public class SearchImagesCreativeTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
                                 new Parameter("fields", "asset_family,id,uri_oembed")
                         )
@@ -137,25 +100,25 @@ public class SearchImagesCreativeTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
-                                new Parameter("file_types", "eps,jpg")
+                                new Parameter("format_available", "hd")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
-                                new Parameter("graphical_styles", "fine_art,illustration")
+                                new Parameter("frame_rates", "24,29.97")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
                                 new Parameter("keyword_ids", "1111,2222,3333")
                         )
@@ -164,7 +127,7 @@ public class SearchImagesCreativeTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
                                 new Parameter("license_models", "rightsmanaged")
                         )
@@ -173,34 +136,7 @@ public class SearchImagesCreativeTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
-                        .withQueryStringParameters(
-                                new Parameter("minimum_size", "small")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/creative")
-                        .withQueryStringParameters(
-                                new Parameter("number_of_people", "one,group")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/creative")
-                        .withQueryStringParameters(
-                                new Parameter("orientations", "Horizontal,Square")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
                                 new Parameter("page", "3")
                         )
@@ -209,7 +145,7 @@ public class SearchImagesCreativeTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
                                 new Parameter("page_size", "50")
                         )
@@ -218,7 +154,7 @@ public class SearchImagesCreativeTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
                                 new Parameter("phrase", "cat")
                         )
@@ -227,16 +163,7 @@ public class SearchImagesCreativeTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
-                        .withQueryStringParameters(
-                                new Parameter("prestige_content_only", "true")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
                                 new Parameter("product_types", "easyaccess,editorialsubscription")
                         )
@@ -245,18 +172,27 @@ public class SearchImagesCreativeTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/images/creative")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
                                 new Parameter("sort_order", "newest")
+                        )
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath("/search/videos")
+                        .withQueryStringParameters(
+                                new Parameter("specific_people", "Reggie Jackson")
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
     }
 
    @Test
-    void searchImagesCreativeWithAgeOfPeople() throws Exception {
+    void searchVideosWithAgeOfPeople() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
+        SearchVideos search = client.searchvideos()
                 .withAgeOfPeople(EnumSet.of(AgeOfPeople.ADULT)).withAgeOfPeople(EnumSet.of(AgeOfPeople.CHILD, AgeOfPeople.BABY));
         String result = search.executeAsync();
         System.out.print(result);
@@ -264,19 +200,9 @@ public class SearchImagesCreativeTests {
     }
 
     @Test
-    void searchImagesCreativeWithArtist() throws Exception {
+    void searchVideosWithCollectionCodes() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
-                .withArtists(Arrays.asList("roman makhmutov"));
-        String result = search.executeAsync();
-        System.out.print(result);
-        assertEquals("success", result);
-    }
-
-    @Test
-    void searchImagesCreativeWithCollectionCodes() throws Exception {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
+        SearchVideos search = client.searchvideos()
                 .withCollectionCodes(Arrays.asList("WRI", "ARF"));
         String result = search.executeAsync();
         System.out.print(result);
@@ -284,9 +210,9 @@ public class SearchImagesCreativeTests {
     }
 
     @Test
-    void searchImagesCreativeWithCollectionFilter() throws Exception {
+    void searchVideosWithCollectionFilter() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
+        SearchVideos search = client.searchvideos()
                 .withCollectionFilterType(CollectionFilter.EXCLUDE);
         String result = search.executeAsync();
         System.out.print(result);
@@ -294,50 +220,19 @@ public class SearchImagesCreativeTests {
     }
 
     @Test
-    void searchImagesCreativeWithColor() throws Exception {
+    void searchVideosWithEditorialVideoTypes() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
-                .withColor("#002244");
-        String result = search.executeAsync();
-        System.out.print(result);
-        assertEquals("success", result);
-    }
-
-
-    @Test
-    void searchImagesCreativeWithComposition() throws Exception {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
-                .withCompositions(EnumSet.of(Compositions.HEADSHOT, Compositions.ABSTRACT));
+        SearchVideos search = client.searchvideos()
+                .withEditorialVideoTypes(EnumSet.of(EditorialVideoType.RAW, EditorialVideoType.PRODUCED));
         String result = search.executeAsync();
         System.out.print(result);
         assertEquals("success", result);
     }
 
     @Test
-    void searchImagesCreativeWithEmbedContetOnly() throws Exception {
+    void searchVideosWithExcludeNudity() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
-                .withEmbedContentOnly(true);
-        String result = search.executeAsync();
-        System.out.print(result);
-        assertEquals("success", result);
-    }
-
-    @Test
-    void searchImagesCreativeWithEthnicity() throws Exception {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
-                .withEthnicity(EnumSet.of(Ethnicity.BLACK, Ethnicity.JAPANESE));
-        String result = search.executeAsync();
-        System.out.print(result);
-        assertEquals("success", result);
-    }
-
-    @Test
-    void searchImagesCreativeWithExcludeNudity() throws Exception {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
+        SearchVideos search = client.searchvideos()
                 .withExcludeNudity(true);
         String result = search.executeAsync();
         System.out.print(result);
@@ -345,9 +240,9 @@ public class SearchImagesCreativeTests {
     }
 
     @Test
-    void searchImagesCreativeWithResponseFields() throws Exception {
+    void searchVideosWithResponseFields() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
+        SearchVideos search = client.searchvideos()
                 .withResponseFields(Arrays.asList("asset_family", "id", "uri_oembed"));
         String result = search.executeAsync();
         System.out.print(result);
@@ -355,29 +250,29 @@ public class SearchImagesCreativeTests {
     }
 
     @Test
-    void searchImagesCreativeWithFileTypes() throws Exception {
+    void searchVideosWithFormatAvailable() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
-                .withFileTypes(EnumSet.of(FileType.EPS, FileType.JPG));
+        SearchVideos search = client.searchvideos()
+                .withFormatAvailable(FormatAvailable.HD);
         String result = search.executeAsync();
         System.out.print(result);
         assertEquals("success", result);
     }
 
    @Test
-    void searchImagesCreativeWithGraphicalStyles() throws Exception {
+    void searchVideosWithFrameRates() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
-                .withGraphicalStyles(EnumSet.of(GraphicalStyles.FINE_ART, GraphicalStyles.ILLUSTRATION));
+        SearchVideos search = client.searchvideos()
+                .withFrameRates(EnumSet.of(FrameRate.FRAMERATE_24, FrameRate.FRAMERATE_29));
         String result = search.executeAsync();
         System.out.print(result);
         assertEquals("success", result);
     }
 
     @Test
-    void searchImagesCreativeWithKeywordIds() throws Exception {
+    void searchVideosWithKeywordIds() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
+        SearchVideos search = client.searchvideos()
                 .withKeywordIds(Arrays.asList(1111,2222,3333));
         String result = search.executeAsync();
         System.out.print(result);
@@ -385,9 +280,9 @@ public class SearchImagesCreativeTests {
     }
 
     @Test
-    void searchImagesCreativeWithLicenseModels() throws Exception {
+    void searchVideosWithLicenseModels() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
+        SearchVideos search = client.searchvideos()
                 .withLicenseModels(EnumSet.of(LicenseModel.RIGHTS_MANAGED));
         String result = search.executeAsync();
         System.out.print(result);
@@ -395,39 +290,9 @@ public class SearchImagesCreativeTests {
     }
 
     @Test
-    void searchImagesCreativeWithMinimumSize() throws Exception {
+    void searchVideosWithPage() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
-                .withMinimumSize(MinimumSize.SMALL);
-        String result = search.executeAsync();
-        System.out.print(result);
-        assertEquals("success", result);
-    }
-
-    @Test
-    void searchImagesCreativeWithNumberOfPeople() throws Exception {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
-                .withNumberOfPeople(EnumSet.of(NumberOfPeople.GROUP, NumberOfPeople.ONE));
-        String result = search.executeAsync();
-        System.out.print(result);
-        assertEquals("success", result);
-    }
-
-    @Test
-    void searchImagesCreativeWithOrientations() throws Exception {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
-                .withOrientations(EnumSet.of(Orientation.HORIZONTAL, Orientation.SQUARE));
-        String result = search.executeAsync();
-        System.out.print(result);
-        assertEquals("success", result);
-    }
-
-    @Test
-    void searchImagesCreativeWithPage() throws Exception {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
+        SearchVideos search = client.searchvideos()
                 .withPage(3);
         String result = search.executeAsync();
         System.out.print(result);
@@ -435,9 +300,9 @@ public class SearchImagesCreativeTests {
     }
 
     @Test
-    void searchImagesCreativeWithPageSize() throws Exception {
+    void searchVideosWithPageSize() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
+        SearchVideos search = client.searchvideos()
                 .withPageSize(50);
         String result = search.executeAsync();
         System.out.print(result);
@@ -445,9 +310,9 @@ public class SearchImagesCreativeTests {
     }
 
     @Test
-    void searchImagesCreativeWithPhrase() throws Exception {
+    void searchVideosWithPhrase() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
+        SearchVideos search = client.searchvideos()
                 .withPhrase("cat");
         String result = search.executeAsync();
         System.out.print(result);
@@ -455,19 +320,9 @@ public class SearchImagesCreativeTests {
     }
 
     @Test
-    void searchImagesCreativeWithPrestigeContentOnly() throws Exception {
+    void searchVideosWithProductTypes() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
-                .withPrestigeContentOnly(true);
-        String result = search.executeAsync();
-        System.out.print(result);
-        assertEquals("success", result);
-    }
-
-    @Test
-    void searchImagesCreativeWithProductTypes() throws Exception {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
+        SearchVideos search = client.searchvideos()
                 .withProductTypes(EnumSet.of(ProductType.EASYACCESS, ProductType.EDITORIALSUBSCRIPTION));
         String result = search.executeAsync();
         System.out.print(result);
@@ -475,10 +330,20 @@ public class SearchImagesCreativeTests {
     }
 
     @Test
-    void searchImagesCreativeWithSortOrder() throws Exception {
+    void searchVideosWithSortOrder() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
+        SearchVideos search = client.searchvideos()
                 .withSortOrder(SortOrder.NEWEST);
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchVideosWithSpecificPeople() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideos search = client.searchvideos()
+                .withSpecificPeople(Arrays.asList("Reggie Jackson"));
         String result = search.executeAsync();
         System.out.print(result);
         assertEquals("success", result);

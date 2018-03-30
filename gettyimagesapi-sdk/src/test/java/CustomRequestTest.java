@@ -1,4 +1,4 @@
-package unittests.CustomRequest;
+
 
 import com.gettyimages.ApiClient;
 import com.gettyimages.CustomRequest.CustomRequest;
@@ -28,7 +28,7 @@ import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 import static org.mockserver.model.JsonBody.json;
 
-public class CustomRequestTests {
+public class CustomRequestTest {
     private static ClientAndServer mockServer;
 
     @BeforeAll

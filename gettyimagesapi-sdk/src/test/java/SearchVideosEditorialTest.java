@@ -1,8 +1,7 @@
-package unittests.Search;
 
 import com.gettyimages.ApiClient;
 import com.gettyimages.Filters.*;
-import com.gettyimages.Search.SearchVideos;
+import com.gettyimages.Search.SearchVideosEditorial;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +19,7 @@ import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
-public class SearchVideosTests {
+public class SearchVideosEditorialTest {
     private static ClientAndServer mockServer;
 
     @BeforeAll
@@ -47,7 +46,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("age_of_people", "baby,child,adult")
                         )
@@ -56,7 +55,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("collection_codes", "WRI,ARF")
                         )
@@ -65,7 +64,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("collections_filter_type", "exclude")
                         )
@@ -74,7 +73,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("editorial_video_types", "raw,produced")
                         )
@@ -83,7 +82,16 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
+                        .withQueryStringParameters(
+                                new Parameter("entity_uris", "uri1,uri2")
+                        )
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("exclude_nudity", "true")
                         )
@@ -92,7 +100,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("fields", "asset_family,id,uri_oembed")
                         )
@@ -101,7 +109,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("format_available", "hd")
                         )
@@ -110,7 +118,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("frame_rates", "24,29.97")
                         )
@@ -119,7 +127,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("keyword_ids", "1111,2222,3333")
                         )
@@ -128,16 +136,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
-                        .withQueryStringParameters(
-                                new Parameter("license_models", "rightsmanaged")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("page", "3")
                         )
@@ -146,7 +145,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("page_size", "50")
                         )
@@ -155,7 +154,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("phrase", "cat")
                         )
@@ -164,7 +163,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("product_types", "easyaccess,editorialsubscription")
                         )
@@ -173,7 +172,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("sort_order", "newest")
                         )
@@ -182,7 +181,7 @@ public class SearchVideosTests {
         client.when(
                 request()
                         .withMethod("GET")
-                        .withPath("/search/videos")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("specific_people", "Reggie Jackson")
                         )
@@ -191,9 +190,9 @@ public class SearchVideosTests {
     }
 
    @Test
-    void searchVideosWithAgeOfPeople() throws Exception {
+    void searchVideosEditorialWithAgeOfPeople() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withAgeOfPeople(EnumSet.of(AgeOfPeople.ADULT)).withAgeOfPeople(EnumSet.of(AgeOfPeople.CHILD, AgeOfPeople.BABY));
         String result = search.executeAsync();
         System.out.print(result);
@@ -201,9 +200,9 @@ public class SearchVideosTests {
     }
 
     @Test
-    void searchVideosWithCollectionCodes() throws Exception {
+    void searchVideosEditorialWithCollectionCodes() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withCollectionCodes(Arrays.asList("WRI", "ARF"));
         String result = search.executeAsync();
         System.out.print(result);
@@ -211,9 +210,9 @@ public class SearchVideosTests {
     }
 
     @Test
-    void searchVideosWithCollectionFilter() throws Exception {
+    void searchVideosEditorialWithCollectionFilter() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withCollectionFilterType(CollectionFilter.EXCLUDE);
         String result = search.executeAsync();
         System.out.print(result);
@@ -221,9 +220,9 @@ public class SearchVideosTests {
     }
 
     @Test
-    void searchVideosWithEditorialVideoTypes() throws Exception {
+    void searchVideosEditorialWithEditorialVideoTypes() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withEditorialVideoTypes(EnumSet.of(EditorialVideoType.RAW, EditorialVideoType.PRODUCED));
         String result = search.executeAsync();
         System.out.print(result);
@@ -231,9 +230,19 @@ public class SearchVideosTests {
     }
 
     @Test
-    void searchVideosWithExcludeNudity() throws Exception {
+    void searchVideosEditorialWithEntityUris() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
+                .withEntityUris(Arrays.asList("uri1", "uri2"));
+        String result = search.executeAsync();
+        System.out.print(result);
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchVideosEditorialWithExcludeNudity() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withExcludeNudity(true);
         String result = search.executeAsync();
         System.out.print(result);
@@ -241,9 +250,9 @@ public class SearchVideosTests {
     }
 
     @Test
-    void searchVideosWithResponseFields() throws Exception {
+    void searchVideosEditorialWithResponseFields() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withResponseFields(Arrays.asList("asset_family", "id", "uri_oembed"));
         String result = search.executeAsync();
         System.out.print(result);
@@ -251,9 +260,9 @@ public class SearchVideosTests {
     }
 
     @Test
-    void searchVideosWithFormatAvailable() throws Exception {
+    void searchVideosEditorialWithFormatAvailable() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withFormatAvailable(FormatAvailable.HD);
         String result = search.executeAsync();
         System.out.print(result);
@@ -261,9 +270,9 @@ public class SearchVideosTests {
     }
 
    @Test
-    void searchVideosWithFrameRates() throws Exception {
+    void searchVideosEditorialWithFrameRates() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withFrameRates(EnumSet.of(FrameRate.FRAMERATE_24, FrameRate.FRAMERATE_29));
         String result = search.executeAsync();
         System.out.print(result);
@@ -271,9 +280,9 @@ public class SearchVideosTests {
     }
 
     @Test
-    void searchVideosWithKeywordIds() throws Exception {
+    void searchVideosEditorialWithKeywordIds() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withKeywordIds(Arrays.asList(1111,2222,3333));
         String result = search.executeAsync();
         System.out.print(result);
@@ -281,19 +290,9 @@ public class SearchVideosTests {
     }
 
     @Test
-    void searchVideosWithLicenseModels() throws Exception {
+    void searchVideosEditorialWithPage() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
-                .withLicenseModels(EnumSet.of(LicenseModel.RIGHTS_MANAGED));
-        String result = search.executeAsync();
-        System.out.print(result);
-        assertEquals("success", result);
-    }
-
-    @Test
-    void searchVideosWithPage() throws Exception {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withPage(3);
         String result = search.executeAsync();
         System.out.print(result);
@@ -301,9 +300,9 @@ public class SearchVideosTests {
     }
 
     @Test
-    void searchVideosWithPageSize() throws Exception {
+    void searchVideosEditorialWithPageSize() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withPageSize(50);
         String result = search.executeAsync();
         System.out.print(result);
@@ -311,9 +310,9 @@ public class SearchVideosTests {
     }
 
     @Test
-    void searchVideosWithPhrase() throws Exception {
+    void searchVideosEditorialWithPhrase() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withPhrase("cat");
         String result = search.executeAsync();
         System.out.print(result);
@@ -321,9 +320,9 @@ public class SearchVideosTests {
     }
 
     @Test
-    void searchVideosWithProductTypes() throws Exception {
+    void searchVideosEditorialWithProductTypes() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withProductTypes(EnumSet.of(ProductType.EASYACCESS, ProductType.EDITORIALSUBSCRIPTION));
         String result = search.executeAsync();
         System.out.print(result);
@@ -331,9 +330,9 @@ public class SearchVideosTests {
     }
 
     @Test
-    void searchVideosWithSortOrder() throws Exception {
+    void searchVideosEditorialWithSortOrder() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withSortOrder(SortOrder.NEWEST);
         String result = search.executeAsync();
         System.out.print(result);
@@ -341,9 +340,9 @@ public class SearchVideosTests {
     }
 
     @Test
-    void searchVideosWithSpecificPeople() throws Exception {
+    void searchVideosEditorialWithSpecificPeople() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchVideos search = client.searchvideos()
+        SearchVideosEditorial search = client.searchvideoseditorial()
                 .withSpecificPeople(Arrays.asList("Reggie Jackson"));
         String result = search.executeAsync();
         System.out.print(result);
