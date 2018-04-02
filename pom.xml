@@ -16,6 +16,5 @@
 
     <modules>
         <module>gettyimagesapi-sdk</module>
-        <module>gettyimagesapi-examples</module>
     </modules>
 </project>
