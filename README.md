@@ -1,15 +1,15 @@
-# Getty Images API SDK 
+# Getty Images API SDK
 
 Seamlessly integrate Getty Images' expansive digital content, powerful search technology, and rich metadata into your publishing tools, products and services!
 
-- Search for images and videos from our extensive creative and editorial catalogs.
-- Get image and video metadata.
-- Download files using your Getty Images products (e.g., Editorial subscriptions, Easy Access, Thinkstock Subscriptions, and Image Packs).
-- Custom Request functionality that allows user to call any endpoint.
+* Search for images and videos from our extensive creative and editorial catalogs.
+* Get image and video metadata.
+* Download files using your Getty Images products (e.g., Editorial subscriptions, Easy Access, Thinkstock Subscriptions, and Image Packs).
+* Custom Request functionality that allows user to call any endpoint.
 
 ## Minimum Requirements
+
 * You have Java JDK 8 or above installed.
-* You have "Getty Test" credentials from the [Getty Images API Portal](https://developer.gettyimages.com/member/register)
 * You have [IntelliJ IDEA](https://www.jetbrains.com/idea/) installed
 * You have [Maven](https://maven.apache.org/) installed
 
@@ -17,7 +17,7 @@ Seamlessly integrate Getty Images' expansive digital content, powerful search te
 
 Import the module into your project
 
-```
+```text
 File | New | Module from Existing Sources...
 Point to the *gettyimagesapi-sdk* folder
 Select *Maven* via *Import module from external model* window
@@ -27,6 +27,7 @@ Click on Next, Next, then click Finish
 ## Examples
 
 ### Search creative images with phrase, age of people, and page
+
 ```java
         String apiKey = "API Key";
         String apiSecret = "API Secret";
@@ -50,6 +51,7 @@ Click on Next, Next, then click Finish
 ```
 
 ### Search editorial videos with phrase, fields, format available, and exclude nudity
+
 ```java
         String apiKey = "API Key";
         String apiSecret = "API Secret";
@@ -74,6 +76,7 @@ Click on Next, Next, then click Finish
 ```
 
 ### Custom Request to search images with phrase, fields, and age of people
+
 ```java
         String apiKey = "API Key";
         String apiSecret = "API Secret";
