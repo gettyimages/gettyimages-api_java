@@ -1,7 +1,7 @@
 
-import com.gettyimages.ApiClient;
-import com.gettyimages.Filters.*;
-import com.gettyimages.Search.SearchImages;
+import com.gettyimages.api.ApiClient;
+import com.gettyimages.api.Filters.*;
+import com.gettyimages.api.Search.SearchImages;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.mockserver.client.server.MockServerClient;
 import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.Parameter;
-import org.mozilla.javascript.EcmaError;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

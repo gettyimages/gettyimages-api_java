@@ -1,7 +1,7 @@
 
-import com.gettyimages.ApiClient;
-import com.gettyimages.Filters.*;
-import com.gettyimages.Search.SearchVideosEditorial;
+import com.gettyimages.api.ApiClient;
+import com.gettyimages.api.Filters.*;
+import com.gettyimages.api.Search.SearchVideosEditorial;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

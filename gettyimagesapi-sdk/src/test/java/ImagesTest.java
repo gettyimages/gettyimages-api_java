@@ -1,7 +1,7 @@
 
 
-import com.gettyimages.ApiClient;
-import com.gettyimages.Images.Images;
+import com.gettyimages.api.ApiClient;
+import com.gettyimages.api.Images.Images;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
