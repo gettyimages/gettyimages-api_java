@@ -42,7 +42,7 @@ public class CustomRequest extends AbstractApiRequest {
     }
 
     /**
-     * @param value A Map of key => value pairs where the key is the name of the parameter and the value is the associated value(s)
+     * @param value A Map of key value pairs where the key is the name of the parameter and the value is the associated value(s)
      * @return CustomRequest
      */
     public CustomRequest withQueryParameters(Map value) {
