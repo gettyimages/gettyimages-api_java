@@ -6,11 +6,19 @@
     <artifactId>gettyimagesapi-sdk</artifactId>
     <version>2.0.0</version>
     <name>gettyimagesapi-sdk</name>
+    <description>A SDK for Getty Images API</description>
     <url>http://api.gettyimages.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <licenses>
+        <license>
+            <name>The MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
 
     <developers>
         <developer>
@@ -21,6 +29,11 @@
             </roles>
         </developer>
     </developers>
+
+    <scm>
+        <url>https://github.com/gettyimages/gettyimages-api_java</url>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>org.json</groupId>
