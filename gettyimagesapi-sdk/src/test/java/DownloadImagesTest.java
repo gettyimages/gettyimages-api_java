@@ -1,9 +1,9 @@
 
 
-import com.gettyimages.ApiClient;
-import com.gettyimages.Downloads.DownloadImages;
-import com.gettyimages.Filters.FileType;
-import com.gettyimages.Filters.ProductType;
+import com.gettyimages.api.ApiClient;
+import com.gettyimages.api.Downloads.DownloadImages;
+import com.gettyimages.api.Filters.FileType;
+import com.gettyimages.api.Filters.ProductType;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

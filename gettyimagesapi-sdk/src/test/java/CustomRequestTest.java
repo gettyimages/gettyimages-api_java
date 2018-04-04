@@ -1,8 +1,8 @@
 
 
-import com.gettyimages.ApiClient;
-import com.gettyimages.CustomRequest.CustomRequest;
-import com.gettyimages.Filters.Compositions;
+import com.gettyimages.api.ApiClient;
+import com.gettyimages.api.CustomRequest.CustomRequest;
+import com.gettyimages.api.Filters.Compositions;
 
 import org.apache.http.entity.ByteArrayEntity;
 import org.json.JSONObject;

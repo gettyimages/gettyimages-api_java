@@ -1,7 +1,7 @@
 
 
-import com.gettyimages.ApiClient;
-import com.gettyimages.Downloads.DownloadVideos;
+import com.gettyimages.api.ApiClient;
+import com.gettyimages.api.Downloads.DownloadVideos;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
