@@ -1,27 +1,38 @@
-# Getty Images API SDK
+# Getty Images API Java SDK
 
-Seamlessly integrate Getty Images' expansive digital content, powerful search technology, and rich metadata into your publishing tools, products and services!
+## Introduction
+This SDK makes using the Getty Images [API](http://developers.gettyimages.com) easy. It handles credential management, makes HTTP requests and is written with a fluent style in mind. For more info about the API, see the [Documentation](https://developers.gettyimages.com/api/).
 
 * Search for images and videos from our extensive creative and editorial catalogs.
 * Get image and video metadata.
 * Download files using your Getty Images products (e.g., Editorial subscriptions, Easy Access, Thinkstock Subscriptions, and Image Packs).
 * Custom Request functionality that allows user to call any endpoint.
 
+## Help & Support
+
+* [Getty Images API](http://developers.gettyimages.com/)
+* [Contact Developer Support](mailto:developersupport@gettyimages.com)
+* [Issue Tracker](https://github.com/gettyimages/gettyimages-api_java/issues)
+
 ## Minimum Requirements
 
 * You have Java JDK 8 or above installed.
-* You have [IntelliJ IDEA](https://www.jetbrains.com/idea/) installed
 * You have [Maven](https://maven.apache.org/) installed
 
-## Import the SDK to your project via IntelliJ+Maven
+## Getting Started
+The SDK is available on [maven central repository](https://search.maven.org/). 
+Include the following dependency in your pom.xml file:
+```sh
+<dependency>
+    <groupId>com.gettyimages</groupId>
+    <artifactId>gettyimagesapi-sdk</artifactId>
+    <version>2.0.0</version>
+</dependency>
+```
 
-Import the module into your project
-
-```text
-File | New | Module from Existing Sources...
-Point to the *gettyimagesapi-sdk* folder
-Select *Maven* via *Import module from external model* window
-Click on Next, Next, then click Finish
+Install in your workspace with:
+```sh
+$ mvn install
 ```
 
 ## Examples
