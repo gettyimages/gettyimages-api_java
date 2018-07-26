@@ -46,6 +46,13 @@ public class VideosTest {
                 request()
                         .withMethod("GET")
                         .withPath("/videos/12345")
+                        .withHeader("Accept-Language", "de")
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath("/videos/12345")
                         .withQueryStringParameters(
                                 new Parameter("fields", "country,id")
                         )
@@ -64,12 +71,20 @@ public class VideosTest {
     }
 
     @Test
+    void videosWithIdWithAcceptLanguage() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        Videos videos = client.videos()
+                .withId("12345").withAcceptLanguage("de");
+        String result = videos.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
     void videosWithIdWithResponseFields() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         Videos videos = client.videos()
                 .withId("12345").withResponseFields(Arrays.asList("country", "id"));
         String result = videos.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -79,7 +94,6 @@ public class VideosTest {
         Videos videos = client.videos()
                 .withIds(Arrays.asList("12345", "678910"));
         String result = videos.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 

@@ -53,6 +53,12 @@ public class Images extends AbstractApiRequest {
         return this;
     }
 
+    public Images withAcceptLanguage(String value)
+    {
+        headers.put(Constants.AcceptLanguageString, value);
+        return this;
+    }
+
     public Images withResponseFields(Iterable<String> values)
     {
         addResponseFields(values);

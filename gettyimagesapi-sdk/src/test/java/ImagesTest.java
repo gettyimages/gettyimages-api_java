@@ -46,6 +46,13 @@ public class ImagesTest {
                 request()
                         .withMethod("GET")
                         .withPath("/images/12345")
+                        .withHeader("Accept-Language", "de")
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath("/images/12345")
                         .withQueryStringParameters(
                                 new Parameter("fields", "country,id")
                         )
@@ -64,12 +71,20 @@ public class ImagesTest {
     }
 
     @Test
+    void imagesWithIdWithAcceptLanguage() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        Images images = client.images()
+                .withId("12345").withAcceptLanguage("de");
+        String result = images.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
     void imagesWithIdWithResponseFields() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         Images images = client.images()
                 .withId("12345").withResponseFields(Arrays.asList("country", "id"));
         String result = images.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -79,7 +94,6 @@ public class ImagesTest {
         Images images = client.images()
                 .withIds(Arrays.asList("12345", "678910"));
         String result = images.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 

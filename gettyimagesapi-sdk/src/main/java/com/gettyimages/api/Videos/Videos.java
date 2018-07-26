@@ -53,6 +53,12 @@ public class Videos extends AbstractApiRequest {
         return this;
     }
 
+    public Videos withAcceptLanguage(String value)
+    {
+        headers.put(Constants.AcceptLanguageString, value);
+        return this;
+    }
+
     public Videos withResponseFields(Iterable<String> values)
     {
         addResponseFields(values);

@@ -48,6 +48,16 @@ public class DownloadImagesTest {
                         .withMethod("POST")
                         .withPath("/downloads/images/12345")
                         .withQueryStringParameters(
+                                new Parameter("auto_download", "false")
+                        )
+                        .withHeader("Accept-Language", "de")
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("POST")
+                        .withPath("/downloads/images/12345")
+                        .withQueryStringParameters(
                                 new Parameter("file_type", "jpg"),
                                 new Parameter("auto_download", "false")
                         )
@@ -87,12 +97,20 @@ public class DownloadImagesTest {
     }
 
     @Test
+    void downloadImagesWithAcceptLanguage() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        DownloadImages downloadimages = client.downloadimages()
+                .withId("12345").withAcceptLanguage("de");
+        String result = downloadimages.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
     void downloadImagesWithFileType() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         DownloadImages downloadimages = client.downloadimages()
                 .withId("12345").withFileType(FileType.JPG);
         String result = downloadimages.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -102,7 +120,6 @@ public class DownloadImagesTest {
         DownloadImages downloadimages = client.downloadimages()
                 .withId("12345").withHeight("592");
         String result = downloadimages.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -112,7 +129,6 @@ public class DownloadImagesTest {
         DownloadImages downloadimages = client.downloadimages()
                 .withId("12345").withProductId(9876);
         String result = downloadimages.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -122,7 +138,6 @@ public class DownloadImagesTest {
         DownloadImages downloadimages = client.downloadimages()
                 .withId("12345").withProductType(ProductType.EASYACCESS);
         String result = downloadimages.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 

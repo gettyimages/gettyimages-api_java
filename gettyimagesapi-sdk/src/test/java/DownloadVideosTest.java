@@ -46,6 +46,16 @@ public class DownloadVideosTest {
                         .withMethod("POST")
                         .withPath("/downloads/videos/12345")
                         .withQueryStringParameters(
+                                new Parameter("auto_download", "false")
+                        )
+                        .withHeader("Accept-Language", "de")
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("POST")
+                        .withPath("/downloads/videos/12345")
+                        .withQueryStringParameters(
                                 new Parameter("product_id", "9876"),
                                 new Parameter("auto_download", "false")
                         )
@@ -65,12 +75,20 @@ public class DownloadVideosTest {
     }
 
     @Test
+    void downloadVideosWithAcceptLanguage() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        DownloadVideos downloadVideos = client.downloadvideos()
+                .withId("12345").withAcceptLanguage("de");
+        String result = downloadVideos.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
     void downloadVideosWithProductId() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         DownloadVideos downloadVideos = client.downloadvideos()
                 .withId("12345").withProductId(9876);
         String result = downloadVideos.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -80,7 +98,6 @@ public class DownloadVideosTest {
         DownloadVideos downloadVideos = client.downloadvideos()
                 .withId("12345").withSize("size");
         String result = downloadVideos.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 

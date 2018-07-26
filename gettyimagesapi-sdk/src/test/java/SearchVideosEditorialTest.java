@@ -47,6 +47,13 @@ public class SearchVideosEditorialTest {
                 request()
                         .withMethod("GET")
                         .withPath("/search/videos/editorial")
+                        .withHeader("Accept-Language", "de")
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath("/search/videos/editorial")
                         .withQueryStringParameters(
                                 new Parameter("age_of_people", "baby,child,adult")
                         )
@@ -189,13 +196,21 @@ public class SearchVideosEditorialTest {
                 .respond(response().withStatusCode(200).withBody("success"));
     }
 
+    @Test
+    void searchVideosEditorialWithAcceptLanguage() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosEditorial search = client.searchvideoseditorial()
+                .withAcceptLanguage("de");
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
    @Test
     void searchVideosEditorialWithAgeOfPeople() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withAgeOfPeople(EnumSet.of(AgeOfPeople.ADULT)).withAgeOfPeople(EnumSet.of(AgeOfPeople.CHILD, AgeOfPeople.BABY));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -205,7 +220,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withCollectionCodes(Arrays.asList("WRI", "ARF"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -215,7 +229,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withCollectionFilterType(CollectionFilter.EXCLUDE);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -225,7 +238,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withEditorialVideoTypes(EnumSet.of(EditorialVideoType.RAW, EditorialVideoType.PRODUCED));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -235,7 +247,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withEntityUris(Arrays.asList("uri1", "uri2"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -245,7 +256,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withExcludeNudity(true);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -255,7 +265,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withResponseFields(Arrays.asList("asset_family", "id", "uri_oembed"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -265,7 +274,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withFormatAvailable(FormatAvailable.HD);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -275,7 +283,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withFrameRates(EnumSet.of(FrameRate.FRAMERATE_24, FrameRate.FRAMERATE_29));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -285,7 +292,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withKeywordIds(Arrays.asList(1111,2222,3333));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -295,7 +301,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withPage(3);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -305,7 +310,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withPageSize(50);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -315,7 +319,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withPhrase("cat");
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -325,7 +328,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withProductTypes(EnumSet.of(ProductType.EASYACCESS, ProductType.EDITORIALSUBSCRIPTION));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -335,7 +337,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withSortOrder(SortOrder.NEWEST);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -345,7 +346,6 @@ public class SearchVideosEditorialTest {
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withSpecificPeople(Arrays.asList("Reggie Jackson"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 

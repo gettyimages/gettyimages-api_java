@@ -51,6 +51,16 @@ public class CustomRequest extends AbstractApiRequest {
     }
 
     /**
+     * @param name The header field name
+     * @param value The value associated with the field
+     * @return CustomRequest
+     */
+    public CustomRequest withHeader(String name, String value) {
+        headers.put(name, value);
+        return this;
+    }
+
+    /**
      * @param value A JSONObject to be passed as the body of the request
      * @return CustomRequest
      */

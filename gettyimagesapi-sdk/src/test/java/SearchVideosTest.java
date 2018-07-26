@@ -47,6 +47,13 @@ public class SearchVideosTest {
                 request()
                         .withMethod("GET")
                         .withPath("/search/videos")
+                        .withHeader("Accept-Language", "de")
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath("/search/videos")
                         .withQueryStringParameters(
                                 new Parameter("age_of_people", "baby,child,adult")
                         )
@@ -189,13 +196,21 @@ public class SearchVideosTest {
                 .respond(response().withStatusCode(200).withBody("success"));
     }
 
+    @Test
+    void searchVideosWithAcceptLanguage() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideos search = client.searchvideos()
+                .withAcceptLanguage("de");
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
    @Test
     void searchVideosWithAgeOfPeople() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         SearchVideos search = client.searchvideos()
                 .withAgeOfPeople(EnumSet.of(AgeOfPeople.ADULT)).withAgeOfPeople(EnumSet.of(AgeOfPeople.CHILD, AgeOfPeople.BABY));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -205,7 +220,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withCollectionCodes(Arrays.asList("WRI", "ARF"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -215,7 +229,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withCollectionFilterType(CollectionFilter.EXCLUDE);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -225,7 +238,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withEditorialVideoTypes(EnumSet.of(EditorialVideoType.RAW, EditorialVideoType.PRODUCED));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -235,7 +247,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withExcludeNudity(true);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -245,7 +256,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withResponseFields(Arrays.asList("asset_family", "id", "uri_oembed"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -255,7 +265,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withFormatAvailable(FormatAvailable.HD);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -265,7 +274,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withFrameRates(EnumSet.of(FrameRate.FRAMERATE_24, FrameRate.FRAMERATE_29));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -275,7 +283,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withKeywordIds(Arrays.asList(1111,2222,3333));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -285,7 +292,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withLicenseModels(EnumSet.of(LicenseModel.RIGHTS_MANAGED));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -295,7 +301,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withPage(3);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -305,7 +310,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withPageSize(50);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -315,7 +319,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withPhrase("cat");
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -325,7 +328,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withProductTypes(EnumSet.of(ProductType.EASYACCESS, ProductType.EDITORIALSUBSCRIPTION));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -335,7 +337,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withSortOrder(SortOrder.NEWEST);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -345,7 +346,6 @@ public class SearchVideosTest {
         SearchVideos search = client.searchvideos()
                 .withSpecificPeople(Arrays.asList("Reggie Jackson"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 

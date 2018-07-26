@@ -3,6 +3,7 @@ package com.gettyimages.api;
 public class Constants {
 
     public static String GraphicalStylesString = "graphical_styles";
+    public static String AcceptLanguageString = "Accept-Language";
     public static String AgeOfPeopleParameterName = "age_of_people";
     public static String CompositionsParameterName = "compositions";
     public static String EmbedContentOnlyParameterName = "embed_content_only";
