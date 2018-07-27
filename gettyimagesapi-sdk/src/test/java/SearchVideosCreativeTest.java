@@ -47,6 +47,13 @@ public class SearchVideosCreativeTest {
                 request()
                         .withMethod("GET")
                         .withPath("/search/videos/creative")
+                        .withHeader("Accept-Language", "de")
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath("/search/videos/creative")
                         .withQueryStringParameters(
                                 new Parameter("age_of_people", "baby,child,adult")
                         )
@@ -171,13 +178,21 @@ public class SearchVideosCreativeTest {
                 .respond(response().withStatusCode(200).withBody("success"));
     }
 
+    @Test
+    void searchVideosCreativeWithAcceptLanguage() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosCreative search = client.searchvideoscreative()
+                .withAcceptLanguage("de");
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
    @Test
     void searchVideosCreativeWithAgeOfPeople() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         SearchVideosCreative search = client.searchvideoscreative()
                 .withAgeOfPeople(EnumSet.of(AgeOfPeople.ADULT)).withAgeOfPeople(EnumSet.of(AgeOfPeople.CHILD, AgeOfPeople.BABY));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -187,7 +202,6 @@ public class SearchVideosCreativeTest {
         SearchVideosCreative search = client.searchvideoscreative()
                 .withCollectionCodes(Arrays.asList("WRI", "ARF"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -197,7 +211,6 @@ public class SearchVideosCreativeTest {
         SearchVideosCreative search = client.searchvideoscreative()
                 .withCollectionFilterType(CollectionFilter.EXCLUDE);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -207,7 +220,6 @@ public class SearchVideosCreativeTest {
         SearchVideosCreative search = client.searchvideoscreative()
                 .withExcludeNudity(true);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -217,7 +229,6 @@ public class SearchVideosCreativeTest {
         SearchVideosCreative search = client.searchvideoscreative()
                 .withResponseFields(Arrays.asList("asset_family", "id", "uri_oembed"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -227,7 +238,6 @@ public class SearchVideosCreativeTest {
         SearchVideosCreative search = client.searchvideoscreative()
                 .withFormatAvailable(FormatAvailable.HD);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -237,7 +247,6 @@ public class SearchVideosCreativeTest {
         SearchVideosCreative search = client.searchvideoscreative()
                 .withFrameRates(EnumSet.of(FrameRate.FRAMERATE_24, FrameRate.FRAMERATE_29));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -247,7 +256,6 @@ public class SearchVideosCreativeTest {
         SearchVideosCreative search = client.searchvideoscreative()
                 .withKeywordIds(Arrays.asList(1111,2222,3333));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -257,7 +265,6 @@ public class SearchVideosCreativeTest {
         SearchVideosCreative search = client.searchvideoscreative()
                 .withLicenseModels(EnumSet.of(LicenseModel.RIGHTS_MANAGED));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -267,7 +274,6 @@ public class SearchVideosCreativeTest {
         SearchVideosCreative search = client.searchvideoscreative()
                 .withPage(3);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -277,7 +283,6 @@ public class SearchVideosCreativeTest {
         SearchVideosCreative search = client.searchvideoscreative()
                 .withPageSize(50);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -287,7 +292,6 @@ public class SearchVideosCreativeTest {
         SearchVideosCreative search = client.searchvideoscreative()
                 .withPhrase("cat");
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -297,7 +301,6 @@ public class SearchVideosCreativeTest {
         SearchVideosCreative search = client.searchvideoscreative()
                 .withProductTypes(EnumSet.of(ProductType.EASYACCESS, ProductType.EDITORIALSUBSCRIPTION));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -307,7 +310,6 @@ public class SearchVideosCreativeTest {
         SearchVideosCreative search = client.searchvideoscreative()
                 .withSortOrder(SortOrder.NEWEST);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 

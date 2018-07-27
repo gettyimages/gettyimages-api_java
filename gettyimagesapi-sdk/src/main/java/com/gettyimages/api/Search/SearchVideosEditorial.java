@@ -26,6 +26,12 @@ public class SearchVideosEditorial extends AbstractApiRequest {
         return super.executeAsync();
     }
 
+    public SearchVideosEditorial withAcceptLanguage(String value)
+    {
+        headers.put(Constants.AcceptLanguageString, value);
+        return this;
+    }
+
     public SearchVideosEditorial withAgeOfPeople(EnumSet<AgeOfPeople> values)
     {
         addAgeOfPeople(values);

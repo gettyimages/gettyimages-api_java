@@ -47,6 +47,13 @@ public class SearchImagesEditorialTest {
                 request()
                         .withMethod("GET")
                         .withPath("/search/images/editorial")
+                        .withHeader("Accept-Language", "de")
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath("/search/images/editorial")
                         .withQueryStringParameters(
                                 new Parameter("age_of_people", "baby,child,adult")
                         )
@@ -289,12 +296,20 @@ public class SearchImagesEditorialTest {
     }
 
     @Test
+    void searchImagesEditorialWithAcceptLanguage() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withAcceptLanguage("de");
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
     void searchImagesEditorialWithAgeOfPeople() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withAgeOfPeople(EnumSet.of(AgeOfPeople.ADULT)).withAgeOfPeople(EnumSet.of(AgeOfPeople.CHILD, AgeOfPeople.BABY));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -304,7 +319,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withArtists(Arrays.asList("roman makhmutov"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -314,7 +328,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withCollectionCodes(Arrays.asList("WRI", "ARF"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -324,7 +337,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withCollectionFilterType(CollectionFilter.EXCLUDE);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -335,7 +347,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withCompositions(EnumSet.of(Compositions.HEADSHOT, Compositions.ABSTRACT));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -345,7 +356,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withEditorialSegments(EnumSet.of(EditorialSegment.ARCHIVAL, EditorialSegment.PUBLICITY));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -355,7 +365,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withEmbedContentOnly(true);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -365,7 +374,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withEndDate("2015-04-01");
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -375,7 +383,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withEntityUris(Arrays.asList("uri1", "uri2"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -385,7 +392,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withEthnicity(EnumSet.of(Ethnicity.BLACK, Ethnicity.JAPANESE));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -395,7 +401,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withEventIds(Arrays.asList(123, 456, 789));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -405,7 +410,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withExcludeNudity(true);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -415,7 +419,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withResponseFields(Arrays.asList("asset_family", "id", "uri_oembed"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -425,7 +428,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withFileTypes(EnumSet.of(FileType.EPS, FileType.JPG));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -435,7 +437,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withGraphicalStyles(EnumSet.of(GraphicalStyles.FINE_ART, GraphicalStyles.ILLUSTRATION));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -445,7 +446,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withKeywordIds(Arrays.asList(1111,2222,3333));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -455,7 +455,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withMinimumQualityRank(MinimumQualityRank.ONE);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -465,7 +464,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withMinimumSize(MinimumSize.SMALL);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -475,7 +473,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withNumberOfPeople(EnumSet.of(NumberOfPeople.GROUP, NumberOfPeople.ONE));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -485,7 +482,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withOrientations(EnumSet.of(Orientation.HORIZONTAL, Orientation.SQUARE));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -495,7 +491,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withPage(3);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -505,7 +500,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withPageSize(50);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -515,7 +509,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withPhrase("cat");
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -525,7 +518,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withProductTypes(EnumSet.of(ProductType.EASYACCESS, ProductType.EDITORIALSUBSCRIPTION));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -535,7 +527,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withSortOrder(SortOrder.NEWEST);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -545,7 +536,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withSpecificPeople(Arrays.asList("Reggie Jackson"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -556,7 +546,6 @@ public class SearchImagesEditorialTest {
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withStartDate("2015-04-01");
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 

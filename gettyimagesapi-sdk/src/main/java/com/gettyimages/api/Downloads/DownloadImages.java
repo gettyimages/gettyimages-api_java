@@ -43,6 +43,12 @@ public class DownloadImages extends AbstractApiRequest {
         return this;
     }
 
+    public DownloadImages withAcceptLanguage(String value)
+    {
+        headers.put(Constants.AcceptLanguageString, value);
+        return this;
+    }
+
     public DownloadImages withFileType(FileType value)
     {
         queryParams.put(Constants.FileTypeParameterName, value);

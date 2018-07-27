@@ -117,6 +117,16 @@ public class CustomRequestTest {
                         )
         )
                 .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath("/search/images")
+                        .withQueryStringParameters(
+                                new Parameter("phrase", "cat")
+                        )
+                        .withHeader("Accept-Language", "de")
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
 
     }
 
@@ -211,6 +221,17 @@ public class CustomRequestTest {
         params.put("asset_ids", Arrays.asList("1234", "5678"));
         CustomRequest request = client.customrequest()
                 .withMethod("DELETE").withRoute("/boards/333").withQueryParameters(params);
+        String result = request.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void customRequestGetWithHeader() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        Map params = new HashMap();
+        params.put("phrase", "cat");
+        CustomRequest request = client.customrequest()
+                .withMethod("GET").withRoute("/search/images").withQueryParameters(params).withHeader("Accept-Language", "de");
         String result = request.executeAsync();
         assertEquals("success", result);
     }

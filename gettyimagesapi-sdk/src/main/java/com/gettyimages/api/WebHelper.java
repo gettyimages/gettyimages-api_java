@@ -1,5 +1,6 @@
 package com.gettyimages.api;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
@@ -28,7 +29,7 @@ public class WebHelper {
         this.baseUrl = baseUrl;
     }
 
-    public String Get(Map queryParams, String path) throws SdkException {
+    public String Get(Map queryParams, String path, Map headers) throws SdkException {
         try {
             String query = BuildQuery(queryParams);
             URL url = new URL(baseUrl + path + "?" + query);
@@ -36,6 +37,9 @@ public class WebHelper {
             HttpGet httpGet = new HttpGet(url.toString());
 
             addHeaders(httpGet);
+            headers.forEach((k, v)->{
+                httpGet.addHeader(String.valueOf(k), String.valueOf(v));
+            });
 
             HttpResponse response = httpClient.execute(httpGet);
             HttpEntity responseEntity = response.getEntity();
@@ -49,7 +53,7 @@ public class WebHelper {
         return "{null}";
     }
 
-    public String PostQuery(Map queryParams, String path, HttpEntity body) throws SdkException {
+    public String PostQuery(Map queryParams, String path, HttpEntity body, Map headers) throws SdkException {
         try {
             String query = BuildQuery(queryParams);
             URL url = new URL(baseUrl + path + "?" + query);
@@ -57,6 +61,10 @@ public class WebHelper {
             HttpPost httpPost = new HttpPost(url.toString());
 
             addHeaders(httpPost);
+            headers.forEach((k, v)->{
+                httpPost.addHeader(String.valueOf(k), String.valueOf(v));
+            });
+
             if (body != null) {
                 httpPost.addHeader("content-type", "application/json");
                 httpPost.setEntity(body);
@@ -75,7 +83,7 @@ public class WebHelper {
         return null;
     }
 
-    public String PutQuery(Map queryParams, String path, HttpEntity body) throws SdkException {
+    public String PutQuery(Map queryParams, String path, HttpEntity body, Map headers) throws SdkException {
         try {
             String query = BuildQuery(queryParams);
             URL url = new URL(baseUrl + path + "?" + query);
@@ -83,6 +91,10 @@ public class WebHelper {
             HttpPut httpPut = new HttpPut(url.toString());
 
             addHeaders(httpPut);
+            headers.forEach((k, v)->{
+                httpPut.addHeader(String.valueOf(k), String.valueOf(v));
+            });
+
             if (body != null) {
                 httpPut.addHeader("content-type", "application/json");
                 httpPut.setEntity(body);
@@ -108,7 +120,7 @@ public class WebHelper {
         return null;
     }
 
-    public String DeleteQuery(Map queryParams, String path) throws SdkException {
+    public String DeleteQuery(Map queryParams, String path, Map headers) throws SdkException {
         try {
             String query = BuildQuery(queryParams);
             URL url = new URL(baseUrl + path + "?" + query);
@@ -116,6 +128,9 @@ public class WebHelper {
             HttpDelete httpDelete = new HttpDelete(url.toString());
 
             addHeaders(httpDelete);
+            headers.forEach((k, v)->{
+                httpDelete.addHeader(String.valueOf(k), String.valueOf(v));
+            });
 
             HttpResponse response = httpClient.execute(httpDelete);
             HttpEntity responseEntity = response.getEntity();

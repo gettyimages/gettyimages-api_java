@@ -1,6 +1,7 @@
 package com.gettyimages.api;
 
 import com.gettyimages.api.Filters.*;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 
 import java.util.*;
@@ -13,6 +14,7 @@ public abstract class AbstractApiRequest<T> {
     protected String path;
     protected HttpEntity body;
     protected Map<String, Object> queryParams = new HashMap<>();
+    protected Map<String, String> headers = new HashMap<>();
 
     public AbstractApiRequest(Credentials credentials, String baseUrl) {
         this.credentials = credentials;
@@ -42,18 +44,17 @@ public abstract class AbstractApiRequest<T> {
                 queryParams.put(k, result);
             }
         });
-
         WebHelper helper = new WebHelper(credentials, baseUrl);
         switch (method)
         {
             case "GET":
-                return helper.Get(queryParams, path);
+                return helper.Get(queryParams, path, headers);
             case "POST":
-                return helper.PostQuery(queryParams, path, body);
+                return helper.PostQuery(queryParams, path, body, headers);
             case "PUT":
-                return helper.PutQuery(queryParams, path, body);
+                return helper.PutQuery(queryParams, path, body, headers);
             case "DELETE":
-                return helper.DeleteQuery(queryParams, path);
+                return helper.DeleteQuery(queryParams, path, headers);
             default:
                 throw new SdkException("No appropriate HTTP method found for this request.");
         }

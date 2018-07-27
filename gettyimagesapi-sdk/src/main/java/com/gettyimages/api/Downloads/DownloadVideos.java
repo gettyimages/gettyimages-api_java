@@ -41,6 +41,12 @@ public class DownloadVideos extends AbstractApiRequest {
         return this;
     }
 
+    public DownloadVideos withAcceptLanguage(String value)
+    {
+        headers.put(Constants.AcceptLanguageString, value);
+        return this;
+    }
+
     public DownloadVideos withProductId(Integer value)
     {
         queryParams.put(Constants.ProductIdParameterName, value);

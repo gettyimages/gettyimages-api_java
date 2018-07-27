@@ -47,6 +47,13 @@ public class SearchImagesTest {
                 request()
                         .withMethod("GET")
                         .withPath("/search/images")
+                        .withHeader("Accept-Language", "de")
+        )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath("/search/images")
                         .withQueryStringParameters(
                                 new Parameter("age_of_people", "baby,child,adult")
                         )
@@ -271,12 +278,20 @@ public class SearchImagesTest {
     }
 
     @Test
+    void searchImagesWithAcceptLanguage() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImages search = client.searchimages()
+                .withAcceptLanguage("de");
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
     void searchImagesWithAgeOfPeople() throws Exception {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         SearchImages search = client.searchimages()
                 .withAgeOfPeople(EnumSet.of(AgeOfPeople.ADULT)).withAgeOfPeople(EnumSet.of(AgeOfPeople.CHILD, AgeOfPeople.BABY));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -286,7 +301,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withArtists(Arrays.asList("roman makhmutov"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -296,7 +310,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withCollectionCodes(Arrays.asList("WRI", "ARF"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -306,7 +319,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withCollectionFilterType(CollectionFilter.EXCLUDE);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -316,7 +328,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withColor("#002244");
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -327,7 +338,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withCompositions(EnumSet.of(Compositions.HEADSHOT, Compositions.ABSTRACT));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -337,7 +347,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withEmbedContentOnly(true);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -347,7 +356,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withEthnicity(EnumSet.of(Ethnicity.BLACK, Ethnicity.JAPANESE));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -357,7 +365,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withEventIds(Arrays.asList(123, 456, 789));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -367,7 +374,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withExcludeNudity(true);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -377,7 +383,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withResponseFields(Arrays.asList("asset_family", "id", "uri_oembed"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -387,7 +392,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withFileTypes(EnumSet.of(FileType.EPS, FileType.JPG));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -397,7 +401,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withGraphicalStyles(EnumSet.of(GraphicalStyles.FINE_ART, GraphicalStyles.ILLUSTRATION));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -407,7 +410,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withKeywordIds(Arrays.asList(1111,2222,3333));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -417,7 +419,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withLicenseModels(EnumSet.of(LicenseModel.RIGHTS_MANAGED));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -427,7 +428,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
             .withMinimumSize(MinimumSize.SMALL);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -437,7 +437,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withNumberOfPeople(EnumSet.of(NumberOfPeople.GROUP, NumberOfPeople.ONE));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -447,7 +446,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withOrientations(EnumSet.of(Orientation.HORIZONTAL, Orientation.SQUARE));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -457,7 +455,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withPage(3);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -467,7 +464,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withPageSize(50);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -477,7 +473,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withPhrase("cat");
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -487,7 +482,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withPrestigeContentOnly(true);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -497,7 +491,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withProductTypes(EnumSet.of(ProductType.EASYACCESS, ProductType.EDITORIALSUBSCRIPTION));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -507,7 +500,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withSortOrder(SortOrder.NEWEST);
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 
@@ -517,7 +509,6 @@ public class SearchImagesTest {
         SearchImages search = client.searchimages()
                 .withSpecificPeople(Arrays.asList("Reggie Jackson"));
         String result = search.executeAsync();
-        System.out.print(result);
         assertEquals("success", result);
     }
 

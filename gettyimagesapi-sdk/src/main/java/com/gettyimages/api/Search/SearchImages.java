@@ -26,6 +26,12 @@ public class SearchImages extends AbstractApiRequest {
         return super.executeAsync();
     }
 
+    public SearchImages withAcceptLanguage(String value)
+    {
+        headers.put(Constants.AcceptLanguageString, value);
+        return this;
+    }
+
     public SearchImages withAgeOfPeople(EnumSet<AgeOfPeople> values)
     {
         addAgeOfPeople(values);
