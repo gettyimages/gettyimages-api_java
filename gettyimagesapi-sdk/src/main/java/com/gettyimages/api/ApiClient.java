@@ -11,7 +11,7 @@ import com.gettyimages.api.Search.*;
     Main entry point to the Connect API SDK
  */
 public class ApiClient {
-    public static String Version="1.0.1-beta";
+    public static String Version="2.1.1";
     private String Slash = "/";
     private Credentials credentials;
     private static String baseUrl = "https://api.gettyimages.com/v3";

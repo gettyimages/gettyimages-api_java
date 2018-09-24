@@ -185,7 +185,7 @@ public class WebHelper {
             httpAgentString = String.format("%s; %s; Java %s", osName, osArch, javaVersion);
         }
 
-        String userAgentString = String.format("ConnectSDK/%s (%s)", ApiClient.Version, httpAgentString);
+        String userAgentString = String.format("GettyImagesSDK/%s (%s)", ApiClient.Version, httpAgentString);
         return userAgentString;
     }
 

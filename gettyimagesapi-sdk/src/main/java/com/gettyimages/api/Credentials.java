@@ -76,7 +76,7 @@ public class Credentials {
 
     public Token GetAccessToken() throws SdkException {
         Calendar now = Calendar.getInstance();
-        now.add(Calendar.MINUTE, -5);
+        now.add(Calendar.MINUTE, 5);
 
         if (CredentialType != CredentialType.ClientCredentials && CredentialType != CredentialType.ResourceOwner && CredentialType != CredentialType.RefreshToken
                 ||
