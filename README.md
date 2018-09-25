@@ -26,7 +26,7 @@ Include the following dependency in your pom.xml file:
 <dependency>
     <groupId>com.gettyimages</groupId>
     <artifactId>gettyimagesapi-sdk</artifactId>
-    <version>2.0.0</version>
+    <version>X.X.X</version>
 </dependency>
 ```
 
