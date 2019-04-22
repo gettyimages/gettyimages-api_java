@@ -2,9 +2,7 @@ package com.gettyimages.api.Filters;
 
 public enum FileType {
     EPS("eps"),
-    GIF("gif"),
-    JPG("jpg"),
-    PNG("png"),;
+    JPG("jpg");
 
     private String fileType;
 
