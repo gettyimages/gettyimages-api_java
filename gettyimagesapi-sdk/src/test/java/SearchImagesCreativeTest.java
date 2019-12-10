@@ -172,15 +172,6 @@ public class SearchImagesCreativeTest {
                         .withMethod("GET")
                         .withPath("/search/images/creative")
                         .withQueryStringParameters(
-                                new Parameter("license_models", "rightsmanaged")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/creative")
-                        .withQueryStringParameters(
                                 new Parameter("minimum_size", "small")
                         )
         )
@@ -382,15 +373,6 @@ public class SearchImagesCreativeTest {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         SearchImagesCreative search = client.searchimagescreative()
                 .withKeywordIds(Arrays.asList(1111,2222,3333));
-        String result = search.executeAsync();
-        assertEquals("success", result);
-    }
-
-    @Test
-    void searchImagesCreativeWithLicenseModels() throws Exception {
-        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
-        SearchImagesCreative search = client.searchimagescreative()
-                .withLicenseModels(EnumSet.of(LicenseModel.RIGHTS_MANAGED));
         String result = search.executeAsync();
         assertEquals("success", result);
     }

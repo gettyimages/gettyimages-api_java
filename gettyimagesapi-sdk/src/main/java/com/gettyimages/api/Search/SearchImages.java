@@ -116,12 +116,6 @@ public class SearchImages extends AbstractApiRequest {
         return this;
     }
 
-    public SearchImages withLicenseModels(EnumSet<LicenseModel> values)
-    {
-        addLicenseModels(values);
-        return this;
-    }
-
     public SearchImages withMinimumSize(MinimumSize value)
     {
         queryParams.put(Constants.MinimumSizeParameterName, value);

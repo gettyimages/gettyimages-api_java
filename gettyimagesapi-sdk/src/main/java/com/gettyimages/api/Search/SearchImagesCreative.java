@@ -110,12 +110,6 @@ public class SearchImagesCreative extends AbstractApiRequest {
         return this;
     }
 
-    public SearchImagesCreative withLicenseModels(EnumSet<LicenseModel> values)
-    {
-        addLicenseModels(values);
-        return this;
-    }
-
     public SearchImagesCreative withMinimumSize(MinimumSize value)
     {
         queryParams.put(Constants.MinimumSizeParameterName, value);
