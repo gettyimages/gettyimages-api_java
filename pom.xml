@@ -4,7 +4,7 @@
 
     <groupId>com.gettyimages</groupId>
     <artifactId>gettyimagesapi</artifactId>
-    <version>2.1.2</version>
+    <version>3.0.0</version>
     <packaging>pom</packaging>
 
     <name>gettyimagesapi</name>
