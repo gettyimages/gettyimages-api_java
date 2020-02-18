@@ -8,6 +8,10 @@ before_deploy:
   #
   - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
   - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
+  #
+  # Tag the build
+  #
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
 
 deploy:
   #
@@ -27,7 +31,7 @@ deploy:
     repo: gettyimages/gettyimages-api_java
     # TODO remove the branch after you're done testing
     branch: deploy
-    # TODO is this the name we want?
+  # TODO is this the name we want?
   name: $project_version
   # TODO: set draft to false after you're done testing
   draft: true
