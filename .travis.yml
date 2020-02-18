@@ -1,3 +1,34 @@
 language: java
 jdk:
-    - openjdk8
+- openjdk8
+
+before_deploy:
+  #
+  # Read the project version 
+  #
+  - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
+  - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
+
+deploy:
+  #
+  # Release instructions
+  # if you need to change the api key 
+  #   * install the travis client on your local machine (you will need Ruby installed)
+  #       ** gem install travis
+  #   * in the directory containing this yml file run the following command and follow the prompts
+  #       ** travis setup releases
+  #
+  provider: releases
+  api_key:
+    secure: QRDWEzr7ecy99uFYetCl6v0t1QSJKfAUJcMPxWQJNWohmzO1oxA7SJF+1PUqyj8cgP+ykZDrqdI3jHZCU+YPOtXirxDkxItc/uMsfJBQAaMlDLzIiZpx6husPAzvatp7xDC/KSRKfQlTv7NnP9oLt/hn8phTxHGyIssV6Xnpd/e84Uqu55NxyeuIfuTeEoVzuC8o4c5NpAClYASwgHV4l8e8uTDQqITx2Y/qbsukh/bq0TYLAQZkHf9GzhJ9Kfqo6p4vMybzn9bGUptf1c/gIUb/OckBTDC4yka3xHdTWvk+nlKPTPrO4LEeIrJ2JbT46ljBqaRzXmAEjr7A2l2rJd3xMOgD09Cb1Od+xiQ900hrh2o/0oSjcChRLZbRe/ztpe5SmJuyJcesBMM+wlvwwNE6hVc77BBCKvzen88OXHzgB8VX3ymKgz6adFKgNI614nemLcNP8/UyqqnjMf5rfknTp9rOkIxmmt9LNSapABCs2IJRlx5zQBup6ij3S66TL5JogEHsVxEzm1zn3vFOx2FJA+tRbd414eP0iB87Zi9tzI9z2/ZBkHTEUXnn22Y0w6W2fPJznTJ4NyJGMmgNLVvpmq0sl9KpfGp4rkof/kADhfxTIjUjRzc1UDHkiJHzxG/Tbw1Ojo+rQnj1RsestQ586tVvGOg0zhiapikGCOE=
+  file: gettyimagesapi-sdk/target/gettyimagesapi-sdk-$project_version.jar
+  on:
+    tags: true
+    repo: gettyimages/gettyimages-api_java
+    # TODO remove the branch after you're done testing
+    branch: deploy
+    # TODO is this the name we want?
+  name: $project_version
+  # TODO: set draft to false after you're done testing
+  draft: true
+  skip_cleanup: true
