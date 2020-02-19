@@ -29,5 +29,8 @@ deploy:
 
   provider: releases # https://docs.travis-ci.com/user/deployment/releases
 
-# GITHUB_PERSONAL_ACCESS_TOKEN is an environment variable set in the GitHub repository
-  api_key: GITHUB_PERSONAL_ACCESS_TOKEN
+# GITHUB_PERSONAL_ACCESS_TOKEN is an environment variable set in Travis-CI
+# https://travis-ci.org/gettyimages/gettyimages-api_java/settings
+# It must be enabled for the branch you're working on.
+  api_key: 
+    secure: GITHUB_PERSONAL_ACCESS_TOKEN
