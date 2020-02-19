@@ -15,7 +15,7 @@ before_deploy:
   # End Extract
 
 deploy:
-  draft: true # set draft to true for testing - creates a build accessible only by collaborators
+  draft: false # set draft to true for testing - creates a draft build accessible only by collaborators
   name: $project_version # use the project version extracted in before_deploy as the name
   skip_cleanup: true # don't cleanup - we need the artifacts for deploying
 
