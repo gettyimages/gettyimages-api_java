@@ -49,6 +49,12 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+# Visual studio
+/.vs/*
+
+# Visual studio code
+/.vscode/*
+
 **/target/
 **/bin/
 *.iml
