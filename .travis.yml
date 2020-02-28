@@ -1,12 +1,25 @@
 language: java
 jdk: # jdk versions to test against - https://www.deps.co/guides/travis-ci-latest-java/
-- openjdk8 # oldest version we support. Do not use Oracle because the license expires.
-- openjdk11 # most recent version supported by Travis
+     # Open JDK support: https://adoptopenjdk.net/support.html
+- openjdk8 # LTS through at least 2023.09
+- openjdk11 # LTS through at least 2022.09
 - openjdk-ea # early release - allow failures, but be aware that there *are* errors
 
 matrix:
   allow_failures: # https://docs.travis-ci.com/user/build-matrix/#rows-that-are-allowed-to-fail
     - jdk: openjdk-ea # allow early access version to fail
+    
+before_install:
+  ## export GPG details
+  - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
+  - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
+
+install:
+  mvn --settings .maven.xml install -DskipTests=true -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
+
+script:
+  ## Build and release to maven central
+  mvn clean deploy --settings .maven.xml -DskipTests=true -B -U -prepare_release
 
 before_deploy:
   # Begin Extract the project version
@@ -31,6 +44,7 @@ deploy:
 
 # GITHUB_PERSONAL_ACCESS_TOKEN is an environment variable set in Travis-CI
 # https://travis-ci.org/gettyimages/gettyimages-api_java/settings
+# https://stackoverflow.com/questions/33735992/travis-ci-using-repository-environment-variables-in-travis-yml
 # It must be enabled for the branch you're working on.
   #api_key: GITHUB_PERSONAL_ACCESS_TOKEN
   api_key:
