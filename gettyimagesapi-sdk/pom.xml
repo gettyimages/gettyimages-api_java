@@ -35,10 +35,10 @@
     </scm>
 
     <distributionManagement>
-        <snapshotrepository>
+        <snapshotRepository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotrepository>
+        </snapshotRepository>
         <repository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
