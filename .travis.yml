@@ -19,7 +19,7 @@ install:
 
 script:
   ## Build and release to maven central
-  mvn clean deploy --settings .maven.xml -DskipTests=true -B -U -prepare_release
+  mvn clean deploy --settings .maven.xml -DskipTests=true -B -U -P prepare_release
 
 before_deploy:
   # Begin Extract the project version
