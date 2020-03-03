@@ -2,8 +2,10 @@ language: java
 jdk: # jdk versions to test against - https://www.deps.co/guides/travis-ci-latest-java/
      # Open JDK support: https://adoptopenjdk.net/support.html
 - openjdk8 # LTS through at least 2023.09
-- openjdk11 # LTS through at least 2022.09
-- openjdk-ea # early release - allow failures, but be aware that there *are* errors
+# It would be nice to test these, but multiple tests mean that Travis will do multiple
+# deploys, only one of which would succeed.
+#- openjdk11 # LTS through at least 2022.09
+#- openjdk-ea # early release - allow failures, but be aware that there *are* errors
 
 matrix:
   allow_failures: # https://docs.travis-ci.com/user/build-matrix/#rows-that-are-allowed-to-fail
@@ -45,7 +47,6 @@ deploy:
 # GITHUB_PERSONAL_ACCESS_TOKEN is an environment variable set in Travis-CI
 # https://travis-ci.org/gettyimages/gettyimages-api_java/settings
 # https://stackoverflow.com/questions/33735992/travis-ci-using-repository-environment-variables-in-travis-yml
-# It must be enabled for the branch you're working on.
-  #api_key: GITHUB_PERSONAL_ACCESS_TOKEN
+# It must be enabled for the branch you're working on. NOTE: you can't use an environment variable because they're not set here.
   api_key:
     secure: pJkTcxWJUO0eJK6fH5D7Vb3BEQoc9tnKGX5pTa7n6OCqJU3qQHJVVpAphoCW5BfYQl1A7svNYGNZh7l/quzznxhBLS1HoV78AJcM4PnL1L/WuSgSIHDwOUZpZ1xctqMcZFh1+oavR4tRTk/mvcjBmUrcR1nOgctdx19i5/FzN7AlVwQZDZi80pd1Q/XnK0ID71GDQ0Zrb0w3Txi4/xHgsDbkN6By0wdCKd3slnYX6Bdd3zLSSGYmqdWWHMUgWrU8yMXwAP5G0lgksNBKv71JxBx6ZJE0QOeqvbIeIn9zLbRxHQKgbw9gJBeXHmlQBcbE+yJ5SqAfuPguSWQRs9PbCEx4GiXvgnU2G45qIBDm5d+82U+Sag+fLdl1/tktnVX7Hn6rJHGWUme/91wObvQRIV52CmV2+G3e49hR5DkNN7+yd/aL6fBTmT5wLKyabI2wf3birmlRScYtKT7uhi4pbBbolDJKubizegJB/48VhKHj6s4XujTCycorE9ucHLbgaAEDQID3inMvHy/fCH0PucAsToae+Yu+MmbSqqsu/899M2jzckCB42oWwseaFmKfGWTdrIwWkz5Bjp73f9dpcD25zo3q9gIFrbuyv2+XJMkQj2OLpTXXK84RW13YsMD8DmrEQya9rFhJsnN8uujoRBk4L9yCYy/PqfST9DV56vQ=
