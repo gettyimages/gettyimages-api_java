@@ -3,6 +3,7 @@ package com.gettyimages.api;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -12,8 +13,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
@@ -103,7 +102,7 @@ public class Credentials {
             return accessToken;
         } catch (JSONException e) {
             e.printStackTrace();
-            throw new SdkException("Unable to get access token. Probably invalid credentials.");
+            throw new HttpSystemErrorException(e);
         }
     }
 
@@ -152,7 +151,7 @@ public class Credentials {
         return dict;
     }
 
-    public String PostForm(Map<String, String> formParameters, String path) {
+    public String PostForm(Map<String, String> formParameters, String path) throws SdkException {
         try {
             URL url = new URL(baseUrl + path);
             CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -165,15 +164,23 @@ public class Credentials {
             httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 
             HttpResponse response = httpClient.execute(httpPost);
+            StatusLine statusLine = response.getStatusLine();
+            int statusCode = statusLine.getStatusCode();
+            if (statusCode >= 400 && statusCode <= 499) {
+                throw new HttpClientErrorException(statusLine);
+            } else if (statusCode >= 500 && statusCode <= 599) {
+                throw new HttpSystemErrorException(statusLine);
+            }
+
             HttpEntity responseEntity = response.getEntity();
             String content = EntityUtils.toString(responseEntity);
 
             return content;
-        } catch (MalformedURLException ex) {
-            String s = ex.toString();
-        } catch (IOException ex) {
-            String s = ex.toString();
+        } catch (SdkException e) {
+            throw e;
         }
-        return null;
+        catch (Exception e) {
+            throw new HttpSystemErrorException(e);
+        }
     }
 }
