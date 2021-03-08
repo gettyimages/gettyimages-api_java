@@ -11,7 +11,6 @@ This SDK makes using the Getty Images [API](http://developers.gettyimages.com) e
 ## Help & Support
 
 * [Getty Images API](http://developers.gettyimages.com/)
-* [Contact API Support](mailto:apisupport@gettyimages.com)
 * [Issue Tracker](https://github.com/gettyimages/gettyimages-api_java/issues)
 
 ## Minimum Requirements
@@ -20,6 +19,13 @@ This SDK makes using the Getty Images [API](http://developers.gettyimages.com) e
 * You have [Maven](https://maven.apache.org/) installed
 
 ## Getting Started
+
+### Obtain an API Key
+
+If you don't already have an API key, fill out and submit the [contact form](http://engage.gettyimages.com/api-contact) to be connected to our Sales team.
+
+### Installing the package
+
 The SDK is available on [maven central repository](https://search.maven.org/). 
 Include the following dependency in your pom.xml file:
 ```sh
