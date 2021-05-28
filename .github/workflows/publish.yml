@@ -1,0 +1,30 @@
+name: publish
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+      - name: Build with Maven
+        run: |
+          sed -i -e "s/0.0.0/${{ steps.previoustag.outputs.tag }}/" pom.xml
+          cat pom.xml
+        run: mvn --batch-mode --update-snapshots verify
+        run: mvn --batch-mode package
+      - uses: actions/upload-artifact@v1
+        with:
+          name: package
+          path: ./gettyimagesapi-sdk/target/gettyimagesapi-sdk-${{ steps.previoustag.outputs.tag }}.jar

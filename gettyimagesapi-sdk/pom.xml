@@ -4,7 +4,7 @@
 
     <groupId>com.gettyimages</groupId>
     <artifactId>gettyimagesapi-sdk</artifactId>
-    <version>3.1.3</version>
+    <version>0.0.0</version>
     <name>gettyimagesapi-sdk</name>
     <description>A SDK for Getty Images API</description>
     <url>http://api.gettyimages.com</url>
