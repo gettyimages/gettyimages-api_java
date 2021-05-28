@@ -22,9 +22,8 @@ jobs:
         run: |
           sed -i -e "s/0.0.0/${{ steps.previoustag.outputs.tag }}/" pom.xml
           cat pom.xml
-      - run: mvn --batch-mode --update-snapshots verify
-      - run: mvn --batch-mode package
+      - run: mvn --batch-mode --update-snapshots package 
       - uses: actions/upload-artifact@v1
         with:
           name: package
-          path: ./gettyimagesapi-sdk/target/gettyimagesapi-sdk-${{ steps.previoustag.outputs.tag }}.jar
+          path: ./target/gettyimagesapi-sdk-${{ steps.previoustag.outputs.tag }}.jar
