@@ -23,7 +23,7 @@
         <name>Getty Images</name>
         <url>https://gettyimages.com</url>
     </organization>
-    
+
     <scm>
         <url>https://github.com/gettyimages/gettyimages-api_java</url>
     </scm>
