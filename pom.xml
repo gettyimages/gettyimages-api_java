@@ -23,6 +23,17 @@
         <name>Getty Images</name>
         <url>https://gettyimages.com</url>
     </organization>
+    <developers>
+        <developer>
+            <id>gettyimages</id>
+            <name>Getty Images</name>
+            <email>developersupport@gettyimages.com</email>
+            <organization>Getty Images</organization>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
 
     <scm>
         <url>https://github.com/gettyimages/gettyimages-api_java</url>
