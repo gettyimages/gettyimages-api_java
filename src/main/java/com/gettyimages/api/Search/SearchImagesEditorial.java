@@ -26,6 +26,16 @@ public class SearchImagesEditorial extends AbstractApiRequest {
         return super.executeAsync();
     }
 
+    public SearchImagesEditorial withCustomHeader(String key, String value) {
+        headers.put(key, value);
+        return this;
+    }
+
+    public SearchImagesEditorial withCustomParameter(String key, String value) {
+        queryParams.put(key, value);
+        return this;
+    }
+
     public SearchImagesEditorial withAcceptLanguage(String value)
     {
         headers.put(Constants.AcceptLanguageString, value);

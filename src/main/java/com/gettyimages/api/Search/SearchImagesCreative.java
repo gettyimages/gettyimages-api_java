@@ -26,6 +26,16 @@ public class SearchImagesCreative extends AbstractApiRequest {
         return super.executeAsync();
     }
 
+    public SearchImagesCreative withCustomHeader(String key, String value) {
+        headers.put(key, value);
+        return this;
+    }
+
+    public SearchImagesCreative withCustomParameter(String key, String value) {
+        queryParams.put(key, value);
+        return this;
+    }
+
     public SearchImagesCreative withAcceptLanguage(String value)
     {
         headers.put(Constants.AcceptLanguageString, value);
