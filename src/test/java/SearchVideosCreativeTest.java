@@ -1,6 +1,7 @@
 
 import com.gettyimages.api.ApiClient;
 import com.gettyimages.api.Filters.*;
+import com.gettyimages.api.Search.SearchImagesCreative;
 import com.gettyimages.api.Search.SearchVideosCreative;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -172,6 +173,22 @@ public class SearchVideosCreativeTest {
                                 )
                 )
                 .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/creative")
+                                .withQueryStringParameters(
+                                        new Parameter("safe_search", "true")
+                                )
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/creative")
+                                .withHeader("gi-country-code", "CAN")
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
     }
 
     @Test
@@ -305,6 +322,24 @@ public class SearchVideosCreativeTest {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         SearchVideosCreative search = client.searchvideoscreative()
                 .withSortOrder(SortOrder.NEWEST);
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchVideosCreativeWithCustomParameter() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosCreative search = client.searchvideoscreative()
+                .withCustomParameter("safe_search", "true");
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchVideosCreativeWithCustomHeader() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosCreative search = client.searchvideoscreative()
+                .withCustomHeader("gi-country-code", "CAN");
         String result = search.executeAsync();
         assertEquals("success", result);
     }

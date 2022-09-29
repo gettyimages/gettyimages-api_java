@@ -244,6 +244,22 @@ public class SearchImagesCreativeTest {
                                 )
                 )
                 .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/creative")
+                                .withQueryStringParameters(
+                                        new Parameter("safe_search", "true")
+                                )
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/creative")
+                                .withHeader("gi-country-code", "CAN")
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
     }
 
     @Test
@@ -450,6 +466,24 @@ public class SearchImagesCreativeTest {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         SearchImagesCreative search = client.searchimagescreative()
                 .withSortOrder(SortOrder.NEWEST);
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchImagesCreativeWithCustomParameter() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesCreative search = client.searchimagescreative()
+                .withCustomParameter("safe_search", "true");
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchImagesCreativeWithCustomHeader() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesCreative search = client.searchimagescreative()
+                .withCustomHeader("gi-country-code", "CAN");
         String result = search.executeAsync();
         assertEquals("success", result);
     }

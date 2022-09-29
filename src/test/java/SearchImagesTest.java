@@ -2,6 +2,7 @@
 import com.gettyimages.api.ApiClient;
 import com.gettyimages.api.Filters.*;
 import com.gettyimages.api.Search.SearchImages;
+import com.gettyimages.api.Search.SearchImagesCreative;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -262,6 +263,22 @@ public class SearchImagesTest {
                                 )
                 )
                 .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images")
+                                .withQueryStringParameters(
+                                        new Parameter("include_related_searches", "true")
+                                )
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images")
+                                .withHeader("gi-country-code", "CAN")
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
     }
 
     @Test
@@ -486,6 +503,24 @@ public class SearchImagesTest {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         SearchImages search = client.searchimages()
                 .withSpecificPeople(Arrays.asList("Reggie Jackson"));
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchImagesWithCustomParameter() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImages search = client.searchimages()
+                .withCustomParameter("include_related_searches", "true");
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchImagesWithCustomHeader() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImages search = client.searchimages()
+                .withCustomHeader("gi-country-code", "CAN");
         String result = search.executeAsync();
         assertEquals("success", result);
     }

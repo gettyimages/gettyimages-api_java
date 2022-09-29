@@ -1,6 +1,7 @@
 
 import com.gettyimages.api.ApiClient;
 import com.gettyimages.api.Filters.*;
+import com.gettyimages.api.Search.SearchImagesCreative;
 import com.gettyimages.api.Search.SearchImagesEditorial;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -289,6 +290,22 @@ public class SearchImagesEditorialTest {
                                 )
                 )
                 .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("include_related_searches", "true")
+                                )
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withHeader("gi-country-code", "CAN")
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
     }
 
     @Test
@@ -541,6 +558,24 @@ public class SearchImagesEditorialTest {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         SearchImagesEditorial search = client.searchimageseditorial()
                 .withStartDate("2015-04-01");
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchImagesEditorialWithCustomParameter() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withCustomParameter("include_related_searches", "true");
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchImagesEditorialWithCustomHeader() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchImagesEditorial search = client.searchimageseditorial()
+                .withCustomHeader("gi-country-code", "CAN");
         String result = search.executeAsync();
         assertEquals("success", result);
     }

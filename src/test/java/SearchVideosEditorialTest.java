@@ -1,6 +1,7 @@
 
 import com.gettyimages.api.ApiClient;
 import com.gettyimages.api.Filters.*;
+import com.gettyimages.api.Search.SearchVideos;
 import com.gettyimages.api.Search.SearchVideosEditorial;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -190,6 +191,22 @@ public class SearchVideosEditorialTest {
                                 )
                 )
                 .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("include_related_searches", "true")
+                                )
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withHeader("gi-country-code", "CAN")
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
     }
 
     @Test
@@ -341,6 +358,24 @@ public class SearchVideosEditorialTest {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withSpecificPeople(Arrays.asList("Reggie Jackson"));
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchVideosEditorialWithCustomParameter() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosEditorial search = client.searchvideoseditorial()
+                .withCustomParameter("include_related_searches", "true");
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchVideosEditorialWithCustomHeader() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosEditorial search = client.searchvideoseditorial()
+                .withCustomHeader("gi-country-code", "CAN");
         String result = search.executeAsync();
         assertEquals("success", result);
     }
