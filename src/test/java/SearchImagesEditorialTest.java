@@ -28,10 +28,6 @@ public class SearchImagesEditorialTest {
         field.setAccessible(true);
         field.set(null, "http://127.0.0.1:1080/");
         mockServer = startClientAndServer(1080);
-    }
-
-    @BeforeEach
-    public void createMock(){
         MockServerClient client = new MockServerClient("127.0.0.1", 1080);
 
         client
@@ -44,254 +40,254 @@ public class SearchImagesEditorialTest {
                         .withBody("{ access_token: 'client_credentials_access_token', token_type: 'Bearer', expires_in: '1800' }")
                 );
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withHeader("Accept-Language", "de")
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withHeader("Accept-Language", "de")
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("age_of_people", "baby,child,adult")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("age_of_people", "baby,child,adult")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("artists", "roman makhmutov")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("artists", "roman makhmutov")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("collection_codes", "WRI,ARF")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("collection_codes", "WRI,ARF")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("collections_filter_type", "exclude")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("collections_filter_type", "exclude")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("compositions", "abstract,headshot")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("compositions", "abstract,headshot")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("editorial_segments", "archival,publicity")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("editorial_segments", "archival,publicity")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("embed_content_only", "true")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("embed_content_only", "true")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("end_date", "2015-04-01")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("end_date", "2015-04-01")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("entity_uris", "uri1,uri2")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("entity_uris", "uri1,uri2")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("ethnicity", "black,japanese")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("ethnicity", "black,japanese")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("event_ids", "123,456,789")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("event_ids", "123,456,789")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("exclude_nudity", "true")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("exclude_nudity", "true")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("fields", "asset_family,id,uri_oembed")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("fields", "asset_family,id,uri_oembed")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("file_types", "eps,jpg")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("file_types", "eps,jpg")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("graphical_styles", "fine_art,illustration")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("graphical_styles", "fine_art,illustration")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("keyword_ids", "1111,2222,3333")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("keyword_ids", "1111,2222,3333")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("minimum_quality_rank", "1")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("minimum_quality_rank", "1")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("minimum_size", "small")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("minimum_size", "small")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("number_of_people", "one,group")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("number_of_people", "one,group")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("orientations", "Horizontal,Square")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("orientations", "Horizontal,Square")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("page", "3")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("page", "3")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("page_size", "50")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("page_size", "50")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("phrase", "cat")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("phrase", "cat")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("product_types", "easyaccess,editorialsubscription")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("product_types", "easyaccess,editorialsubscription")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("sort_order", "newest")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("sort_order", "newest")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("specific_people", "Reggie Jackson")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("specific_people", "Reggie Jackson")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("start_date", "2015-04-01")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("start_date", "2015-04-01")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
     }
 
