@@ -26,6 +26,16 @@ public class SearchImages extends AbstractApiRequest {
         return super.executeAsync();
     }
 
+    public SearchImages withCustomHeader(String key, String value) {
+        headers.put(key, value);
+        return this;
+    }
+
+    public SearchImages withCustomParameter(String key, String value) {
+        queryParams.put(key, value);
+        return this;
+    }
+
     public SearchImages withAcceptLanguage(String value)
     {
         headers.put(Constants.AcceptLanguageString, value);

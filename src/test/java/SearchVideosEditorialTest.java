@@ -1,6 +1,7 @@
 
 import com.gettyimages.api.ApiClient;
 import com.gettyimages.api.Filters.*;
+import com.gettyimages.api.Search.SearchVideos;
 import com.gettyimages.api.Search.SearchVideosEditorial;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -28,10 +29,6 @@ public class SearchVideosEditorialTest {
         field.setAccessible(true);
         field.set(null, "http://127.0.0.1:1080/");
         mockServer = startClientAndServer(1080);
-    }
-
-    @BeforeEach
-    public void createMock(){
         MockServerClient client = new MockServerClient("127.0.0.1", 1080);
 
         client
@@ -44,155 +41,171 @@ public class SearchVideosEditorialTest {
                         .withBody("{ access_token: 'client_credentials_access_token', token_type: 'Bearer', expires_in: '1800' }")
                 );
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withHeader("Accept-Language", "de")
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withHeader("Accept-Language", "de")
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("age_of_people", "baby,child,adult")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("age_of_people", "baby,child,adult")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("collection_codes", "WRI,ARF")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("collection_codes", "WRI,ARF")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("collections_filter_type", "exclude")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("collections_filter_type", "exclude")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("editorial_video_types", "raw,produced")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("editorial_video_types", "raw,produced")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("entity_uris", "uri1,uri2")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("entity_uris", "uri1,uri2")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("exclude_nudity", "true")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("exclude_nudity", "true")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("fields", "asset_family,id,uri_oembed")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("fields", "asset_family,id,uri_oembed")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("format_available", "hd")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("format_available", "hd")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("frame_rates", "24,29.97")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("frame_rates", "24,29.97")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("keyword_ids", "1111,2222,3333")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("keyword_ids", "1111,2222,3333")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("page", "3")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("page", "3")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("page_size", "50")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("page_size", "50")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("phrase", "cat")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("phrase", "cat")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("product_types", "easyaccess,editorialsubscription")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("product_types", "easyaccess,editorialsubscription")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("sort_order", "newest")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("sort_order", "newest")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/videos/editorial")
-                        .withQueryStringParameters(
-                                new Parameter("specific_people", "Reggie Jackson")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("specific_people", "Reggie Jackson")
+                                )
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withQueryStringParameters(
+                                        new Parameter("include_related_searches", "true")
+                                )
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/videos/editorial")
+                                .withHeader("gi-country-code", "CAN")
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
     }
 
@@ -345,6 +358,24 @@ public class SearchVideosEditorialTest {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         SearchVideosEditorial search = client.searchvideoseditorial()
                 .withSpecificPeople(Arrays.asList("Reggie Jackson"));
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchVideosEditorialWithCustomParameter() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosEditorial search = client.searchvideoseditorial()
+                .withCustomParameter("include_related_searches", "true");
+        String result = search.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void searchVideosEditorialWithCustomHeader() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        SearchVideosEditorial search = client.searchvideoseditorial()
+                .withCustomHeader("gi-country-code", "CAN");
         String result = search.executeAsync();
         assertEquals("success", result);
     }

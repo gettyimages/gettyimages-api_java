@@ -28,10 +28,6 @@ public class DownloadImagesTest {
         field.setAccessible(true);
         field.set(null, "http://127.0.0.1:1080/");
         mockServer = startClientAndServer(1080);
-    }
-
-    @BeforeEach
-    public void createMock(){
         MockServerClient client = new MockServerClient("127.0.0.1", 1080);
 
         client
@@ -44,54 +40,54 @@ public class DownloadImagesTest {
                         .withBody("{ access_token: 'client_credentials_access_token', token_type: 'Bearer', expires_in: '1800' }")
                 );
         client.when(
-                request()
-                        .withMethod("POST")
-                        .withPath("/downloads/images/12345")
-                        .withQueryStringParameters(
-                                new Parameter("auto_download", "false")
-                        )
-                        .withHeader("Accept-Language", "de")
-        )
+                        request()
+                                .withMethod("POST")
+                                .withPath("/downloads/images/12345")
+                                .withQueryStringParameters(
+                                        new Parameter("auto_download", "false")
+                                )
+                                .withHeader("Accept-Language", "de")
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("POST")
-                        .withPath("/downloads/images/12345")
-                        .withQueryStringParameters(
-                                new Parameter("file_type", "jpg"),
-                                new Parameter("auto_download", "false")
-                        )
-        )
+                        request()
+                                .withMethod("POST")
+                                .withPath("/downloads/images/12345")
+                                .withQueryStringParameters(
+                                        new Parameter("file_type", "jpg"),
+                                        new Parameter("auto_download", "false")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("POST")
-                        .withPath("/downloads/images/12345")
-                        .withQueryStringParameters(
-                                new Parameter("auto_download", "false"),
-                                new Parameter("height", "592")
-                        )
-        )
+                        request()
+                                .withMethod("POST")
+                                .withPath("/downloads/images/12345")
+                                .withQueryStringParameters(
+                                        new Parameter("auto_download", "false"),
+                                        new Parameter("height", "592")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("POST")
-                        .withPath("/downloads/images/12345")
-                        .withQueryStringParameters(
-                                new Parameter("product_id", "9876"),
-                                new Parameter("auto_download", "false")
-                        )
-        )
+                        request()
+                                .withMethod("POST")
+                                .withPath("/downloads/images/12345")
+                                .withQueryStringParameters(
+                                        new Parameter("product_id", "9876"),
+                                        new Parameter("auto_download", "false")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("POST")
-                        .withPath("/downloads/images/12345")
-                        .withQueryStringParameters(
-                                new Parameter("product_type", "easyaccess"),
-                                new Parameter("auto_download", "false")
-                        )
-        )
+                        request()
+                                .withMethod("POST")
+                                .withPath("/downloads/images/12345")
+                                .withQueryStringParameters(
+                                        new Parameter("product_type", "easyaccess"),
+                                        new Parameter("auto_download", "false")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
 
     }

@@ -92,6 +92,29 @@ $ mvn install
         }
 ```
 
+### Search creative images with phrase, custom parameter, and customer header
+```java
+        String apiKey = "API Key";
+        String apiSecret = "API Secret";
+        String userName = "Username";
+        String userPassword = "Password";
+
+        ApiClient client = ApiClient.GetApiClientWithResourceOwnerCredentials(apiKey, apiSecret, userName, userPassword);
+
+      try {
+            SearchImagesCreative search = client.searchimagescreative()
+                    .withPhrase("cat")
+                    .withCustomParameter("safe_search", "true")
+                    .withCustomHeader("gi-country-code", "CAN");
+            String result = search.executeAsync();
+            System.out.print(result);
+
+        } catch (SdkException e) {
+            System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
+            System.exit(-1);
+        }
+```
+
 ### Custom Request to search images with phrase, fields, and age of people
 
 ```java

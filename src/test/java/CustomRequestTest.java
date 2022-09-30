@@ -37,10 +37,6 @@ public class CustomRequestTest {
         field.setAccessible(true);
         field.set(null, "http://127.0.0.1:1080/");
         mockServer = startClientAndServer(1080);
-    }
-
-    @BeforeEach
-    public void createMock(){
         MockServerClient client = new MockServerClient("127.0.0.1", 1080);
 
         client
@@ -53,81 +49,80 @@ public class CustomRequestTest {
                         .withBody("{ access_token: 'client_credentials_access_token', token_type: 'Bearer', expires_in: '1800' }")
                 );
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images")
-                        .withQueryStringParameters(
-                                new Parameter("phrase", "cat"),
-                                new Parameter("compositions", "abstract,full_frame")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("POST")
-                        .withPath("/downloads/images/12345")
-                        .withQueryStringParameters(
-                                new Parameter("auto_download", "false")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("POST")
-                        .withPath("/boards")
-                        .withBody(
-                                json("{" + System.lineSeparator() +
-                                        "   \"name\": \"new board\"," + System.lineSeparator() +
-                                        "   \"description\": \"new description\"" + System.lineSeparator() +
-                                        "}",
-                                    MatchType.STRICT
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images")
+                                .withQueryStringParameters(
+                                        new Parameter("phrase", "cat"),
+                                        new Parameter("compositions", "abstract,full_frame")
                                 )
-                        )
-        )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("PUT")
-                        .withPath("/asset-changes/change-sets")
-                        .withQueryStringParameters(
-                                new Parameter("channel_id", "3")
-                        )
-        )
-                .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
-                request()
-                        .withMethod("PUT")
-                        .withPath("/boards/111")
-                        .withBody(
-                                json("{" + System.lineSeparator() +
-                                                "   \"name\": \"new board\"," + System.lineSeparator() +
-                                                "   \"description\": \"new description\"" + System.lineSeparator() +
-                                                "}",
-                                        MatchType.STRICT
+                        request()
+                                .withMethod("POST")
+                                .withPath("/downloads/images/12345")
+                                .withQueryStringParameters(
+                                        new Parameter("auto_download", "false")
                                 )
-                        )
-        )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("DELETE")
-                        .withPath("/boards/333")
-                        .withQueryStringParameters(
-                                new Parameter("asset_ids", "1234,5678")
-                        )
-        )
+                        request()
+                                .withMethod("POST")
+                                .withPath("/boards")
+                                .withBody(
+                                        json("{" + System.lineSeparator() +
+                                                        "   \"name\": \"new board\"," + System.lineSeparator() +
+                                                        "   \"description\": \"new description\"" + System.lineSeparator() +
+                                                        "}",
+                                                MatchType.STRICT
+                                        )
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/search/images")
-                        .withQueryStringParameters(
-                                new Parameter("phrase", "cat")
-                        )
-                        .withHeader("Accept-Language", "de")
-        )
+                        request()
+                                .withMethod("PUT")
+                                .withPath("/asset-changes/change-sets")
+                                .withQueryStringParameters(
+                                        new Parameter("channel_id", "3")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
-
+        client.when(
+                        request()
+                                .withMethod("PUT")
+                                .withPath("/boards/111")
+                                .withBody(
+                                        json("{" + System.lineSeparator() +
+                                                        "   \"name\": \"new board\"," + System.lineSeparator() +
+                                                        "   \"description\": \"new description\"" + System.lineSeparator() +
+                                                        "}",
+                                                MatchType.STRICT
+                                        )
+                                )
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("DELETE")
+                                .withPath("/boards/333")
+                                .withQueryStringParameters(
+                                        new Parameter("asset_ids", "1234,5678")
+                                )
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/search/images")
+                                .withQueryStringParameters(
+                                        new Parameter("phrase", "cat")
+                                )
+                                .withHeader("Accept-Language", "de")
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
     }
 
     @Test

@@ -27,10 +27,6 @@ public class VideosTest {
         field.setAccessible(true);
         field.set(null, "http://127.0.0.1:1080/");
         mockServer = startClientAndServer(1080);
-    }
-
-    @BeforeEach
-    public void createMock(){
         MockServerClient client = new MockServerClient("127.0.0.1", 1080);
 
         client
@@ -43,29 +39,29 @@ public class VideosTest {
                         .withBody("{ access_token: 'client_credentials_access_token', token_type: 'Bearer', expires_in: '1800' }")
                 );
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/videos/12345")
-                        .withHeader("Accept-Language", "de")
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/videos/12345")
+                                .withHeader("Accept-Language", "de")
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/videos/12345")
-                        .withQueryStringParameters(
-                                new Parameter("fields", "country,id")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/videos/12345")
+                                .withQueryStringParameters(
+                                        new Parameter("fields", "country,id")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
         client.when(
-                request()
-                        .withMethod("GET")
-                        .withPath("/videos")
-                        .withQueryStringParameters(
-                                new Parameter("ids", "12345,678910")
-                        )
-        )
+                        request()
+                                .withMethod("GET")
+                                .withPath("/videos")
+                                .withQueryStringParameters(
+                                        new Parameter("ids", "12345,678910")
+                                )
+                )
                 .respond(response().withStatusCode(200).withBody("success"));
 
     }

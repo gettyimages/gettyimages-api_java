@@ -26,6 +26,16 @@ public class SearchVideos extends AbstractApiRequest {
         return super.executeAsync();
     }
 
+    public SearchVideos withCustomHeader(String key, String value) {
+        headers.put(key, value);
+        return this;
+    }
+
+    public SearchVideos withCustomParameter(String key, String value) {
+        queryParams.put(key, value);
+        return this;
+    }
+
     public SearchVideos withAcceptLanguage(String value)
     {
         headers.put(Constants.AcceptLanguageString, value);
