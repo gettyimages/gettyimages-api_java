@@ -6,7 +6,6 @@ import com.gettyimages.api.Filters.FileType;
 import com.gettyimages.api.Filters.ProductType;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockserver.client.server.MockServerClient;
 import org.mockserver.integration.ClientAndServer;
@@ -44,7 +43,7 @@ public class DownloadImagesTest {
                                 .withMethod("POST")
                                 .withPath("/downloads/images/12345")
                                 .withQueryStringParameters(
-                                        new Parameter("auto_download", "false")
+                                        new Parameter("auto_download", "true")
                                 )
                                 .withHeader("Accept-Language", "de")
                 )
@@ -55,7 +54,7 @@ public class DownloadImagesTest {
                                 .withPath("/downloads/images/12345")
                                 .withQueryStringParameters(
                                         new Parameter("file_type", "jpg"),
-                                        new Parameter("auto_download", "false")
+                                        new Parameter("auto_download", "true")
                                 )
                 )
                 .respond(response().withStatusCode(200).withBody("success"));
@@ -64,7 +63,7 @@ public class DownloadImagesTest {
                                 .withMethod("POST")
                                 .withPath("/downloads/images/12345")
                                 .withQueryStringParameters(
-                                        new Parameter("auto_download", "false"),
+                                        new Parameter("auto_download", "true"),
                                         new Parameter("height", "592")
                                 )
                 )
@@ -75,7 +74,7 @@ public class DownloadImagesTest {
                                 .withPath("/downloads/images/12345")
                                 .withQueryStringParameters(
                                         new Parameter("product_id", "9876"),
-                                        new Parameter("auto_download", "false")
+                                        new Parameter("auto_download", "true")
                                 )
                 )
                 .respond(response().withStatusCode(200).withBody("success"));
@@ -85,6 +84,15 @@ public class DownloadImagesTest {
                                 .withPath("/downloads/images/12345")
                                 .withQueryStringParameters(
                                         new Parameter("product_type", "easyaccess"),
+                                        new Parameter("auto_download", "true")
+                                )
+                )
+                .respond(response().withStatusCode(200).withBody("success"));
+        client.when(
+                        request()
+                                .withMethod("POST")
+                                .withPath("/downloads/images/12345")
+                                .withQueryStringParameters(
                                         new Parameter("auto_download", "false")
                                 )
                 )
@@ -133,6 +141,15 @@ public class DownloadImagesTest {
         ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
         DownloadImages downloadimages = client.downloadimages()
                 .withId("12345").withProductType(ProductType.EASYACCESS);
+        String result = downloadimages.executeAsync();
+        assertEquals("success", result);
+    }
+
+    @Test
+    void downloadImagesWithDisabledAutoDownload() throws Exception {
+        ApiClient client = ApiClient.GetApiClientWithClientCredentials("apiKey", "apiSecret");
+        DownloadImages downloadimages = client.downloadimages()
+                .withId("12345").withAutoDownload(false);
         String result = downloadimages.executeAsync();
         assertEquals("success", result);
     }

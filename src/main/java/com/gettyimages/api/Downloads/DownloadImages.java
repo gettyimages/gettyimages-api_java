@@ -29,7 +29,7 @@ public class DownloadImages extends AbstractApiRequest {
             throw new SdkException(MustSpecifyAtLeastOneImageIdMessage);
         }
 
-        queryParams.put(Constants.AutoDownloadParameterName, false);
+        queryParams.putIfAbsent(Constants.AutoDownloadParameterName, true);
 
         method = "POST";
         path = DownloadsPathString + assetId;
@@ -70,6 +70,12 @@ public class DownloadImages extends AbstractApiRequest {
     public DownloadImages withProductType(ProductType value)
     {
         queryParams.put(Constants.ProductTypeParameterName, value);
+        return this;
+    }
+
+    public DownloadImages withAutoDownload(Boolean autoDownload)
+    {
+        queryParams.put(Constants.AutoDownloadParameterName, autoDownload);
         return this;
     }
 }
