@@ -11,8 +11,8 @@ import static org.mockserver.model.HttpResponse.response;
 public class TestBase {
     private ClientAndServer apiServerMock;
     protected MockServerClient apiClientMock;
-    private ClientAndServer authServerMock;
-    private MockServerClient authClientMock;
+    protected ClientAndServer authServerMock;
+    protected MockServerClient authClientMock;
 
     protected void startMockServersAndSetupAuth() throws Exception {
         startMockServers();

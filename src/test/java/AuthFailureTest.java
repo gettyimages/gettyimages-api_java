@@ -50,12 +50,10 @@ public class AuthFailureTest extends TestBase {
     }
 
     private void createMock(final int statusCode) {
-            final MockServerClient client = new MockServerClient("127.0.0.1", 1081);
-
-            client.when(request().withMethod("POST").withPath("/oauth2/token"))
-                            .respond(response().withStatusCode(statusCode));
-            client.when(request().withMethod("GET").withPath("/search/images")
-                            .withQueryStringParameters(new Parameter("phrase", "cat")))
-                            .respond(response().withStatusCode(200).withBody("success"));
+        authClientMock.when(request().withMethod("POST").withPath("/oauth2/token"))
+                      .respond(response().withStatusCode(statusCode));
+        apiClientMock.when(request().withMethod("GET").withPath("/search/images")
+                     .withQueryStringParameters(new Parameter("phrase", "cat")))
+                     .respond(response().withStatusCode(200).withBody("success"));
     }
 }
