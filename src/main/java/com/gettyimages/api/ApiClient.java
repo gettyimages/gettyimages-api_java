@@ -14,14 +14,15 @@ public class ApiClient {
     public static String Version="2.1.1";
     private String Slash = "/";
     private Credentials credentials;
-    private static String baseUrl = "https://api.gettyimages.com/v3";
+    private static String apiBaseUrl = "https://api.gettyimages.com/v3";
+    private static String authenticationBaseUrl = "https://authentication.gettyimages.com";
 
     private ApiClient(String apiKey, String apiSecret) {
-        credentials = Credentials.GetInstance(apiKey, apiSecret, GetOAuthBaseUrl());
+        credentials = Credentials.GetInstance(apiKey, apiSecret, authenticationBaseUrl);
     }
 
     private ApiClient(String apiKey, String apiSecret, String userName, String userPassword) {
-        credentials = Credentials.GetInstance(apiKey, apiSecret, userName, userPassword, GetOAuthBaseUrl());
+        credentials = Credentials.GetInstance(apiKey, apiSecret, userName, userPassword, authenticationBaseUrl);
     }
 
     public static ApiClient GetApiClientWithClientCredentials(String apiKey, String apiSecret)
@@ -34,54 +35,49 @@ public class ApiClient {
         return new ApiClient(apiKey, apiSecret, userName, password);
     }
 
-    private String GetOAuthBaseUrl() {
-        String oAuthBaseUrl = baseUrl.substring(0, baseUrl.lastIndexOf(Slash));
-        return oAuthBaseUrl;
-    }
-
     public Images images()
     {
-        return Images.GetInstance(credentials, baseUrl);
+        return Images.GetInstance(credentials, apiBaseUrl);
     }
 
     public Videos videos()
     {
-        return Videos.GetInstance(credentials, baseUrl);
+        return Videos.GetInstance(credentials, apiBaseUrl);
     }
 
     public SearchImages searchimages() {
-        return SearchImages.GetInstance(credentials, baseUrl);
+        return SearchImages.GetInstance(credentials, apiBaseUrl);
     }
 
     public SearchImagesCreative searchimagescreative() {
-        return SearchImagesCreative.GetInstance(credentials, baseUrl);
+        return SearchImagesCreative.GetInstance(credentials, apiBaseUrl);
     }
 
     public SearchImagesEditorial searchimageseditorial() {
-        return SearchImagesEditorial.GetInstance(credentials, baseUrl);
+        return SearchImagesEditorial.GetInstance(credentials, apiBaseUrl);
     }
 
     public SearchVideos searchvideos() {
-        return SearchVideos.GetInstance(credentials, baseUrl);
+        return SearchVideos.GetInstance(credentials, apiBaseUrl);
     }
 
     public SearchVideosCreative searchvideoscreative() {
-        return SearchVideosCreative.GetInstance(credentials, baseUrl);
+        return SearchVideosCreative.GetInstance(credentials, apiBaseUrl);
     }
 
     public SearchVideosEditorial searchvideoseditorial() {
-        return SearchVideosEditorial.GetInstance(credentials, baseUrl);
+        return SearchVideosEditorial.GetInstance(credentials, apiBaseUrl);
     }
 
     public DownloadVideos downloadvideos() {
-        return DownloadVideos.GetInstance(credentials, baseUrl);
+        return DownloadVideos.GetInstance(credentials, apiBaseUrl);
     }
 
     public DownloadImages downloadimages() {
-        return DownloadImages.GetInstance(credentials, baseUrl);
+        return DownloadImages.GetInstance(credentials, apiBaseUrl);
     }
 
     public CustomRequest customrequest() {
-        return CustomRequest.GetInstance(credentials, baseUrl);
+        return CustomRequest.GetInstance(credentials, apiBaseUrl);
     }
 }

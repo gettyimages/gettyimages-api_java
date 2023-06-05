@@ -1,10 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
-
-import java.lang.reflect.Field;
 
 import com.gettyimages.api.ApiClient;
 import com.gettyimages.api.HttpClientErrorException;
@@ -15,18 +12,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockserver.client.server.MockServerClient;
-import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.Parameter;
 
-public class AuthFailureTest {
-    private ClientAndServer mockServer;
-
+public class AuthFailureTest extends TestBase {
     @BeforeEach
     public void startProxy() throws Exception {
-            final Field field = ApiClient.class.getDeclaredField("baseUrl");
-            field.setAccessible(true);
-            field.set(null, "http://127.0.0.1:1080/");
-            mockServer = startClientAndServer(1080);
+        startMockServers();
     }
 
     @Test
@@ -38,7 +29,7 @@ public class AuthFailureTest {
                 .withPhrase("cat");
 
         final HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () -> { search.executeAsync(); } );
-        assertEquals(exception.getStatusCode(), statusCode);
+        assertEquals(statusCode, exception.getStatusCode());
     }
 
     @Test
@@ -50,17 +41,14 @@ public class AuthFailureTest {
                 .withPhrase("cat");
 
         final HttpSystemErrorException exception = assertThrows(HttpSystemErrorException.class, () -> { search.executeAsync(); } );
-        assertEquals(exception.getStatusCode(), statusCode);
+        assertEquals(statusCode, exception.getStatusCode());
     }
-
 
     @AfterEach
-    public void stopProxy() {
-        mockServer.stop();
-    }
+    public void stopProxy() { stopMockServers(); }
 
     private void createMock(final int statusCode) {
-            final MockServerClient client = new MockServerClient("127.0.0.1", 1080);
+            final MockServerClient client = new MockServerClient("127.0.0.1", 1081);
 
             client.when(request().withMethod("POST").withPath("/oauth2/token"))
                             .respond(response().withStatusCode(statusCode));

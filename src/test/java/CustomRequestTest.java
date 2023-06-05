@@ -6,16 +6,10 @@ import com.gettyimages.api.Filters.Compositions;
 
 import org.apache.http.entity.ByteArrayEntity;
 import org.json.JSONObject;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockserver.client.server.MockServerClient;
-import org.mockserver.integration.ClientAndServer;
+import org.junit.jupiter.api.*;
 import org.mockserver.matchers.MatchType;
 import org.mockserver.model.Parameter;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -23,32 +17,17 @@ import java.util.Map;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 import static org.mockserver.model.JsonBody.json;
 
-public class CustomRequestTest {
-    private static ClientAndServer mockServer;
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+public class CustomRequestTest extends TestBase {
     @BeforeAll
-    public static void startProxy() throws Exception {
-        Field field = ApiClient.class.getDeclaredField("baseUrl");
-        field.setAccessible(true);
-        field.set(null, "http://127.0.0.1:1080/");
-        mockServer = startClientAndServer(1080);
-        MockServerClient client = new MockServerClient("127.0.0.1", 1080);
+    public void startProxy() throws Exception {
+        startMockServersAndSetupAuth();
 
-        client
-                .when(request()
-                        .withMethod("POST")
-                        .withPath("/oauth2/token")
-                )
-                .respond(response()
-                        .withStatusCode(200)
-                        .withBody("{ access_token: 'client_credentials_access_token', token_type: 'Bearer', expires_in: '1800' }")
-                );
-        client.when(
+        apiClientMock.when(
                         request()
                                 .withMethod("GET")
                                 .withPath("/search/images")
@@ -58,7 +37,7 @@ public class CustomRequestTest {
                                 )
                 )
                 .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
+        apiClientMock.when(
                         request()
                                 .withMethod("POST")
                                 .withPath("/downloads/images/12345")
@@ -67,7 +46,7 @@ public class CustomRequestTest {
                                 )
                 )
                 .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
+        apiClientMock.when(
                         request()
                                 .withMethod("POST")
                                 .withPath("/boards")
@@ -81,7 +60,7 @@ public class CustomRequestTest {
                                 )
                 )
                 .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
+        apiClientMock.when(
                         request()
                                 .withMethod("PUT")
                                 .withPath("/asset-changes/change-sets")
@@ -90,7 +69,7 @@ public class CustomRequestTest {
                                 )
                 )
                 .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
+        apiClientMock.when(
                         request()
                                 .withMethod("PUT")
                                 .withPath("/boards/111")
@@ -104,7 +83,7 @@ public class CustomRequestTest {
                                 )
                 )
                 .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
+        apiClientMock.when(
                         request()
                                 .withMethod("DELETE")
                                 .withPath("/boards/333")
@@ -113,7 +92,7 @@ public class CustomRequestTest {
                                 )
                 )
                 .respond(response().withStatusCode(200).withBody("success"));
-        client.when(
+        apiClientMock.when(
                         request()
                                 .withMethod("GET")
                                 .withPath("/search/images")
@@ -231,9 +210,6 @@ public class CustomRequestTest {
         assertEquals("success", result);
     }
 
-
     @AfterAll
-    public static void stopProxy() {
-        mockServer.stop();
-    }
+    public void stopProxy() { stopMockServers(); }
 }
