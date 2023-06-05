@@ -46,102 +46,94 @@ $ mvn install
 ### Search creative images with phrase, age of people, and page
 
 ```java
-        String apiKey = "API Key";
-        String apiSecret = "API Secret";
-        String userName = "Username";
-        String userPassword = "Password";
+String apiKey = "API Key";
+String apiSecret = "API Secret";
 
-        ApiClient client = ApiClient.GetApiClientWithResourceOwnerCredentials(apiKey, apiSecret, userName, userPassword);
+ApiClient client = ApiClient.GetApiClientWithClientCredentials(apiKey, apiSecret);
 
-      try {
-            SearchImagesCreative search = client.searchimagescreative()
-                    .withPhrase("cat")
-                    .withAgeOfPeople(EnumSet.of(AgeOfPeople.CHILD, AgeOfPeople.BABY,AgeOfPeople.ADULT))
-                    .withPage(3);
-            String result = search.executeAsync();
-            System.out.print(result);
+try {
+    SearchImagesCreative search = client.searchimagescreative()
+            .withPhrase("cat")
+            .withAgeOfPeople(EnumSet.of(AgeOfPeople.CHILD, AgeOfPeople.BABY,AgeOfPeople.ADULT))
+            .withPage(3);
+    String result = search.executeAsync();
+    System.out.print(result);
 
-        } catch (SdkException e) {
-            System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
-            System.exit(-1);
-        }
+} catch (SdkException e) {
+    System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
+    System.exit(-1);
+}
 ```
 
 ### Search editorial videos with phrase, fields, format available, and exclude nudity
 
 ```java
-        String apiKey = "API Key";
-        String apiSecret = "API Secret";
-        String userName = "Username";
-        String userPassword = "Password";
+String apiKey = "API Key";
+String apiSecret = "API Secret";
 
-        ApiClient client = ApiClient.GetApiClientWithResourceOwnerCredentials(apiKey, apiSecret, userName, userPassword);
+ApiClient client = ApiClient.GetApiClientWithClientCredentials(apiKey, apiSecret);
 
-        try {
-            SearchVideosEditorial search = client.searchvideoseditorial()
-                    .withPhrase("cat")
-                    .withResponseFields(Arrays.asList("allowed_use","caption"))
-                    .withFormatAvailable(FormatAvailable.HD)
-                    .withExcludeNudity(true);
-            String result = search.executeAsync();
-            System.out.print(result);
+try {
+    SearchVideosEditorial search = client.searchvideoseditorial()
+            .withPhrase("cat")
+            .withResponseFields(Arrays.asList("allowed_use","caption"))
+            .withFormatAvailable(FormatAvailable.HD)
+            .withExcludeNudity(true);
+    String result = search.executeAsync();
+    System.out.print(result);
 
-        } catch (SdkException e) {
-            System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
-            System.exit(-1);
-        }
+} catch (SdkException e) {
+    System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
+    System.exit(-1);
+}
 ```
 
 ### Search creative images with phrase, custom parameter, and customer header
 ```java
-        String apiKey = "API Key";
-        String apiSecret = "API Secret";
-        String userName = "Username";
-        String userPassword = "Password";
+String apiKey = "API Key";
+String apiSecret = "API Secret";
 
-        ApiClient client = ApiClient.GetApiClientWithResourceOwnerCredentials(apiKey, apiSecret, userName, userPassword);
+ApiClient client = ApiClient.GetApiClientWithClientCredentials(apiKey, apiSecret);
 
-      try {
-            SearchImagesCreative search = client.searchimagescreative()
-                    .withPhrase("cat")
-                    .withCustomParameter("safe_search", "true")
-                    .withCustomHeader("gi-country-code", "CAN");
-            String result = search.executeAsync();
-            System.out.print(result);
+try {
+    SearchImagesCreative search = client.searchimagescreative()
+            .withPhrase("cat")
+            .withCustomParameter("safe_search", "true")
+            .withCustomHeader("gi-country-code", "CAN");
+    String result = search.executeAsync();
+    System.out.print(result);
 
-        } catch (SdkException e) {
-            System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
-            System.exit(-1);
-        }
+} catch (SdkException e) {
+    System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
+    System.exit(-1);
+}
 ```
 
 ### Custom Request to search images with phrase, fields, and age of people
 
 ```java
-        String apiKey = "API Key";
-        String apiSecret = "API Secret";
-        String userName = "Username";
-        String userPassword = "Password";
+String apiKey = "API Key";
+String apiSecret = "API Secret";
 
-        ApiClient client = ApiClient.GetApiClientWithResourceOwnerCredentials(apiKey, apiSecret, userName, userPassword);
+ApiClient client = ApiClient.GetApiClientWithClientCredentials(apiKey, apiSecret);
 
-         Map params = new HashMap();
-         params.put("phrase", "cat");
-         params.put("fields", Arrays.asList("artist", "id"));
-         params.put("age_of_people", EnumSet.of(AgeOfPeople.NEWBORN,AgeOfPeople.BABY,AgeOfPeople.CHILD));
+ Map params = new HashMap();
+ params.put("phrase", "cat");
+ params.put("fields", Arrays.asList("artist", "id"));
+ params.put("age_of_people", EnumSet.of(AgeOfPeople.NEWBORN,AgeOfPeople.BABY,AgeOfPeople.CHILD));
 
-         try {
-             CustomRequest search = client.customrequest()
-                     .withMethod("GET")
-                     .withRoute("/search/images")
-                     .withQueryParameters(params);
-             String result = search.executeAsync();
-             System.out.print(result);
+ try {
+     CustomRequest search = client.customrequest()
+             .withMethod("GET")
+             .withRoute("/search/images")
+             .withQueryParameters(params);
+     String result = search.executeAsync();
+     System.out.print(result);
 
-         } catch (SdkException e) {
-             System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
-             System.exit(-1);
-         }
+ } catch (SdkException e) {
+     System.out.println("Exception occurred while searching for creative images: " + e.getLocalizedMessage());
+     System.exit(-1);
+ }
 ```
 
 For more examples, see unittests package.
