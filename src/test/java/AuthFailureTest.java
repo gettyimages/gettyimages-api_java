@@ -45,7 +45,9 @@ public class AuthFailureTest extends TestBase {
     }
 
     @AfterEach
-    public void stopProxy() { stopMockServers(); }
+    public void stopProxy() {
+        stopMockServers();
+    }
 
     private void createMock(final int statusCode) {
             final MockServerClient client = new MockServerClient("127.0.0.1", 1081);

@@ -361,5 +361,7 @@ public class SearchVideosTest extends TestBase {
     }
 
     @AfterAll
-    public void stopProxy() { stopMockServers(); }
+    public void stopProxy() {
+        stopMockServers();
+    }
 }

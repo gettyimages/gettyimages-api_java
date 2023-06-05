@@ -117,5 +117,7 @@ public class DownloadImagesTest extends TestBase {
 
 
     @AfterAll
-    public void stopProxy() { stopMockServers(); }
+    public void stopProxy() {
+        stopMockServers();
+    }
 }
