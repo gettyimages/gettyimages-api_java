@@ -74,9 +74,22 @@ public class Credentials {
     }
 
     public Token GetAccessToken() throws SdkException {
+
+        // "now" seems like a bad name.  The value is set to some time into the future to then
+        // compare to the token expiration.  If the token expiration is equal to or after this 
+        // time then we keep caching.
         Calendar now = Calendar.getInstance();
         now.add(Calendar.MINUTE, 5);
 
+        // Bug?  This reads to me like we'll never cache the token.
+        // It only returns the cached token if the CredentialType is all at once NOT: 
+        // - ClientCredentials
+        // - ResourceOwner
+        // - RefreshToken
+        // First, this doesn't seem right: you'd want to cache the token in the case of CC or RO, right?
+        // Second, we don't offer any way to instantiate Credentials *except* for these cases.
+        // That tells me we're never caching the token.
+        // Keep caching as long as the token's expiration is equal to or after 5 minutes from now
         if (CredentialType != CredentialType.ClientCredentials && CredentialType != CredentialType.ResourceOwner && CredentialType != CredentialType.RefreshToken
                 ||
                 (accessToken != null && accessToken.getExpiration().compareTo(now.getTime()) >= 0)) {
