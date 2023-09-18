@@ -74,12 +74,12 @@ public class Credentials {
     }
 
     public Token GetAccessToken() throws SdkException {
-        Calendar now = Calendar.getInstance();
-        now.add(Calendar.MINUTE, 5);
+        Calendar expirationCushion = Calendar.getInstance();
+        expirationCushion.add(Calendar.MINUTE, 5);
 
         if (CredentialType != CredentialType.ClientCredentials && CredentialType != CredentialType.ResourceOwner && CredentialType != CredentialType.RefreshToken
                 ||
-                (accessToken != null && accessToken.getExpiration().compareTo(now.getTime()) >= 0)) {
+                (accessToken != null && accessToken.getExpiration().compareTo(expirationCushion.getTime()) >= 0)) {
             return accessToken;
         }
 
