@@ -137,3 +137,7 @@ ApiClient client = ApiClient.GetApiClientWithClientCredentials(apiKey, apiSecret
 ```
 
 For more examples, see unittests package.
+
+## `ApiClient` lifecycle
+
+In production applications, we recommend utilizing the `ApiClient` as a global singleton.  This ensures that token caching is properly performed.
